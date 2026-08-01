@@ -1,0 +1,276 @@
+{
+  "package": "abs-chatreghermez-final-locked-v4_2",
+  "version": "v4.2",
+  "status": "authoritative-final-architecture-for-abbas-route-integrity-hotfix-v4.2",
+  "supersedes": [
+    "all packages before v4.2, including v4.1"
+  ],
+  "scope_now": [
+    "technical foundation",
+    "component system",
+    "CMS content model",
+    "WooCommerce-ready commerce core",
+    "single responsive home implementation",
+    "other page templates after home"
+  ],
+  "scope_later": [
+    "media rental inventory",
+    "map",
+    "availability calendar",
+    "booking hold",
+    "rental checkout extensions",
+    "rental operations panel"
+  ],
+  "target_stack": {
+    "cms": "WordPress",
+    "commerce": "WooCommerce",
+    "theme": "custom block theme or child theme with reusable components",
+    "domain_core": "custom plugin: chatreghermez-core",
+    "future_rental_module": "separate custom plugin: chatreghermez-media-rental",
+    "api_namespace": "/wp-json/chatreghermez/v1/",
+    "database": "WordPress/WooCommerce tables plus versioned custom tables only where domain concurrency requires them",
+    "queue": "Action Scheduler or equivalent background queue",
+    "source_control": "Git with staging-first workflow"
+  },
+  "non_negotiable_architecture": {
+    "single_responsive_home": true,
+    "desktop_and_mobile_same_dom_and_data": true,
+    "mega_menu_integrated": true,
+    "theme_contains_no_business_logic": true,
+    "domain_logic_in_plugins_services": true,
+    "product_defined_once": true,
+    "media_asset_references_product_variant": true,
+    "public_routes_are_stable": true,
+    "future_rental_changes_are_additive_only": true,
+    "sms_is_event_driven": true,
+    "payment_is_order_driven": true,
+    "feature_flags_control_unreleased_modules": true,
+    "no_hardcoded_production_inventory_or_prices": true,
+    "authorization_policy_registry": true,
+    "future_capabilities_are_backlog_not_phase1_build": true,
+    "rental_price_and_calendar_authenticated_only": true
+  },
+  "base_plugin_modules": [
+    "content entities and taxonomies",
+    "entity relations",
+    "feature flag registry",
+    "event bus and notification events",
+    "application service interfaces",
+    "REST API namespace and permissions",
+    "migration/version registry",
+    "audit log interface",
+    "shared cart/order adapters",
+    "schema and SEO helpers"
+  ],
+  "feature_flags": {
+    "commerce_enabled": true,
+    "product_checkout_enabled": true,
+    "media_rental_enabled": false,
+    "media_map_enabled": false,
+    "online_booking_enabled": false,
+    "rental_payment_enabled": false,
+    "sms_enabled": false,
+    "approved_clients_enabled": false,
+    "mobile_otp_login_enabled": true,
+    "customer_basic_account_enabled": true,
+    "advanced_customer_workspace_enabled": false,
+    "ticketing_enabled": false,
+    "crm_retention_enabled": false
+  },
+  "reserved_extension_points": [
+    "mediaRentalMount",
+    "commerceCartMount",
+    "accountStatusMount",
+    "productCardSlot",
+    "projectMediaSlot",
+    "orderLineTypeRegistry",
+    "notificationEventRegistry",
+    "paymentPolicyRegistry",
+    "featureFlagRegistry",
+    "customerIdentityAdapter",
+    "customerWorkspaceMount",
+    "ticketingProviderRegistry",
+    "conversationProviderRegistry",
+    "attachmentStorageAdapter",
+    "creativeApprovalRegistry",
+    "authorizationPolicyRegistry",
+    "rentalVisibilityPolicy",
+    "privateAllocationPolicy",
+    "behavioralEventRegistry",
+    "crmAdapterRegistry"
+  ],
+  "implementation_phases": [
+    {
+      "phase": 0,
+      "name": "Environment and evidence",
+      "build": [
+        "Staging",
+        "Git",
+        "backup/restore rehearsal",
+        "crawl/GSC export",
+        "secrets management"
+      ],
+      "gate": "environment-ready"
+    },
+    {
+      "phase": 1,
+      "name": "Minimum stable foundation",
+      "build": [
+        "component shell",
+        "CMS models",
+        "API/event/feature/authorization registries",
+        "WooCommerce adapters",
+        "mobile OTP identity",
+        "minimal customer account",
+        "SEO/schema/performance base"
+      ],
+      "gate": "foundation-and-auth-accepted"
+    },
+    {
+      "phase": 2,
+      "name": "Responsive home",
+      "build": [
+        "single responsive home",
+        "live CMS components",
+        "prelaunch rental section"
+      ],
+      "gate": "home-accepted"
+    },
+    {
+      "phase": 3,
+      "name": "Rank-and-sell pages",
+      "build": [
+        "service/product/project/portfolio/article/video templates",
+        "commerce checkout",
+        "content migration",
+        "redirects"
+      ],
+      "gate": "initial-site-launch"
+    },
+    {
+      "phase": 4,
+      "name": "Future media rental",
+      "build": [
+        "independent rental plugin and operational workflows"
+      ],
+      "gate": "separate-approved-project"
+    }
+  ],
+  "stop_rules": [
+    "Stop phase 1 if mobile OTP security tests fail.",
+    "Stop launch if crawl/indexability/redirect evidence is incomplete.",
+    "Stop commerce release if price validation or payment idempotency fails.",
+    "Do not begin media-rental implementation before the initial site is public and measured.",
+    "Do not reopen architecture for a nice-to-have request; place it in backlog."
+  ],
+  "definition_of_done_foundation": [
+    "All migrations are versioned and reversible or safely forward-fixable.",
+    "Core routes and namespaces exist without exposing unfinished modules.",
+    "Product and ProductVariant are reusable across shop, services, projects and future rental.",
+    "Cart and Order adapters accept registered line types without schema replacement.",
+    "Feature flags can hide future rental UI and API surfaces.",
+    "Event bus can register payment, order and future reservation events.",
+    "Home reads approved content through components/data providers, not duplicate hardcoded copies.",
+    "Automated smoke tests and manual responsive checks pass.",
+    "Backup and rollback are demonstrated on staging.",
+    "Authorization policy registry supports public, authenticated, role-based and customer-restricted scopes without building the future rental UI.",
+    "Ticket, conversation, attachment and creative-approval interfaces are registered but no operational module is implemented in phase 1.",
+    "Future rental price/calendar visibility and private customer allocation can be added through policies and new tables without changing Product, Cart, Order, Home or public URLs.",
+    "No phase-1 deliverable expands into advanced CRM, multi-user organization accounts or a full rental engine."
+  ],
+  "primary_business_goal": [
+    "کسب رتبه در Google و پاسخ‌پذیری برای موتورهای هوش مصنوعی",
+    "آمادگی برای Google Discover با محتوای اصیل، تصویری و سریع",
+    "کاربرپسندی و حل نیازهای واقعی مخاطب",
+    "تولید سرنخ و فروش محصولات و خدمات",
+    "امکان افزودن ماژول‌های آینده بدون بازنویسی ساختار موجود"
+  ],
+  "scope_governance": {
+    "rule": "Build the smallest stable foundation now; register future capabilities without implementing them.",
+    "build_now": [
+      "معماری اطلاعات، Route و Canonical پایدار",
+      "پوسته و سیستم کامپوننت Responsive واحد",
+      "مدل CMS برای Service, Product, ProductVariant, Project, Portfolio, Article, Video",
+      "هسته فروش کالا با WooCommerce و Adapterهای پایدار",
+      "Feature Flag, Event Registry, Authorization Policy Registry و API namespace",
+      "زیرساخت پایه SEO، Schema، Analytics و Performance",
+      "نقاط اتصال حساب کاربری، تیکت/گفتگو/فایل/تأیید طرح و اجاره رسانه",
+      "ورود مشتری با شماره موبایل و OTP از نسخه اولیه",
+      "حساب پایه مشتری شامل نمای کلی، سفارش‌ها، فاکتورها، پروفایل و خروج"
+    ],
+    "reserve_interface_only": [
+      "تیکتینگ، فضای گفتگو، ارسال عکس/فایل و تأیید طرح",
+      "رویدادهای رفتاری CRM و Retention",
+      "قیمت و تقویم اجاره فقط برای کاربر واردشده",
+      "Hold خصوصی مدیر برای مشتری منتخب"
+    ],
+    "do_not_build_now": [
+      "حساب چندکاربره سازمانی",
+      "CRM کامل و Customer 360",
+      "باشگاه مشتریان، کیف پول و پیش‌بینی ارزش مشتری",
+      "موتور کامل اجاره رسانه، نقشه، تقویم و رزرو",
+      "چت زنده و تیکتینگ عملیاتی",
+      "داشبورد پیشرفته بازاریابی و اتوماسیون Retention",
+      "operational ticket/chat module",
+      "full media rental module"
+    ]
+  },
+  "architecture_freeze": {
+    "effective_now": true,
+    "rule": "No new architecture capability enters the initial release unless it blocks launch, security, legal compliance, data integrity, indexability or core sales.",
+    "new_ideas_destination": "abs_11_final_implementation_registry_and_acceptance_v4.xlsx / backlog",
+    "freeze_until": "public launch plus first 30-day measurement cycle",
+    "allowed_before_launch": [
+      "blocker bug",
+      "security/privacy defect",
+      "legal requirement",
+      "data-loss risk",
+      "broken indexability/redirect",
+      "broken lead/login/cart/checkout/payment"
+    ],
+    "not_allowed_before_launch": [
+      "advanced CRM",
+      "multi-user organization account",
+      "loyalty/wallet",
+      "operational ticket/chat",
+      "full media-rental engine",
+      "new dashboards"
+    ]
+  },
+  "identity_and_account_initial_release": {
+    "login_method": "mobile number + one-time password",
+    "required_routes": [
+      "/account/login/",
+      "/account/",
+      "/account/orders/",
+      "/account/invoices/",
+      "/account/profile/"
+    ],
+    "minimal_dashboard": [
+      "overview",
+      "orders",
+      "invoices",
+      "profile",
+      "logout"
+    ],
+    "future_mounts_only": [
+      "supportTicketMount",
+      "conversationThreadMount",
+      "attachmentUploadMount",
+      "creativeApprovalMount",
+      "rentalAccountMount"
+    ]
+  },
+  "hotfix_version": "v4.2",
+  "hotfix_scope": [
+    "public route-root declaration",
+    "exact home-link route registration",
+    "printing namespace contract",
+    "video root and video singles",
+    "trust, consulting and legal/utility routes",
+    "cross-contract QC"
+  ],
+  "home_source_of_truth": "abs_03_home_master_responsive_FINAL_v4_2.html",
+  "route_source_of_truth": "abs_06_final_route_map_v4_2.json",
+  "architecture_source_of_truth": "abs_05_final_architecture_model_v4_2.json"
+}

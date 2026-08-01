@@ -1,0 +1,270 @@
+{
+  "version": "v4.2-FINAL-LOCKED",
+  "status": "authoritative final logical route contract; route-root integrity hotfix",
+  "rules": {
+    "trailing_slash": true,
+    "lowercase_english_slugs": true,
+    "public_route_changes_require_redirect": true,
+    "system_pages_noindex": true,
+    "filter_parameters_noindex": true,
+    "rental_routes_hidden_until_feature_flag": true,
+    "account_routes_noindex": true,
+    "otp_endpoints_noindex": true,
+    "future_rental_sensitive_data_authenticated_only": true,
+    "locked_public_routes_require_redirect_to_change": true,
+    "exact_internal_home_links_require_registered_route": true,
+    "public_namespace_roots_must_be_declared": true
+  },
+  "public_roots": [
+    "/",
+    "/services/",
+    "/products/",
+    "/printing/",
+    "/solutions/",
+    "/portfolio/",
+    "/projects/",
+    "/capabilities/",
+    "/facilities/",
+    "/blog/",
+    "/video/",
+    "/about-us/",
+    "/credentials/",
+    "/consulting/",
+    "/contact-us/",
+    "/faq/",
+    "/privacy/",
+    "/terms/"
+  ],
+  "commerce_routes": [
+    {
+      "route": "/products/",
+      "index": "Index",
+      "active_phase": 1
+    },
+    {
+      "route": "/products/{family}/{product}/",
+      "index": "Index when complete",
+      "active_phase": 1
+    },
+    {
+      "route": "/cart/",
+      "index": "Noindex",
+      "active_phase": 1
+    },
+    {
+      "route": "/checkout/",
+      "index": "Noindex",
+      "active_phase": 1
+    },
+    {
+      "route": "/account/",
+      "index": "Noindex",
+      "active_phase": 1
+    },
+    {
+      "route": "/account/orders/",
+      "index": "Noindex",
+      "active_phase": 1
+    },
+    {
+      "route": "/account/contracts/",
+      "index": "Noindex",
+      "active_phase": 1
+    }
+  ],
+  "future_rental_routes": [
+    {
+      "route": "/media-rental/",
+      "index": "Noindex until activation",
+      "active_phase": 4
+    },
+    {
+      "route": "/media-rental/projects/",
+      "index": "Noindex until sufficient real inventory",
+      "active_phase": 4
+    },
+    {
+      "route": "/media-rental/projects/{project-slug}/",
+      "index": "Conditional",
+      "active_phase": 4
+    },
+    {
+      "route": "/media-rental/map/",
+      "index": "Noindex",
+      "active_phase": 4
+    },
+    {
+      "route": "/media-rental/{city}/{media-code}/",
+      "index": "Conditional",
+      "active_phase": 4
+    }
+  ],
+  "api_routes": [
+    "/wp-json/chatreghermez/v1/content/*",
+    "/wp-json/chatreghermez/v1/catalog/*",
+    "/wp-json/chatreghermez/v1/cart/*",
+    "/wp-json/chatreghermez/v1/orders/*",
+    "/wp-json/chatreghermez/v1/features/*",
+    "/wp-json/chatreghermez/v1/rental/* (registered only by future module)"
+  ],
+  "reserved_namespaces": [
+    "media-rental",
+    "cart",
+    "checkout",
+    "account",
+    "orders",
+    "printing",
+    "video",
+    "catalog",
+    "downloads"
+  ],
+  "migration_rule": "No production URL change without approved redirect row and regression test.",
+  "account_routes_initial": [
+    {
+      "route": "/account/login/",
+      "purpose": "mobile OTP login",
+      "index": "noindex"
+    },
+    {
+      "route": "/account/",
+      "purpose": "basic customer dashboard",
+      "index": "noindex"
+    },
+    {
+      "route": "/account/orders/",
+      "purpose": "customer orders",
+      "index": "noindex"
+    },
+    {
+      "route": "/account/invoices/",
+      "purpose": "invoices and payment status",
+      "index": "noindex"
+    },
+    {
+      "route": "/account/profile/",
+      "purpose": "verified mobile and profile",
+      "index": "noindex"
+    }
+  ],
+  "account_routes_future_reserved": [
+    "/account/support/",
+    "/account/conversations/",
+    "/account/approvals/",
+    "/account/rentals/"
+  ],
+  "auth_api_routes_initial": [
+    "/wp-json/chatreghermez/v1/auth/otp/request",
+    "/wp-json/chatreghermez/v1/auth/otp/verify",
+    "/wp-json/chatreghermez/v1/auth/session",
+    "/wp-json/chatreghermez/v1/auth/logout"
+  ],
+  "hotfix_version": "v4.2",
+  "hotfix_scope": [
+    "public route-root declaration",
+    "exact home-link route registration",
+    "printing namespace contract",
+    "video root and video singles",
+    "trust, consulting and legal/utility routes",
+    "cross-contract QC"
+  ],
+  "content_and_system_routes_initial": [
+    {
+      "route": "/printing/",
+      "type": "namespace root",
+      "purpose": "declare the public parent namespace for phase-1 printing pages",
+      "behavior": "301 redirect to /services/printing/ until a distinct printing hub is approved",
+      "index": "Noindex redirect",
+      "active_phase": 1
+    },
+    {
+      "route": "/video/",
+      "type": "video archive root",
+      "purpose": "stable parent route for production and behind-the-scenes videos",
+      "behavior": "render archive or listing; must not 404",
+      "index": "Noindex until archive has sufficient unique content",
+      "active_phase": 1
+    },
+    {
+      "route": "/video/lightbox-making/",
+      "type": "video single",
+      "purpose": "lightbox-making evidence video linked from home",
+      "index": "Index",
+      "active_phase": 1
+    },
+    {
+      "route": "/video/textile-printing/",
+      "type": "video single",
+      "purpose": "textile-printing evidence video linked from home",
+      "index": "Index",
+      "active_phase": 1
+    },
+    {
+      "route": "/video/website-behind-scenes/",
+      "type": "video single",
+      "purpose": "website-production behind-the-scenes video linked from home",
+      "index": "Index",
+      "active_phase": 1
+    },
+    {
+      "route": "/credentials/",
+      "type": "trust page",
+      "purpose": "licenses, certificates and verifiable organizational evidence",
+      "index": "Index",
+      "active_phase": 1
+    },
+    {
+      "route": "/consulting/",
+      "type": "diagnostic consultation landing",
+      "purpose": "start a diagnosis session before selecting services",
+      "index": "Index",
+      "active_phase": 1
+    },
+    {
+      "route": "/faq/",
+      "type": "utility page",
+      "purpose": "site-wide frequently asked questions",
+      "index": "Noindex",
+      "active_phase": 1
+    },
+    {
+      "route": "/privacy/",
+      "type": "legal page",
+      "purpose": "privacy policy",
+      "index": "Noindex",
+      "active_phase": 1
+    },
+    {
+      "route": "/terms/",
+      "type": "legal page",
+      "purpose": "terms and conditions",
+      "index": "Noindex",
+      "active_phase": 1
+    }
+  ],
+  "route_integrity": {
+    "printing_namespace_declared": true,
+    "video_namespace_and_children_declared": true,
+    "home_system_routes_declared": true,
+    "unknown_home_internal_routes_allowed": false,
+    "required_download_assets_registered": true,
+    "production_launch_requires_http_200_for_home_downloads": true
+  },
+  "required_static_assets_initial": [
+    {
+      "route": "/catalog/chatreghermez-services.pdf",
+      "purpose": "downloadable service catalog linked from footer",
+      "content_type": "application/pdf",
+      "index": "Noindex via X-Robots-Tag",
+      "launch_requirement": "file must exist and return HTTP 200 before production launch",
+      "active_phase": 1
+    },
+    {
+      "route": "/downloads/rahnama-cheklist.pdf",
+      "purpose": "lead-magnet checklist linked from home",
+      "content_type": "application/pdf",
+      "index": "Noindex via X-Robots-Tag",
+      "launch_requirement": "file must exist and return HTTP 200 before production launch",
+      "active_phase": 1
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "version": "v4.2-FINAL-LOCKED",
+  "principle": "One component, one data contract, reusable across templates.",
+  "layers": {
+    "presentation": [
+      "SiteHeader",
+      "MegaMenu",
+      "MobileDrawer",
+      "SiteFooter",
+      "SectionShell",
+      "Modal",
+      "Toast",
+      "FormField"
+    ],
+    "content": [
+      "ServiceCard",
+      "ProductCard",
+      "ProductVariantSelector",
+      "ProjectCard",
+      "PortfolioCard",
+      "ArticleCard",
+      "VideoCard",
+      "CapabilityCard",
+      "SolutionCard"
+    ],
+    "commerce": [
+      "PriceBlock",
+      "CartButton",
+      "CartDrawer",
+      "CartSummary",
+      "CheckoutStep",
+      "OrderStatus",
+      "AccountOrders"
+    ],
+    "future_rental": [
+      "RentalEntryMount",
+      "MediaAssetCard",
+      "MediaMap",
+      "AvailabilityCalendar",
+      "BookingSummary",
+      "RentalAddOnSelector",
+      "HoldTimer"
+    ]
+  },
+  "home_sections_order": [
+    "Header/MegaMenu",
+    "Hero",
+    "DecisionHelper",
+    "Portfolio",
+    "ProblemRoutes",
+    "ExecutionChains",
+    "AboutCapabilities",
+    "ServiceHubs",
+    "RentalEntryMount-disabled",
+    "ProductStructures",
+    "ExhibitionSolution",
+    "Process",
+    "ApprovedClients-disabled",
+    "MediaAndBlog",
+    "FAQ",
+    "Contact",
+    "Footer"
+  ],
+  "data_rules": [
+    "Cards receive entity IDs/DTOs, never duplicate raw production data.",
+    "Desktop and mobile render the same entities and actions.",
+    "Future rental components register without modifying existing component contracts.",
+    "Feature-gated components must render nothing and expose no indexable links while disabled.",
+    "OTP and account state come from server-side authenticated APIs.",
+    "Sensitive rental price/calendar data is never embedded in public home HTML."
+  ],
+  "mounts": [
+    {
+      "id": "mediaRentalMount",
+      "owner": "future rental plugin",
+      "default": "disabled"
+    },
+    {
+      "id": "commerceCartMount",
+      "owner": "commerce core",
+      "default": "enabled when cart configured"
+    },
+    {
+      "id": "accountStatusMount",
+      "owner": "commerce core",
+      "default": "enabled after account routes configured"
+    }
+  ],
+  "future_extension_slots": [
+    "customerWorkspaceMount",
+    "supportTicketMount",
+    "conversationThreadMount",
+    "attachmentUploadMount",
+    "creativeApprovalMount",
+    "mediaRentalAuthenticatedDataMount",
+    "rentalAccountMount"
+  ],
+  "phase_rules": {
+    "phase1": "build mobile OTP and minimal account; only interfaces/mounts for ticket/chat/approval/rental",
+    "phase2_3": "home and page templates use reusable components and live CMS data",
+    "phase4_plus": "future modules render inside registered mounts without altering existing layouts"
+  },
+  "initial_account_components": [
+    "MobileOtpLoginForm",
+    "OtpVerificationState",
+    "AccountOverview",
+    "AccountOrders",
+    "AccountInvoices",
+    "AccountProfile",
+    "AccountLogout"
+  ],
+  "hotfix_version": "v4.2",
+  "hotfix_scope": [
+    "public route-root declaration",
+    "exact home-link route registration",
+    "printing namespace contract",
+    "video root and video singles",
+    "trust, consulting and legal/utility routes",
+    "cross-contract QC"
+  ]
+}

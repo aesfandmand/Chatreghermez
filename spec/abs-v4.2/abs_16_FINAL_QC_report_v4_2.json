@@ -1,0 +1,299 @@
+{
+  "release": "abs-final-locked-v4.2",
+  "decision": "PASS_REPLACE_V4_1",
+  "instruction": "نسخه v4.1 متوقف و v4.2 جایگزین شود.",
+  "scope": "Route-contract integrity hotfix; no visual redesign",
+  "checks": [
+    {
+      "code": "V42-01",
+      "check": "ریشه /printing/ در public_roots ثبت است",
+      "status": "PASS",
+      "evidence": "public_roots"
+    },
+    {
+      "code": "V42-02",
+      "check": "ریشه‌های عمومی، اعتماد، مشاوره و حقوقی ثبت‌اند",
+      "status": "PASS",
+      "evidence": "/printing/, /video/, /credentials/, /consulting/, /faq/, /privacy/, /terms/"
+    },
+    {
+      "code": "V42-03",
+      "check": "سه مسیر ویدئویی دقیق هوم ثبت‌اند",
+      "status": "PASS",
+      "evidence": "/video/lightbox-making/, /video/textile-printing/, /video/website-behind-scenes/"
+    },
+    {
+      "code": "V42-04",
+      "check": "هر لینک داخلی هوم در قرارداد موجود است",
+      "status": "PASS",
+      "evidence": "169 href یکتا؛ 0 ناشناخته"
+    },
+    {
+      "code": "V42-05",
+      "check": "صفحات فاز ۱ واجد Index از هوم لینک دارند",
+      "status": "PASS",
+      "evidence": "107 صفحه؛ 0 بدون لینک"
+    },
+    {
+      "code": "V42-06",
+      "check": "Trailing slash هوم بدون نقض است",
+      "status": "PASS",
+      "evidence": "0 نقض"
+    },
+    {
+      "code": "V42-07",
+      "check": "دو دارایی دانلودی هوم در قرارداد ثبت‌اند",
+      "status": "PASS",
+      "evidence": "/catalog/chatreghermez-services.pdf, /downloads/rahnama-cheklist.pdf"
+    },
+    {
+      "code": "V42-08",
+      "check": "هویت داخلی هوم کاملاً v4.2 است",
+      "status": "PASS",
+      "evidence": "{\"abs-home-master-v3\": 0, \"v3_source_filename\": 0, \"v3_title\": 0, \"v4_1_release\": 0, \"v4_1_source\": 0}"
+    },
+    {
+      "code": "V42-09",
+      "check": "ساختار و طراحی مصوب هوم تغییر نکرده است",
+      "status": "PASS",
+      "evidence": "{\"sections\": 21, \"h1\": 1, \"hero_slides\": 4, \"mega_feature_cards\": 6, \"hub_cards\": 6, \"work_cards\": 5, \"process_nodes\": 4, \"faq_tabs\": 4}"
+    },
+    {
+      "code": "V42-10",
+      "check": "Browser QC چهار Viewport پاس است",
+      "status": "PASS",
+      "evidence": "1440 / 1024 / 390 / 360"
+    },
+    {
+      "code": "V42-11",
+      "check": "هیچ ID تکراری در هوم نیست",
+      "status": "PASS",
+      "evidence": "84 ID؛ 0 تکراری"
+    },
+    {
+      "code": "V42-12",
+      "check": "JSON، SVG، DOCX و XLSX از نظر ساختاری سالم‌اند",
+      "status": "PASS",
+      "evidence": "JSON errors=0, SVG errors=0, containers=0"
+    },
+    {
+      "code": "V42-13",
+      "check": "Workbook بدون خطای فرمول و دارای Routeهای افزوده است",
+      "status": "PASS",
+      "evidence": "artifact_tool inspection؛ P-123 تا P-139؛ formula errors=0"
+    },
+    {
+      "code": "V42-14",
+      "check": "راهنمای PDF از DOCX نهایی تولید و رندر شده است",
+      "status": "PASS",
+      "evidence": "pages=3; render inspection completed"
+    }
+  ],
+  "pass_count": 14,
+  "fail_count": 0,
+  "route_audit": {
+    "total_home_hrefs": 366,
+    "unique_internal_home_hrefs": 169,
+    "unique_internal_paths": 124,
+    "unknown_exact_routes": [],
+    "unknown_exact_route_count": 0,
+    "trailing_slash_violations": [],
+    "phase1_indexable_count": 107,
+    "phase1_indexable_without_home_link": [],
+    "phase1_indexable_without_home_link_count": 0
+  },
+  "required_routes": {
+    "public_roots": [
+      "/printing/",
+      "/video/",
+      "/credentials/",
+      "/consulting/",
+      "/faq/",
+      "/privacy/",
+      "/terms/"
+    ],
+    "exact_video_routes": [
+      "/video/lightbox-making/",
+      "/video/textile-printing/",
+      "/video/website-behind-scenes/"
+    ],
+    "download_assets": [
+      "/catalog/chatreghermez-services.pdf",
+      "/downloads/rahnama-cheklist.pdf"
+    ]
+  },
+  "home_identity": {
+    "data_release": "abs-home-master-v4.2",
+    "data_architecture": "v4.2-final-locked",
+    "title": "آژانس تبلیغاتی چتر قرمز | هوم مادر Responsive - مرجع اجرای عباس v4.2",
+    "stale_hits": {
+      "abs-home-master-v3": 0,
+      "v3_source_filename": 0,
+      "v3_title": 0,
+      "v4_1_release": 0,
+      "v4_1_source": 0
+    }
+  },
+  "home_structure": {
+    "before_v4_1": {
+      "sections": 21,
+      "h1": 1,
+      "hero_slides": 4,
+      "mega_feature_cards": 6,
+      "hub_cards": 6,
+      "work_cards": 5,
+      "process_nodes": 4,
+      "faq_tabs": 4
+    },
+    "after_v4_2": {
+      "sections": 21,
+      "h1": 1,
+      "hero_slides": 4,
+      "mega_feature_cards": 6,
+      "hub_cards": 6,
+      "work_cards": 5,
+      "process_nodes": 4,
+      "faq_tabs": 4
+    },
+    "normalized_content_equal": true,
+    "duplicate_ids": []
+  },
+  "browser_evidence": {
+    "release": "abs-final-locked-v4.2",
+    "home_file": "abs_03_home_master_responsive_FINAL_v4_2.html",
+    "viewports": [
+      {
+        "viewport": {
+          "label": "desktop-1440",
+          "width": 1440,
+          "height": 1000
+        },
+        "consoleErrors": [],
+        "pageErrors": [],
+        "data": {
+          "title": "آژانس تبلیغاتی چتر قرمز | هوم مادر Responsive - مرجع اجرای عباس v4.2",
+          "release": "abs-home-master-v4.2",
+          "architecture": "v4.2-final-locked",
+          "h1Count": 1,
+          "rawSections": 21,
+          "megaFeatureCards": 6,
+          "heroSlides": 4,
+          "hubCards": 6,
+          "overflow": false,
+          "duplicateIds": [],
+          "taglineVisible": true,
+          "loginDesktopVisible": true,
+          "accountMount": true,
+          "staleV41": false
+        },
+        "interaction": {
+          "drawer_opened": false,
+          "mobile_login_visible": false
+        }
+      },
+      {
+        "viewport": {
+          "label": "tablet-1024",
+          "width": 1024,
+          "height": 900
+        },
+        "consoleErrors": [],
+        "pageErrors": [],
+        "data": {
+          "title": "آژانس تبلیغاتی چتر قرمز | هوم مادر Responsive - مرجع اجرای عباس v4.2",
+          "release": "abs-home-master-v4.2",
+          "architecture": "v4.2-final-locked",
+          "h1Count": 1,
+          "rawSections": 21,
+          "megaFeatureCards": 6,
+          "heroSlides": 4,
+          "hubCards": 6,
+          "overflow": false,
+          "duplicateIds": [],
+          "taglineVisible": true,
+          "loginDesktopVisible": false,
+          "accountMount": true,
+          "staleV41": false
+        },
+        "interaction": {
+          "drawer_opened": true,
+          "mobile_login_visible": true
+        }
+      },
+      {
+        "viewport": {
+          "label": "mobile-390",
+          "width": 390,
+          "height": 844
+        },
+        "consoleErrors": [],
+        "pageErrors": [],
+        "data": {
+          "title": "آژانس تبلیغاتی چتر قرمز | هوم مادر Responsive - مرجع اجرای عباس v4.2",
+          "release": "abs-home-master-v4.2",
+          "architecture": "v4.2-final-locked",
+          "h1Count": 1,
+          "rawSections": 21,
+          "megaFeatureCards": 6,
+          "heroSlides": 4,
+          "hubCards": 6,
+          "overflow": false,
+          "duplicateIds": [],
+          "taglineVisible": true,
+          "loginDesktopVisible": false,
+          "accountMount": true,
+          "staleV41": false
+        },
+        "interaction": {
+          "drawer_opened": true,
+          "mobile_login_visible": true
+        }
+      },
+      {
+        "viewport": {
+          "label": "mobile-360",
+          "width": 360,
+          "height": 800
+        },
+        "consoleErrors": [],
+        "pageErrors": [],
+        "data": {
+          "title": "آژانس تبلیغاتی چتر قرمز | هوم مادر Responsive - مرجع اجرای عباس v4.2",
+          "release": "abs-home-master-v4.2",
+          "architecture": "v4.2-final-locked",
+          "h1Count": 1,
+          "rawSections": 21,
+          "megaFeatureCards": 6,
+          "heroSlides": 4,
+          "hubCards": 6,
+          "overflow": false,
+          "duplicateIds": [],
+          "taglineVisible": true,
+          "loginDesktopVisible": false,
+          "accountMount": true,
+          "staleV41": false
+        },
+        "interaction": {
+          "drawer_opened": true,
+          "mobile_login_visible": true
+        }
+      }
+    ],
+    "route_audit": {
+      "unique_internal_home_hrefs": 169,
+      "unknown_exact_routes": [],
+      "unknown_exact_route_count": 0,
+      "phase1_indexable_count": 107,
+      "phase1_indexable_without_home_link": [],
+      "phase1_indexable_without_home_link_count": 0
+    }
+  },
+  "artifact_validation": {
+    "json_errors": [],
+    "svg_errors": [],
+    "office_container_errors": [],
+    "workbook_ok": true,
+    "pdf_pages": 3,
+    "pdf_error": null
+  }
+}

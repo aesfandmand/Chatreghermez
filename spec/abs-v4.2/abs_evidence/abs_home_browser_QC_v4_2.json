@@ -1,0 +1,130 @@
+{
+  "release": "abs-final-locked-v4.2",
+  "home_file": "abs_03_home_master_responsive_FINAL_v4_2.html",
+  "viewports": [
+    {
+      "viewport": {
+        "label": "desktop-1440",
+        "width": 1440,
+        "height": 1000
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "data": {
+        "title": "آژانس تبلیغاتی چتر قرمز | هوم مادر Responsive - مرجع اجرای عباس v4.2",
+        "release": "abs-home-master-v4.2",
+        "architecture": "v4.2-final-locked",
+        "h1Count": 1,
+        "rawSections": 21,
+        "megaFeatureCards": 6,
+        "heroSlides": 4,
+        "hubCards": 6,
+        "overflow": false,
+        "duplicateIds": [],
+        "taglineVisible": true,
+        "loginDesktopVisible": true,
+        "accountMount": true,
+        "staleV41": false
+      },
+      "interaction": {
+        "drawer_opened": false,
+        "mobile_login_visible": false
+      }
+    },
+    {
+      "viewport": {
+        "label": "tablet-1024",
+        "width": 1024,
+        "height": 900
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "data": {
+        "title": "آژانس تبلیغاتی چتر قرمز | هوم مادر Responsive - مرجع اجرای عباس v4.2",
+        "release": "abs-home-master-v4.2",
+        "architecture": "v4.2-final-locked",
+        "h1Count": 1,
+        "rawSections": 21,
+        "megaFeatureCards": 6,
+        "heroSlides": 4,
+        "hubCards": 6,
+        "overflow": false,
+        "duplicateIds": [],
+        "taglineVisible": true,
+        "loginDesktopVisible": false,
+        "accountMount": true,
+        "staleV41": false
+      },
+      "interaction": {
+        "drawer_opened": true,
+        "mobile_login_visible": true
+      }
+    },
+    {
+      "viewport": {
+        "label": "mobile-390",
+        "width": 390,
+        "height": 844
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "data": {
+        "title": "آژانس تبلیغاتی چتر قرمز | هوم مادر Responsive - مرجع اجرای عباس v4.2",
+        "release": "abs-home-master-v4.2",
+        "architecture": "v4.2-final-locked",
+        "h1Count": 1,
+        "rawSections": 21,
+        "megaFeatureCards": 6,
+        "heroSlides": 4,
+        "hubCards": 6,
+        "overflow": false,
+        "duplicateIds": [],
+        "taglineVisible": true,
+        "loginDesktopVisible": false,
+        "accountMount": true,
+        "staleV41": false
+      },
+      "interaction": {
+        "drawer_opened": true,
+        "mobile_login_visible": true
+      }
+    },
+    {
+      "viewport": {
+        "label": "mobile-360",
+        "width": 360,
+        "height": 800
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "data": {
+        "title": "آژانس تبلیغاتی چتر قرمز | هوم مادر Responsive - مرجع اجرای عباس v4.2",
+        "release": "abs-home-master-v4.2",
+        "architecture": "v4.2-final-locked",
+        "h1Count": 1,
+        "rawSections": 21,
+        "megaFeatureCards": 6,
+        "heroSlides": 4,
+        "hubCards": 6,
+        "overflow": false,
+        "duplicateIds": [],
+        "taglineVisible": true,
+        "loginDesktopVisible": false,
+        "accountMount": true,
+        "staleV41": false
+      },
+      "interaction": {
+        "drawer_opened": true,
+        "mobile_login_visible": true
+      }
+    }
+  ],
+  "route_audit": {
+    "unique_internal_home_hrefs": 169,
+    "unknown_exact_routes": [],
+    "unknown_exact_route_count": 0,
+    "phase1_indexable_count": 107,
+    "phase1_indexable_without_home_link": [],
+    "phase1_indexable_without_home_link_count": 0
+  }
+}

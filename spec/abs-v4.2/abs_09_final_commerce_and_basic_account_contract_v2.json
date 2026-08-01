@@ -1,0 +1,96 @@
+{
+  "version": "v2-FINAL-LOCKED",
+  "platform": "WooCommerce with Chatreghermez adapters",
+  "active_phase": 1,
+  "line_type_registry": [
+    {
+      "type": "product_purchase",
+      "active_now": true,
+      "reference": "ProductVariant"
+    },
+    {
+      "type": "service_addon",
+      "active_now": "optional",
+      "reference": "Service"
+    },
+    {
+      "type": "media_rental",
+      "active_now": false,
+      "registered_by": "future rental plugin",
+      "reference": "MediaAsset+AvailabilityPeriod"
+    }
+  ],
+  "stable_interfaces": [
+    "CartLineFactory",
+    "OrderLineAdapter",
+    "PriceCalculator",
+    "PaymentPolicy",
+    "ContractPolicy",
+    "NotificationPublisher",
+    "FeatureFlagProvider",
+    "InventoryProvider"
+  ],
+  "order_invariants": [
+    "Server recalculates all prices.",
+    "Client-submitted totals are never trusted.",
+    "Every payment attempt has an idempotency key.",
+    "Invoice snapshot is immutable after confirmation.",
+    "Order status transitions are logged.",
+    "Notification events are emitted after committed state change."
+  ],
+  "phase1_checkout": [
+    "customer identity",
+    "addresses when needed",
+    "product lines",
+    "tax/shipping policy",
+    "payment",
+    "order confirmation",
+    "SMS event hooks disabled until provider configured"
+  ],
+  "future_rental_extension": [
+    "rental line metadata",
+    "hold validation",
+    "deposit payment policy",
+    "contract acceptance",
+    "remaining balance",
+    "reservation event hooks"
+  ],
+  "no_replacement_later": [
+    "Cart",
+    "Order",
+    "Payment",
+    "Customer account",
+    "Checkout route",
+    "Notification outbox"
+  ],
+  "phase1_account_scope": [
+    "mobile OTP login",
+    "customer link to WooCommerce",
+    "account overview",
+    "order history",
+    "invoice/payment status",
+    "profile",
+    "logout"
+  ],
+  "future_account_capabilities_registered_only": [
+    "support tickets",
+    "conversation and attachment",
+    "creative approval",
+    "CRM timeline",
+    "rental reservations"
+  ],
+  "scope_exclusions_phase1": [
+    "multi-user organization accounts",
+    "advanced CRM/retention",
+    "wallet/loyalty",
+    "operational ticket/chat",
+    "full rental account"
+  ],
+  "checkout_identity_rule": {
+    "browse": "public",
+    "cart": "public or session",
+    "checkout": "OTP login required before final order placement",
+    "existing_customer": "link by unique normalized verified mobile",
+    "order_history": "attach only after verified mobile ownership"
+  }
+}

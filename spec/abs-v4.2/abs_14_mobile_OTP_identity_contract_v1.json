@@ -1,0 +1,70 @@
+{
+  "version": "v1-FINAL",
+  "status": "required-in-initial-release",
+  "purpose": "mobile OTP customer login without building a complex identity system",
+  "canonical_identity": {
+    "country": "IR",
+    "storage_format": "+98XXXXXXXXXX",
+    "display_format": "09XXXXXXXXX",
+    "unique": true,
+    "customer_link": "WordPress/WooCommerce user"
+  },
+  "flow": [
+    "normalize mobile",
+    "rate-limit",
+    "generate secure OTP",
+    "store hash+expiry",
+    "send via provider adapter",
+    "verify one-time code",
+    "link/create customer",
+    "start secure session",
+    "redirect"
+  ],
+  "default_configurable_security_values": {
+    "otp_ttl_seconds": 120,
+    "resend_cooldown_seconds": 60,
+    "max_verify_attempts_per_challenge": 5,
+    "max_requests_per_phone_per_hour": 5,
+    "max_requests_per_ip_per_hour": 20
+  },
+  "security_invariants": [
+    "never store/log plaintext OTP",
+    "one-time use",
+    "generic anti-enumeration response",
+    "server-side mobile/IP rate limit",
+    "CSRF/nonce protection",
+    "secure HttpOnly SameSite cookie",
+    "allow-listed redirects",
+    "admin login has stronger protection",
+    "transactional and marketing consent separated"
+  ],
+  "initial_routes": [
+    "/account/login/",
+    "/account/",
+    "/account/orders/",
+    "/account/invoices/",
+    "/account/profile/"
+  ],
+  "initial_api": [
+    "POST /wp-json/chatreghermez/v1/auth/otp/request",
+    "POST /wp-json/chatreghermez/v1/auth/otp/verify",
+    "GET /wp-json/chatreghermez/v1/auth/session",
+    "POST /wp-json/chatreghermez/v1/auth/logout"
+  ],
+  "acceptance_tests": [
+    "new/existing mobile maps to one account",
+    "expired/reused/wrong OTP rejected",
+    "rate limits work",
+    "orders visible only to owner",
+    "session persists",
+    "logout invalidates session",
+    "no plaintext OTP in logs"
+  ],
+  "not_in_scope": [
+    "social login",
+    "multi-user organization identity",
+    "advanced identity provider",
+    "loyalty profile",
+    "full CRM"
+  ]
+}

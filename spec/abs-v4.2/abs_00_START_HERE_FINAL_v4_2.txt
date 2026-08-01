@@ -1,0 +1,33 @@
+بسته نهایی و قفل‌شده چتر قرمز برای عباس - v4.2
+
+تنها مرجع اجرا: همین بسته. نسخه‌های v3، v3.1، v4 و v4.1 منسوخ‌اند.
+
+قفل‌ها:
+- ورود با موبایل و OTP از نسخه اولیه.
+- حساب پایه: Overview, Orders, Invoices, Profile, Logout.
+- Ticket/Chat/File/Approval/CRM/Rental اکنون ساخته نمی‌شوند.
+- معماری تا رونمایی و چرخه ۳۰ روزه قفل است.
+- هیچ لینک داخلی هوم نباید خارج از Route Contract باشد.
+
+ترتیب اجرا:
+0) Staging/Git/Backup/Crawl
+1) Foundation + Mobile OTP + Basic Account
+2) Responsive Home
+3) Pages + Content + Commerce + Launch
+4) Future Media Rental as separate project
+
+ایده جدید فقط وارد بک‌لاگ می‌شود و برنامه عباس را تغییر نمی‌دهد.
+
+HOTFIX v4.1:
+- لینک مستقیم صفحات ایندکس‌شدنی از هوم
+- اصلاح هویت داخلی هوم
+- trailing slash
+- بازگرداندن شعار برند
+
+HOTFIX v4.2:
+- ثبت /printing/ به‌عنوان ریشه عمومی و Namespace قفل‌شده
+- ثبت /video/ و سه مسیر ویدئویی دقیق
+- ثبت /credentials/ و /consulting/
+- ثبت /faq/ و /privacy/ و /terms/
+- افزودن تست تطبیق هر لینک هوم با Route Contract
+- هیچ تغییر بصری در هوم ایجاد نشده است

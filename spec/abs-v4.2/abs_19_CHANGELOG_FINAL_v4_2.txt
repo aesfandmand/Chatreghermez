@@ -1,0 +1,25 @@
+v4 FINAL
+- Mobile OTP moved into initial release.
+- Basic customer account locked.
+- Visible login added to desktop header and mobile drawer.
+- OTP routes/API/security contract added.
+- Architecture freeze through launch + first 30-day measurement cycle.
+- Ticket/CRM/Rental remain future modules or interfaces only.
+- AF-25 to AF-30 added.
+- v4 supersedes all earlier packages.
+
+
+v4.1 HOTFIX
+- Fixed 32 missing home links to phase-1 indexable architecture pages.
+- Corrected embedded release/source-of-truth identity.
+- Enforced trailing slash on internal content URLs.
+- Restored visible brand tagline: به آسمان سلام کن.
+- Added FQ-21 through FQ-25 acceptance checks.
+
+
+v4.2 ROUTE-INTEGRITY HOTFIX
+- Added /printing/ to declared public roots and locked its redirect behavior.
+- Registered /video/ and all three exact video URLs linked from home.
+- Registered /credentials/, /consulting/, /faq/, /privacy/, and /terms/.
+- Added exact home-link-to-route-contract audit.
+- Home design, sections, motion and visible copy were not changed.

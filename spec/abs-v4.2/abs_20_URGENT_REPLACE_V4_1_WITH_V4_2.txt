@@ -1,0 +1,22 @@
+عباس عزیز،
+
+بسته v4.1 را اجرا نکن یا ادامه نده.
+این بسته v4.2 جایگزین کامل آن است.
+
+علت جایگزینی:
+- ریشه /printing/ در Route Contract ثبت شد.
+- ریشه /video/ و سه مسیر ویدئویی دقیق ثبت شدند.
+- /credentials/ و /consulting/ ثبت شدند.
+- /faq/ و /privacy/ و /terms/ ثبت شدند.
+- هر لینک داخلی هوم باید در Architecture یا Route Contract موجود باشد.
+
+هیچ تغییر بصری در هوم، سکشن‌ها، مگامنو، موبایل یا موشن‌ها ایجاد نشده است.
+
+مرجع هوم:
+abs_03_home_master_responsive_FINAL_v4_2.html
+
+مرجع Route:
+abs_06_final_route_map_v4_2.json
+
+مرجع معماری:
+abs_05_final_architecture_model_v4_2.json

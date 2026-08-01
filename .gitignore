@@ -7,3 +7,7 @@ Thumbs.db
 # scratch
 .cache/
 node_modules/
+
+# python
+__pycache__/
+*.py[cod]

@@ -1,0 +1,213 @@
+{
+  "version": "v4-FINAL-LOCKED",
+  "wordpress_content_types": [
+    {
+      "type": "service",
+      "storage": "custom post type",
+      "public": true,
+      "phase": 1
+    },
+    {
+      "type": "product",
+      "storage": "WooCommerce product",
+      "public": true,
+      "phase": 1
+    },
+    {
+      "type": "product_variation",
+      "storage": "WooCommerce variation",
+      "public": true,
+      "phase": 1
+    },
+    {
+      "type": "project",
+      "storage": "custom post type",
+      "public": true,
+      "phase": 1
+    },
+    {
+      "type": "portfolio",
+      "storage": "custom post type",
+      "public": true,
+      "phase": 1
+    },
+    {
+      "type": "solution",
+      "storage": "custom post type or page template",
+      "public": true,
+      "phase": 2
+    },
+    {
+      "type": "capability",
+      "storage": "custom post type",
+      "public": "after evidence",
+      "phase": 1
+    },
+    {
+      "type": "facility",
+      "storage": "custom post type",
+      "public": "after evidence",
+      "phase": 1
+    },
+    {
+      "type": "video",
+      "storage": "custom post type",
+      "public": true,
+      "phase": 2
+    },
+    {
+      "type": "place",
+      "storage": "shared entity/taxonomy+meta",
+      "public": false,
+      "phase": 1
+    }
+  ],
+  "custom_tables_base": [
+    {
+      "table": "cg_entity_relations",
+      "purpose": "typed relations between canonical entities"
+    },
+    {
+      "table": "cg_notification_events",
+      "purpose": "event outbox and delivery status"
+    },
+    {
+      "table": "cg_audit_log",
+      "purpose": "critical business and admin changes"
+    },
+    {
+      "table": "cg_schema_migrations",
+      "purpose": "versioned database migrations"
+    }
+  ],
+  "custom_tables_future_rental": [
+    {
+      "table": "cg_media_assets",
+      "purpose": "installed rentable media units"
+    },
+    {
+      "table": "cg_availability_periods",
+      "purpose": "month/date availability"
+    },
+    {
+      "table": "cg_booking_holds",
+      "purpose": "temporary concurrency locks"
+    },
+    {
+      "table": "cg_reservations",
+      "purpose": "confirmed rental records"
+    },
+    {
+      "table": "cg_rate_plans",
+      "purpose": "rental pricing and deposit policy"
+    }
+  ],
+  "why_custom_rental_tables": "Availability and holds require transactional consistency and should not depend only on post meta queries.",
+  "taxonomies": [
+    "service_hub",
+    "service_category",
+    "product_family",
+    "entity_topic",
+    "portfolio_service",
+    "portfolio_product",
+    "project_type",
+    "project_status",
+    "industry",
+    "city",
+    "audience",
+    "use_case",
+    "content_pillar",
+    "content_cluster",
+    "funnel_stage",
+    "media_city",
+    "media_context",
+    "audience_fit",
+    "availability_status"
+  ],
+  "permissions": [
+    "manage_cg_catalog",
+    "manage_cg_projects",
+    "manage_cg_content",
+    "manage_cg_orders",
+    "manage_cg_notifications",
+    "manage_cg_rental_inventory",
+    "manage_cg_reservations",
+    "manage_cg_finance"
+  ],
+  "migration_contract": {
+    "schema_version_option": "cg_schema_version",
+    "forward_only_preferred": true,
+    "backup_before_migration": true,
+    "staging_first": true,
+    "production_rollback_plan_required": true,
+    "deduplicate_mobile_before_unique_index": true,
+    "future_tables_only_in_approved_phase": true
+  },
+  "foundation_registries": [
+    "feature_flags",
+    "authorization_policies",
+    "event_types",
+    "line_type_registry",
+    "notification_outbox",
+    "migration_registry",
+    "audit_log_interface"
+  ],
+  "future_interfaces_without_phase1_tables": {
+    "support": [
+      "Ticket",
+      "Conversation",
+      "Message",
+      "Attachment",
+      "CreativeApproval"
+    ],
+    "crm": [
+      "BehavioralEvent",
+      "CampaignAttribution",
+      "ConsentPreference",
+      "SegmentMembership"
+    ],
+    "rental": [
+      "MediaAsset",
+      "AvailabilityPeriod",
+      "BookingHold",
+      "ProtectedAllocation",
+      "CalendarPublication",
+      "Reservation",
+      "RatePlan"
+    ]
+  },
+  "rental_future_access_rules": {
+    "asset_public_summary": "may be public when approved",
+    "price_visibility": "authenticated_only",
+    "availability_calendar_visibility": "authenticated_only",
+    "protected_allocation": "manager may block periods for named customer before public calendar publication",
+    "implementation_phase": 4
+  },
+  "initial_identity_storage": {
+    "wordpress_user": "canonical customer account",
+    "unique_mobile": "canonical +98 identifier with uniqueness enforced",
+    "otp_challenge": "short-lived hashed challenge; never plaintext",
+    "session": "WordPress/WooCommerce secure session",
+    "audit": "outcome only; never OTP plaintext"
+  },
+  "initial_account_views": [
+    "overview",
+    "orders",
+    "invoices",
+    "profile"
+  ],
+  "role_permissions_initial": {
+    "anonymous": [
+      "browse public content/products",
+      "request OTP subject to rate limits"
+    ],
+    "customer": [
+      "view own orders",
+      "view own invoices",
+      "edit own profile"
+    ],
+    "administrator": [
+      "manage site with stronger admin authentication"
+    ]
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "version": "v4-FINAL-FUTURE-CONTRACT",
+  "status": "frozen future contract; implementation prohibited before phase 4 approval",
+  "plugin": "chatreghermez-media-rental",
+  "dependency": [
+    "chatreghermez-core",
+    "WooCommerce"
+  ],
+  "additive_only": true,
+  "entities": [
+    "MediaAsset",
+    "AvailabilityPeriod",
+    "BookingHold",
+    "Reservation",
+    "RatePlan"
+  ],
+  "references": {
+    "MediaAsset": "ProductVariant + Project + Place",
+    "Reservation": "Customer + OrderLine + MediaAsset + AvailabilityPeriod",
+    "RatePlan": "MediaAsset or project policy",
+    "Notification": "NotificationEvent registry"
+  },
+  "required_features": [
+    "project/list/map views",
+    "real coordinates and media",
+    "Jalali year/month availability",
+    "concurrency-safe hold",
+    "multiple media and months per cart",
+    "design/print/install per rental line and month",
+    "versioned contract",
+    "deposit and remaining balance",
+    "operator confirmation",
+    "SMS delivery status",
+    "operations and finance roles"
+  ],
+  "activation_gates": [
+    "Owner-approved deposit/cancellation/refund policies",
+    "At least one real pilot project and verified inventory",
+    "Real photos, coordinates, rates and availability owner",
+    "Map provider selected and licensed",
+    "Payment and SMS sandbox passed",
+    "Double-booking tests passed",
+    "Security, privacy, SEO and accessibility QA passed"
+  ],
+  "must_not_require": [
+    "changing product IDs or variants",
+    "replacing cart/checkout/order/account",
+    "changing existing public URLs",
+    "rewriting home or mega menu",
+    "moving project or portfolio data",
+    "duplicating products",
+    "making prices or availability public",
+    "implementing organization multi-user accounts",
+    "building CRM or ticketing before their own approved phases"
+  ],
+  "access_control": {
+    "public_user": [
+      "may view approved introductory rental content",
+      "may view approved media/project summaries without sensitive rate or availability data"
+    ],
+    "authenticated_customer": [
+      "may view rental prices when enabled",
+      "may view published availability calendar when enabled",
+      "may see protected allocations assigned to the same customer"
+    ],
+    "manager": [
+      "may keep future periods internal before annual calendar publication",
+      "may create protected allocation for selected customer",
+      "may set expiry, reason and release status",
+      "all actions must be logged"
+    ]
+  },
+  "publication_model": {
+    "calendar_year_states": [
+      "draft",
+      "internal_review",
+      "customer_restricted",
+      "published"
+    ],
+    "period_states": [
+      "internal",
+      "available",
+      "protected_hold",
+      "temporary_hold",
+      "reserved",
+      "blocked",
+      "maintenance"
+    ],
+    "unauthenticated_response": "do not expose prices or availability payloads; return login-required policy response",
+    "protected_hold_behavior": "blocks other customers and is visible only to assigned customer and authorized staff",
+    "public_release": "explicit manager publication action; never inferred from data existence"
+  },
+  "phase1_only_requirements": [
+    "reserve plugin namespace and feature flags",
+    "register rental_price_view and rental_calendar_view policies",
+    "register ProtectedAllocation and CalendarPublication in architecture",
+    "keep media rental disabled",
+    "do not build inventory, map, calendar, reservation or admin UI"
+  ],
+  "future_entities": [
+    "MediaAsset",
+    "AvailabilityPeriod",
+    "BookingHold",
+    "Reservation",
+    "RatePlan",
+    "ProtectedAllocation",
+    "CalendarPublication"
+  ],
+  "initial_release_dependency": {
+    "mobile_otp_login": "exists",
+    "customer_identity": "exists",
+    "authorization_policy_registry": "exists",
+    "cart_order_payment_interfaces": "exists"
+  }
+}
