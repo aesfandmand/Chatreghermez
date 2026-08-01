@@ -1,0 +1,415 @@
+<!--
+==========================================================
+  چتر قرمز — قانون قفل کنترل کیفی (سند ۰۹)
+  فایل: 09-قانون-قفل-کنترل-کیفی-v1-LOCKED.html
+  نسخه: v1 | تاریخ: ۴ مرداد ۱۴۰۵
+  جایگاه: بالادستِ اجرا. سند ۰۱ می‌گوید چه بنویسیم، سند ۰۵ می‌گوید چگونه،
+          این سند می‌گوید چطور جلوی تخطی گرفته شود.
+  وضعیت: قفل — بدون کارت پیش‌پرواز تکمیل‌شده، هیچ خروجی تحویل نمی‌شود.
+==========================================================
+-->
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>قانون قفل کنترل کیفی — سند ۰۹ | چتر قرمز</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#17161B;--ink-2:#26242C;--red:#DB1D49;--red-deep:#A21437;--red-tint:#FCEBEF;
+--paper:#F6F4F0;--white:#fff;--muted:#74727A;--line:#E7E3DC;--gold:#C9A227;
+--green:#2E7D5B;--green-tint:#E4F2EB;--blue:#2B5F8C;--blue-tint:#E5EFF7;
+--amber:#8A6A11;--amber-tint:#FBF2DA}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Vazirmatn',Tahoma,sans-serif;background:var(--paper);color:var(--ink);line-height:1.9;font-size:15.5px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+h1,h2,h3,h4{line-height:1.45;font-weight:800;letter-spacing:-.015em}
+a{color:var(--red)}
+.top{background:var(--ink);color:#fff;padding:38px 0 32px}
+.top h1{font-size:clamp(1.5rem,3vw,2.05rem)}
+.top p{color:#b3b1ba;margin-top:.5rem;max-width:78ch}
+.badge{display:inline-block;background:var(--gold);color:#1c1600;font-size:.7rem;font-weight:800;padding:.25rem .7rem;border-radius:100px;margin-bottom:.7rem}
+.meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;font-size:.82rem;color:#c9c7cf}
+.meta b{color:#fff}
+.tabs{position:sticky;top:0;z-index:50;background:rgba(246,244,240,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.tabs .wrap{display:flex;gap:3px;overflow-x:auto}
+.tab{padding:14px 15px;font-weight:700;font-size:.88rem;color:var(--muted);cursor:pointer;border:0;background:none;font-family:inherit;white-space:nowrap;border-bottom:3px solid transparent}
+.tab.on{color:var(--red);border-color:var(--red)}
+.pane{display:none;padding:30px 0 70px}
+.pane.on{display:block}
+.sh{margin:34px 0 18px}
+.sh:first-child{margin-top:0}
+.sh h2{font-size:1.32rem}
+.sh p{color:var(--muted);margin-top:.3rem;max-width:82ch}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:14px}
+.card h3{font-size:1.04rem;margin-bottom:.5rem}
+.card h4{font-size:.93rem;margin:.9rem 0 .35rem;color:var(--ink-2)}
+.lock{border-right:4px solid var(--red)}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:.87rem}
+th{background:var(--ink);color:#fff;text-align:right;padding:11px 12px;font-weight:700;font-size:.82rem}
+td{padding:10px 12px;border-top:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:#FBFAF8}
+.tag{display:inline-block;font-size:.7rem;font-weight:800;padding:.16rem .5rem;border-radius:6px;white-space:nowrap}
+.fail{background:var(--red-tint);color:var(--red-deep)}
+.warn{background:var(--amber-tint);color:var(--amber)}
+.pass{background:var(--green-tint);color:var(--green)}
+.info{background:var(--blue-tint);color:var(--blue)}
+.num{width:28px;height:28px;border-radius:9px;background:var(--red);color:#fff;display:inline-grid;place-items:center;font-size:.78rem;font-weight:800;margin-left:9px;vertical-align:middle}
+ul,ol{margin:.4rem 1.2rem .2rem 0}
+li{margin-bottom:.34rem}
+.quote{border-right:3px solid var(--red);background:var(--red-tint);padding:12px 16px;border-radius:0 10px 10px 0;font-size:.9rem;margin:.8rem 0}
+.quote b{color:var(--red-deep)}
+.hero-note{background:var(--ink);color:#fff;border-radius:16px;padding:26px 24px;margin-bottom:20px}
+.hero-note h2{font-size:1.2rem;color:#fff}
+.hero-note p{color:#c9c7cf;margin-top:.5rem;max-width:84ch}
+/* --- کارت پیش‌پرواز --- */
+.gate-bar{position:sticky;top:49px;z-index:40;border-radius:12px;padding:15px 18px;margin-bottom:16px;font-weight:800;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;transition:.25s}
+.gate-blocked{background:var(--red);color:#fff}
+.gate-open{background:var(--green);color:#fff}
+.gate-bar small{font-weight:500;opacity:.85;display:block;font-size:.76rem;margin-top:2px}
+.pf{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:.86rem}
+.pf th{background:var(--ink);color:#fff;text-align:right;padding:10px 11px;font-size:.79rem}
+.pf td{padding:9px 11px;border-top:1px solid var(--line);vertical-align:middle}
+.pf tr.grp td{background:var(--ink-2);color:#fff;font-weight:800;font-size:.82rem}
+.pf input[type=text]{width:100%;font-family:inherit;font-size:.82rem;padding:6px 9px;border:1px solid var(--line);border-radius:8px;background:#FBFAF8;color:var(--ink)}
+.pf input[type=text]:focus{outline:2px solid var(--red);outline-offset:1px;background:#fff}
+.pf input[type=checkbox]{width:18px;height:18px;accent-color:var(--red);cursor:pointer}
+.pf tr.bad td{background:#FEF6F8}
+.btn{font-family:inherit;font-weight:800;font-size:.84rem;padding:10px 18px;border-radius:10px;border:0;cursor:pointer;background:var(--ink);color:#fff}
+.btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.out{background:#141318;color:#e8e6ec;border-radius:10px;padding:14px 16px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.76rem;white-space:pre-wrap;line-height:1.75;margin-top:14px;display:none}
+.foot{background:var(--ink);color:#8f8d97;padding:26px 0;font-size:.8rem}
+</style>
+</head>
+<body>
+
+<div class="top"><div class="wrap">
+<span class="badge">سند ۰۹ · قفل‌شده</span>
+<h1>قانون قفل کنترل کیفی</h1>
+<p>سند ۰۱ می‌گوید چه بنویسیم. سند ۰۵ می‌گوید چگونه. این سند تنها یک کار می‌کند: جلوی تخطی را می‌گیرد. قاعده‌ای که سنجه‌پذیر نباشد، قاعده نیست؛ سلیقه است. هر بند این سند یا یک <b>عدد</b> دارد یا یک <b>شاهد قابل ارائه</b>.</p>
+<div class="meta"><span>نسخه: <b>v1</b></span><span>تاریخ: <b>۴ مرداد ۱۴۰۵</b></span><span>جایگاه: <b>بالادستِ اجرا</b></span><span>شرط تحویل: <b>کارت پیش‌پرواز تکمیل‌شده</b></span></div>
+</div></div>
+
+<div class="tabs"><div class="wrap">
+<button class="tab on" data-p="1">۱· چرا قواعد قبلی اجرا نشد</button>
+<button class="tab" data-p="2">۲· ده قفل</button>
+<button class="tab" data-p="3">۳· کارت پیش‌پرواز</button>
+<button class="tab" data-p="4">۴· قاعدهٔ عدم پس‌رفت</button>
+</div></div>
+
+<!-- ============ تب ۱ ============ -->
+<div class="pane on" id="p1"><div class="wrap">
+
+<div class="hero-note">
+<h2>تشخیص: مشکل نبودِ قاعده نبود؛ نبودِ سنجه بود.</h2>
+<p>سند ۰۱ بیست بند دارد و سند ۰۵ یک دروازهٔ شش‌بندی. هر دو درست‌اند. اما هر دو با زبانی نوشته شده‌اند که <b>قضاوت‌پذیر است، نه اندازه‌گیری‌پذیر</b>. وقتی بند می‌گوید «مشتری قهرمان باشد»، هر بازبینی‌کننده‌ای می‌تواند صادقانه بگوید «هست» و رد شود. تخطی از سر بی‌انضباطی نبود؛ از سر <b>ابهام سنجه</b> بود.</p>
+</div>
+
+<div class="sh"><h2>چهار حفره‌ای که تخطی از آن‌ها عبور می‌کرد</h2></div>
+
+<div class="grid" style="display:grid;gap:14px">
+<div class="card lock">
+<h3><span class="num">۱</span>بند کیفی، بدون عدد</h3>
+<p>«اطلاعات کافی داده شده» یعنی چه؟ ۱۱۶۳ واژه هم می‌تواند کافی به‌نظر برسد. تا وقتی عدد نداشته باشیم، «کافی» را هر بار جور دیگری می‌فهمیم.</p>
+<p><b>بستن حفره:</b> هر بند یا حداقل عددی دارد یا شمارش دارد. «اطلاعات کافی» می‌شود «حداقل ۲۶۰۰ واژه برای صفحهٔ سرمایه‌گذاری، و حداقل یک شاهد به‌ازای هر ادعای اثباتی».</p>
+</div>
+<div class="card lock">
+<h3><span class="num">۲</span>دروازه، یک وعده بود نه یک قدم</h3>
+<p>سند ۰۵ نوشته «پیش از نمایش هر صفحه، دروازه اجرا و گزارشش داده می‌شود». اما هیچ <b>مصنوعی</b> تعریف نشده بود که بدون آن، تحویل ممکن نباشد. وعده‌ای که مصنوع تولید نکند، فراموش می‌شود.</p>
+<p><b>بستن حفره:</b> کارت پیش‌پرواز تب ۳. بدون کارت پرشده، خروجی تحویل نمی‌شود. کارت باید <b>مقدار اندازه‌گیری‌شده</b> داشته باشد، نه تیک.</p>
+</div>
+<div class="card lock">
+<h3><span class="num">۳</span>هیچ حافظه‌ای بین نسخه‌ها نبود</h3>
+<p>بخش «شکست» یک بار اضافه شد، تأیید شد، و در نسخهٔ بعد ناپدید شد. کارنامهٔ ۱۰ ساله همین‌طور. هیچ سازوکاری نبود که بگوید نسخهٔ تازه از نسخهٔ قبل عقب‌تر است.</p>
+<p><b>بستن حفره:</b> قاعدهٔ عدم پس‌رفت در تب ۴. هیچ نسخه‌ای اجازه ندارد در سنجه‌های کمّی از نسخهٔ تأییدشدهٔ قبل پایین‌تر باشد.</p>
+</div>
+<div class="card lock">
+<h3><span class="num">۴</span>بازخورد را بد ترجمه می‌کردیم</h3>
+<p>«متن زیاد است» را «اطلاعات را کم کن» فهمیدیم، در حالی که یعنی «جمله را کوتاه کن». «فونت درشت است» را «H1 را کوچک کن» فهمیدیم، در حالی که مسئله نبودِ پلهٔ میانی بود. اصلاحِ اشتباه، ایراد را برمی‌گرداند و همان فلش‌بک را می‌سازد.</p>
+<p><b>بستن حفره:</b> قفل شمارهٔ ۱۰. هر بازخورد پیش از اجرا باید به یک <b>سنجهٔ عددی</b> ترجمه و ثبت شود. اگر ترجمه ممکن نشد، پرسیده می‌شود؛ حدس زده نمی‌شود.</p>
+</div>
+</div>
+
+<div class="quote">
+<b>اصل حاکم بر کل این سند:</b> هیچ بندی در این سند وجود ندارد که بتوان با «به‌نظرم رعایت شده» از آن عبور کرد. هر بند یا عدد می‌خواهد یا شاهد. اگر بندی روزی چنین شد، همان بند معیوب است و باید بازنویسی شود، نه اینکه با قضاوت پر شود.
+</div>
+
+</div></div>
+
+<!-- ============ تب ۲ ============ -->
+<div class="pane" id="p2"><div class="wrap">
+
+<div class="sh"><h2>ده قفل</h2>
+<p>هر قفل شمارهٔ خودش را دارد و در کارت پیش‌پرواز با همان شماره ارجاع داده می‌شود.</p></div>
+
+<div class="card lock"><h3><span class="num">۱</span>قفل قهرمان</h3>
+<p>مشتری قهرمان است، ما راهنما. این بند دیگر با احساس سنجیده نمی‌شود، با شمارش:</p>
+<ul>
+<li>نسبت «شما» به «ما» در کل متن صفحه، حداقل <b>۲ به ۱</b>.</li>
+<li>در ۱۵۰ واژهٔ نخست صفحه، دستِ‌کم <b>یک</b> جمله دربارهٔ وضعیت خودِ مخاطب و <b>هیچ</b> جمله‌ای دربارهٔ بزرگی ما.</li>
+<li>صفحه حق ندارد بنویسد «شما قهرمان هستید». قهرمانی نشان داده می‌شود، اعلام نمی‌شود.</li>
+</ul>
+</div>
+
+<div class="card lock"><h3><span class="num">۲</span>قفل شکست</h3>
+<p>پرتکرارترین بند فراموش‌شدهٔ ما. از این پس بند صفر است: <b>هیچ صفحه‌ای بدون بخش شکست تحویل نمی‌شود.</b></p>
+<ul>
+<li>حداقل <b>سه</b> محور از هزینهٔ بی‌عملی، هر سه راست و قابل دفاع.</li>
+<li>ترس ساختگی، شمارش معکوس جعلی و کمیابی دروغین ممنوع است.</li>
+<li>محل قرارگیری: پیش از بخش راه‌حل، نه بعد از آن.</li>
+</ul>
+</div>
+
+<div class="card lock"><h3><span class="num">۳</span>قفل اثبات</h3>
+<p>راهنمای بدون اقتدار، راهنما نیست. هر صفحه حداقل <b>چهار شاهد</b> از این فهرست دارد: عدد پروژه، نام شهر، سال، شمارهٔ مجوز، مطالعهٔ موردی، عکس واقعی دارایی، لوگوی مشتری، مشخصات فنی.</p>
+<div class="quote">و قاعدهٔ قرینه‌اش، که به همان اندازه لازم است: <b>هیچ صفتی بدون شاهد نوشته نمی‌شود.</b> «یکپارچه»، «حرفه‌ای»، «باکیفیت» و «معتبر» تا وقتی شاهد نداشته باشند حذف می‌شوند. توجه: ترسِ ادعای بی‌پشتوانه نباید به <b>نداشتن هیچ ادعا</b> منجر شود. آن هم خطاست، فقط جهتش برعکس.</div>
+</div>
+
+<div class="card lock"><h3><span class="num">۴</span>قفل پرسونا</h3>
+<ul>
+<li>هر صفحه <b>یک</b> پرسونای اصلی دارد. اگر دو پرسونا لازم شد، مسیر دوشاخه می‌شود؛ متن دوپهلو نمی‌شود.</li>
+<li>همهٔ اعتراض‌های ثبت‌شدهٔ آن پرسونا در پروندهٔ پرسونا v2 باید <b>صریحاً</b> در صفحه پاسخ بگیرند. شمارش می‌شود: تعداد اعتراض پرونده = تعداد پاسخ صفحه.</li>
+<li>همهٔ معیارهای تصمیم آن پرسونا باید در صفحه مصداق داشته باشند.</li>
+</ul>
+</div>
+
+<div class="card lock"><h3><span class="num">۵</span>قفل کوئری</h3>
+<ul>
+<li>عنوان صفحه و H1 از ستون «عنوان سئو» کوئری‌مپ می‌آیند، نه از نام داخلی محصول و نه از خلاقیت لحظه‌ای.</li>
+<li>کوئری سر خوشه باید در H1 یا در ۱۰۰ واژهٔ نخست، به زبان طبیعی حاضر باشد.</li>
+<li>هر دارایی تجویزشده در کوئری‌مپ برای آن خدمت باید ساخته شده باشد یا صریحاً در صف ثبت شود. حذف بی‌سروصدا ممنوع است.</li>
+</ul>
+</div>
+
+<div class="card lock"><h3><span class="num">۶</span>قفل تایپوگرافی</h3>
+<p>اعداد زیر قفل‌اند. تغییرشان فقط با تصمیم مکتوب مالک ممکن است.</p>
+<table style="margin-top:8px">
+<tr><th>عنصر</th><th>اندازه در ۱۴۴۰px</th><th>ارتفاع خط</th><th>سقف طول</th></tr>
+<tr><td>H1</td><td><b>۴۳px</b></td><td>۱٫۳۵</td><td>حداکثر ۱۰ واژه، حداکثر ۲ خط</td></tr>
+<tr><td>H2</td><td><b>۲۸px</b></td><td>۱٫۴۵</td><td>حداکثر ۹ واژه، حداکثر ۲ خط</td></tr>
+<tr><td>H3</td><td><b>۱۹٫۵px</b></td><td>۱٫۵۵</td><td>حداکثر ۶ واژه، ۱ خط</td></tr>
+<tr><td>متن</td><td><b>۱۶٫۵px</b></td><td>۱٫۹</td><td>عرض ستون حداکثر ۷۰ نویسه</td></tr>
+</table>
+<p style="margin-top:10px"><b>قاعدهٔ پله:</b> نسبت هر پله به پلهٔ بعدی باید بین <b>۱٫۳۵ تا ۱٫۵۵</b> بماند. حس «درشتی» معمولاً از بزرگی H1 نمی‌آید؛ از پرش بین پله‌ها می‌آید. اگر H2 به H3 نسبتی بیش از ۱٫۶ داشت، صفحه رد است حتی اگر همهٔ اعداد در سقف مجاز باشند.</p>
+<p><b>قاعدهٔ جمله در تیتر:</b> تیتر جمله نیست. جملهٔ توضیحی به زیرتیتر می‌رود.</p>
+</div>
+
+<div class="card lock"><h3><span class="num">۷</span>قفل عمق</h3>
+<table style="margin-top:4px">
+<tr><th>نوع صفحه</th><th>حداقل واژه</th><th>حداقل پرسش متداول</th><th>حداقل شاهد</th></tr>
+<tr><td>صفحهٔ سرمایه‌گذاری و مشارکت</td><td>۲۶۰۰</td><td>۱۰</td><td>۶</td></tr>
+<tr><td>صفحهٔ خدمت اصلی (پیلار)</td><td>۱۸۰۰</td><td>۸</td><td>۵</td></tr>
+<tr><td>صفحهٔ محصول</td><td>۱۲۰۰</td><td>۶</td><td>۴</td></tr>
+<tr><td>لندینگ پرسونا</td><td>۱۰۰۰</td><td>۵</td><td>۴</td></tr>
+<tr><td>هاب لوکال شهر</td><td>۸۰۰</td><td>۴</td><td>۳</td></tr>
+</table>
+<div class="quote"><b>قاعدهٔ ضدپرحرفی، که به همان اندازه الزامی است:</b> هر ۱۰۰ واژهٔ افزوده باید یا یک شاهد بیاورد یا یک اعتراض را ببندد یا یک تصمیم را ممکن کند. واژه‌ای که هیچ‌کدام را نکند حذف می‌شود. رسیدن به حداقلِ عمق با پرحرفی، تخطی است نه انطباق.</div>
+</div>
+
+<div class="card lock"><h3><span class="num">۸</span>قفل ساختار</h3>
+<ul>
+<li>هیچ بخشی از فایل پایهٔ تأییدشده <b>حذف</b> نمی‌شود.</li>
+<li>هیچ بخشی <b>جابه‌جا</b> نمی‌شود.</li>
+<li>تعداد بخش‌ها فقط با تأیید صریح مالک تغییر می‌کند.</li>
+<li>همهٔ تغییرات به‌صورت <b>لایهٔ افزوده</b> اعمال می‌شوند، نه بازنویسی شیوه‌نامهٔ موجود.</li>
+<li>ناوبری و مگامنو در همهٔ صفحات یکسان است. تغییر در یکی، هم‌زمان در همه.</li>
+</ul>
+</div>
+
+<div class="card lock"><h3><span class="num">۹</span>قفل فنی</h3>
+<ul>
+<li>اسکیماهای اولویت ۱ نقشهٔ اسکیما برای آن نوع صفحه، همگی حاضرند.</li>
+<li><span style="direction:ltr;display:inline-block">meta description</span> نوشته شده است.</li>
+<li><span style="direction:ltr;display:inline-block">areaServed</span> شهر و استان واقعی است، نه «Iran».</li>
+<li>هر تصویر یا کارکرد دارد یا حذف می‌شود. تصویر تزئینی ممنوع.</li>
+<li>پیوند داخلی طبق نقشهٔ معماری برقرار است.</li>
+</ul>
+</div>
+
+<div class="card lock"><h3><span class="num">۱۰</span>قفل ترجمهٔ بازخورد</h3>
+<p>هیچ بازخوردی مستقیماً اجرا نمی‌شود. اول به سنجهٔ عددی ترجمه می‌شود، ترجمه نوشته و نشان داده می‌شود، و پس از تأیید اجرا می‌شود.</p>
+<table style="margin-top:8px">
+<tr><th style="width:30%">بازخورد</th><th>ترجمهٔ غلط (که قبلاً کردیم)</th><th>ترجمهٔ درست</th></tr>
+<tr><td>«متن زیاد است»</td><td>حذف اطلاعات</td><td>کوتاه‌کردن جمله و پاراگراف؛ اطلاعات دست‌نخورده</td></tr>
+<tr><td>«محتوا خلاصه است»</td><td>افزودن پاراگراف توضیحی</td><td>افزودن شاهد، پاسخ به اعتراض، و ماژول تصمیم‌ساز</td></tr>
+<tr><td>«فونت درشت است»</td><td>کوچک‌کردن H1</td><td>اصلاح نسبت پله‌ها و کوتاه‌کردن خودِ تیتر</td></tr>
+<tr><td>«جذاب نیست»</td><td>افزودن انیمیشن</td><td>شکستن ریتم با ماژول تعاملی و نقطهٔ توقف بصری</td></tr>
+<tr><td>«فلان چیز درست نشد»</td><td>تغییر ظاهر همان عنصر</td><td>اندازه‌گیری در مرورگر و یافتن علت ساختاری</td></tr>
+</table>
+</div>
+
+</div></div>
+
+<!-- ============ تب ۳ ============ -->
+<div class="pane" id="p3"><div class="wrap">
+
+<div class="sh"><h2>کارت پیش‌پرواز</h2>
+<p>این کارت پیش از هر تحویل پر می‌شود. ستون شاهد باید <b>مقدار واقعی اندازه‌گیری‌شده</b> داشته باشد، نه توصیف. «رعایت شد» شاهد نیست؛ «۲۸px» شاهد است. تا وقتی حتی یک ردیف ناقص باشد، نوار بالا قرمز می‌ماند و تحویل مسدود است.</p></div>
+
+<div class="gate-bar gate-blocked" id="gateBar">
+<span id="gateText">دروازه بسته است<small id="gateSub">۰ از ۲۴ ردیف کامل</small></span>
+<span style="display:flex;gap:8px;flex-wrap:wrap">
+<button class="btn ghost" id="btnReport">ساخت گزارش متنی</button>
+</span>
+</div>
+
+<table class="pf" id="pfTable">
+<tr><th style="width:44px">تأیید</th><th style="width:40%">بند</th><th style="width:60px">قفل</th><th>شاهد اندازه‌گیری‌شده</th></tr>
+
+<tr class="grp"><td colspan="4">الف· داستان و قیف</td></tr>
+<tr><td><input type="checkbox"></td><td>نسبت «شما» به «ما» حداقل ۲ به ۱</td><td>۱</td><td><input type="text" placeholder="نمونه: ۴۱ به ۱۶"></td></tr>
+<tr><td><input type="checkbox"></td><td>در ۱۵۰ واژهٔ نخست، هیچ جمله‌ای دربارهٔ بزرگی ما نیست</td><td>۱</td><td><input type="text" placeholder="نمونه: صفر مورد"></td></tr>
+<tr><td><input type="checkbox"></td><td>بخش شکست وجود دارد با حداقل سه محور</td><td>۲</td><td><input type="text" placeholder="نمونه: ۳ محور، بخش why"></td></tr>
+<tr><td><input type="checkbox"></td><td>برنامهٔ سه تا پنج قدمی روشن است</td><td>۱</td><td><input type="text" placeholder="نمونه: ۵ قدم، بخش process"></td></tr>
+<tr><td><input type="checkbox"></td><td>یک دعوت به اقدام اصلی، بقیه فرعی و کم‌وزن</td><td>۱</td><td><input type="text" placeholder="نمونه: ۱ اصلی، ۳ فرعی"></td></tr>
+<tr><td><input type="checkbox"></td><td>موفقیت به‌صورت عینی تصویر شده است</td><td>۱</td><td><input type="text" placeholder="نمونه: قبل و بعد جدارهٔ مبارکه"></td></tr>
+
+<tr class="grp"><td colspan="4">ب· اثبات و اقتدار</td></tr>
+<tr><td><input type="checkbox"></td><td>حداقل چهار شاهد اثبات در صفحه</td><td>۳</td><td><input type="text" placeholder="نمونه: ۶ شاهد"></td></tr>
+<tr><td><input type="checkbox"></td><td>هیچ صفتی بدون شاهد نمانده است</td><td>۳</td><td><input type="text" placeholder="نمونه: ۴ صفت بی‌شاهد حذف شد"></td></tr>
+<tr><td><input type="checkbox"></td><td>هیچ عدد یا وعدهٔ اثبات‌نشده‌ای درج نشده است</td><td>۳</td><td><input type="text" placeholder="نمونه: صفر مورد"></td></tr>
+<tr><td><input type="checkbox"></td><td>یک پیشنهاد رایگانِ قابل‌لمس وجود دارد</td><td>۳</td><td><input type="text" placeholder="نمونه: PDF نمونهٔ قرارداد"></td></tr>
+
+<tr class="grp"><td colspan="4">ج· پرسونا و کوئری</td></tr>
+<tr><td><input type="checkbox"></td><td>صفحه یک پرسونای اصلی دارد</td><td>۴</td><td><input type="text" placeholder="نمونه: P4، با مسیر فرعی P3"></td></tr>
+<tr><td><input type="checkbox"></td><td>همهٔ اعتراض‌های پروندهٔ پرسونا پاسخ گرفته‌اند</td><td>۴</td><td><input type="text" placeholder="نمونه: ۳ از ۳"></td></tr>
+<tr><td><input type="checkbox"></td><td>همهٔ معیارهای تصمیم پرسونا مصداق دارند</td><td>۴</td><td><input type="text" placeholder="نمونه: ۴ از ۴"></td></tr>
+<tr><td><input type="checkbox"></td><td>H1 و عنوان از کوئری‌مپ آمده‌اند</td><td>۵</td><td><input type="text" placeholder="نمونه: SVC-018، ستون عنوان سئو"></td></tr>
+<tr><td><input type="checkbox"></td><td>دارایی‌های تجویزشدهٔ کوئری‌مپ ساخته یا در صف ثبت شده‌اند</td><td>۵</td><td><input type="text" placeholder="نمونه: ماشین‌حساب ساخته شد"></td></tr>
+
+<tr class="grp"><td colspan="4">د· ظاهر و تایپوگرافی</td></tr>
+<tr><td><input type="checkbox"></td><td>H1 برابر ۴۳px و حداکثر ۲ خط</td><td>۶</td><td><input type="text" placeholder="مقدار اندازه‌گیری‌شده در ۱۴۴۰px"></td></tr>
+<tr><td><input type="checkbox"></td><td>H2 برابر ۲۸px و حداکثر ۹ واژه</td><td>۶</td><td><input type="text" placeholder="مقدار اندازه‌گیری‌شده"></td></tr>
+<tr><td><input type="checkbox"></td><td>نسبت هر پله به پلهٔ بعد بین ۱٫۳۵ تا ۱٫۵۵</td><td>۶</td><td><input type="text" placeholder="نمونه: ۱٫۵۴ و ۱٫۴۴ و ۱٫۱۸"></td></tr>
+<tr><td><input type="checkbox"></td><td>هیچ گریدی خانهٔ خالی ندارد، از جمله مگامنو</td><td>۸</td><td><input type="text" placeholder="نمونه: بررسی شد در ۱۴۴۰ و ۱۲۸۰"></td></tr>
+<tr><td><input type="checkbox"></td><td>هر تصویر کارکرد دارد؛ تصویر تزئینی حذف شده</td><td>۹</td><td><input type="text" placeholder="نمونه: ۵ تصویر، همه کارکردی"></td></tr>
+
+<tr class="grp"><td colspan="4">ه· عمق، ساختار و فنی</td></tr>
+<tr><td><input type="checkbox"></td><td>حداقل عمق نوع صفحه رعایت شده است</td><td>۷</td><td><input type="text" placeholder="نمونه: ۳۱۸۰ واژه از حداقل ۲۶۰۰"></td></tr>
+<tr><td><input type="checkbox"></td><td>تعداد و ترتیب بخش‌ها با فایل پایه یکسان است</td><td>۸</td><td><input type="text" placeholder="نمونه: ۱۰ بخش، ترتیب یکسان"></td></tr>
+<tr><td><input type="checkbox"></td><td>اسکیماهای اولویت ۱ و توضیحات متا حاضرند</td><td>۹</td><td><input type="text" placeholder="نمونه: Service, FAQPage, Breadcrumb"></td></tr>
+<tr><td><input type="checkbox"></td><td>قاعدهٔ عدم پس‌رفت بررسی شد و نقض نشده است</td><td>—</td><td><input type="text" placeholder="نمونه: همهٔ سنجه‌ها ≥ نسخهٔ ۱۱"></td></tr>
+</table>
+
+<div class="out" id="reportOut"></div>
+
+<div class="quote" style="margin-top:20px">
+<b>قاعدهٔ توقف:</b> اگر حتی یک ردیف ناقص بماند، خروجی تحویل نمی‌شود. اگر ردیفی به‌دلیل نبودِ دادهٔ مالک قابل تکمیل نیست، در ستون شاهد نوشته می‌شود «بلاک‌کننده: [نام داده]» و آن ردیف به‌جای تیک، در فهرست بلاک‌کننده‌های تحویل ثبت می‌شود. پنهان‌کردن یک بند ناقص، بدترین شکل تخطی است.
+</div>
+
+</div></div>
+
+<!-- ============ تب ۴ ============ -->
+<div class="pane" id="p4"><div class="wrap">
+
+<div class="hero-note">
+<h2>قاعدهٔ عدم پس‌رفت</h2>
+<p>هیچ نسخهٔ تازه‌ای اجازه ندارد در سنجه‌های کمّی از نسخهٔ تأییدشدهٔ پیش از خود پایین‌تر باشد. اگر بخشی، شاهدی یا ماژولی حذف می‌شود، حذف باید <b>خواستهٔ صریح مالک</b> باشد و در فهرست زندهٔ تغییرات با دلیل ثبت شود. حذف بی‌سروصدا، تخطی است.</p>
+</div>
+
+<div class="sh"><h2>چرا این قاعده لازم شد</h2></div>
+<p style="max-width:82ch">در فهرست زندهٔ تغییرات ثبت است که لندینگ شهرداری نسخهٔ ۱ دارای «بخش شکست» و «کارنامهٔ ۱۰ ساله» بود. در همان فهرست، زیر ورودی منشور محتوا، نوشته شده «خطای مشترک: Stakes در همهٔ صفحات جا افتاده بود». یعنی این خطا یک بار دیده شد، یک بار اصلاح شد، و در نسخهٔ ۱۱ دوباره برگشت. بدون یک قاعدهٔ مکانیکی، هر بازنویسی احتمال از دست دادن یک دستاورد قبلی را دارد.</p>
+
+<div class="sh"><h2>سنجه‌های پایه — ثبت اجباری در هر نسخه</h2>
+<p>این جدول در بالای کد هر فایل، به‌صورت کامنت درج می‌شود. نسخهٔ بعدی موظف است ستون خودش را پر کند و با ستون قبلی مقایسه شود.</p></div>
+
+<table>
+<tr><th>سنجه</th><th style="width:110px">نسخهٔ ۱۱ (پایه)</th><th style="width:110px">حداقل مجاز v12</th><th>یادداشت</th></tr>
+<tr><td>تعداد بخش</td><td>۱۰</td><td>۱۰</td><td>ثابت. کاهش ممنوع، افزایش فقط با تأیید.</td></tr>
+<tr><td>کل واژگان</td><td>۱۱۶۳</td><td>۲۶۰۰</td><td>حداقل نوع صفحه، طبق قفل ۷.</td></tr>
+<tr><td>شواهد اثبات</td><td>۰</td><td>۴</td><td>طبق قفل ۳.</td></tr>
+<tr><td>پرسش‌های متداول</td><td>۴</td><td>۱۰</td><td>طبق قفل ۷.</td></tr>
+<tr><td>اعتراض‌های پاسخ‌داده‌شده</td><td>۰</td><td>۳</td><td>از پروندهٔ پرسونا v2.</td></tr>
+<tr><td>بخش شکست</td><td>ندارد</td><td>دارد</td><td>بند صفر، غیرقابل چشم‌پوشی.</td></tr>
+<tr><td>اسکیماهای اولویت ۱</td><td>۱ از ۳</td><td>۳ از ۳</td><td>Service و FAQPage و BreadcrumbList.</td></tr>
+<tr><td>تصاویر کارکردی</td><td>۰</td><td>۳</td><td>وابسته به رسیدن عکس واقعی.</td></tr>
+<tr><td>شهرهای نام‌برده</td><td>۰</td><td>۵</td><td>زمین برد: شهرستان‌های اصفهان.</td></tr>
+<tr><td>اندازهٔ H1</td><td>۵۷٫۶px</td><td>۴۳px</td><td>در این سنجه، «بهتر» یعنی رسیدن به عدد قفل، نه بیشتر.</td></tr>
+</table>
+
+<div class="sh" style="margin-top:30px"><h2>سه استثنای مجاز</h2></div>
+<ul style="max-width:82ch">
+<li><b>تصمیم مکتوب مالک.</b> اگر مالک بگوید بخشی حذف شود، حذف می‌شود و در فهرست زنده با دلیل ثبت می‌شود.</li>
+<li><b>ادغام، نه حذف.</b> اگر دو بخش در یکی ادغام شوند، مجموع محتوا نباید کم شود. ادغام با کاهش، حذف است با نام دیگر.</li>
+<li><b>حذف ادعای بی‌پشتوانه.</b> اگر شاهدی نادرست از آب درآمد، حذفش نه‌تنها مجاز بلکه واجب است. صداقت بر عدد مقدم است.</li>
+</ul>
+
+<div class="quote" style="margin-top:22px">
+<b>ثبت در فهرست زنده:</b> این سند از امروز در نقشهٔ اسناد سند مادر با شمارهٔ ۰۹ درج می‌شود، و بند ۶ سند ۰۵ به آن ارجاع می‌دهد. سند ۰۵ همچنان معتبر است؛ این سند جایگزینش نیست، بازوی اجرایی‌اش است.
+</div>
+
+</div></div>
+
+<div class="foot"><div class="wrap">
+سند ۰۹ · قانون قفل کنترل کیفی · نسخهٔ ۱ · ۴ مرداد ۱۴۰۵ · بالادستِ اجرا · بدون کارت پیش‌پرواز، تحویلی در کار نیست.
+</div></div>
+
+<script>
+document.querySelectorAll('.tab').forEach(function(t){
+  t.addEventListener('click',function(){
+    document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on')});
+    document.querySelectorAll('.pane').forEach(function(x){x.classList.remove('on')});
+    t.classList.add('on');
+    document.getElementById('p'+t.dataset.p).classList.add('on');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+
+var rows = Array.prototype.filter.call(
+  document.querySelectorAll('#pfTable tr'),
+  function(r){ return r.querySelector('input[type=checkbox]'); }
+);
+
+function refresh(){
+  var done = 0;
+  rows.forEach(function(r){
+    var cb = r.querySelector('input[type=checkbox]');
+    var tx = r.querySelector('input[type=text]');
+    var ok = cb.checked && tx.value.trim().length > 0;
+    r.classList.toggle('bad', !ok);
+    if(ok) done++;
+  });
+  var bar = document.getElementById('gateBar');
+  var txt = document.getElementById('gateText');
+  var sub = document.getElementById('gateSub');
+  var total = rows.length;
+  sub.textContent = done + ' از ' + total + ' ردیف کامل';
+  if(done === total){
+    bar.className = 'gate-bar gate-open';
+    txt.childNodes[0].nodeValue = 'دروازه باز است — تحویل مجاز';
+  } else {
+    bar.className = 'gate-bar gate-blocked';
+    txt.childNodes[0].nodeValue = 'دروازه بسته است';
+  }
+}
+
+document.querySelectorAll('#pfTable input').forEach(function(i){
+  i.addEventListener('input', refresh);
+  i.addEventListener('change', refresh);
+});
+
+document.getElementById('btnReport').addEventListener('click', function(){
+  var out = document.getElementById('reportOut');
+  var lines = ['گزارش کارت پیش‌پرواز — سند ۰۹', ''];
+  var missing = [];
+  rows.forEach(function(r){
+    var cb = r.querySelector('input[type=checkbox]');
+    var tx = r.querySelector('input[type=text]');
+    var label = r.children[1].textContent.trim();
+    var ok = cb.checked && tx.value.trim().length > 0;
+    lines.push((ok ? '[✓] ' : '[ ] ') + label + ' — ' + (tx.value.trim() || 'بدون شاهد'));
+    if(!ok) missing.push(label);
+  });
+  lines.push('');
+  lines.push(missing.length === 0
+    ? 'حکم: دروازه باز. تحویل مجاز است.'
+    : 'حکم: دروازه بسته. ' + missing.length + ' ردیف ناقص. تحویل مسدود.');
+  out.textContent = lines.join('\n');
+  out.style.display = 'block';
+  out.scrollIntoView({behavior:'smooth', block:'nearest'});
+});
+
+refresh();
+</script>
+</body>
+</html>
