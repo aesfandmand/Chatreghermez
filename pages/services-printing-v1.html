@@ -111,9 +111,17 @@
  --paper:#F5F3EF; --paper-2:#EDE9E2; --surface:#FFFFFF;
  --muted:#5C5966; --line:#DFD9D0; --line-strong:#C7BFB3;
 
- --accent:#C11539;          /* قرمز متنی: کنتراست آزموده‌شده */
+ /* قرمز متنی تیره‌تر از قرمز برند است و این تنها انحراف عمدی از توکن
+    شِل است: #DA1E49 به‌عنوان متن روی سطح کاغذی ۴٫۴۵ به ۱ می‌دهد که زیر
+    کف ۴٫۵ است، ولی #C11539 عدد ۵٫۵۲ می‌دهد. یعنی ظاهر برند عوض نشده،
+    فقط متنِ قرمز خوانا شده. */
+ --accent:#C11539;
  --accent-2:#A00F33;
- --accent-surface:#D01A44;  /* قرمز سطح: فقط زمینه، نه متن */
+ /* قرمز سطح: عیناً قرمز شِل کانونیکال هوم مصوب (۱۲ بار در abs_03).
+    متن سفید رویش ۴٫۹۳ به ۱ می‌دهد، پس به‌عنوان سطح مشکلی ندارد.
+    نسخهٔ استرابورد اینجا #D01A44 گذاشته بود که انشعاب از شِل است؛
+    برگردانده شد. */
+ --accent-surface:#DA1E49;
  --accent-soft:#FDECF0;
  --rose:#FF7C9B;            /* قرمز روی زمینهٔ تیره */
  --dim:#2A6480;             /* فولادی: یادداشت فنی و عدد */
@@ -179,8 +187,8 @@ p{margin:0 0 var(--s4);max-width:64ch}
   min-height:52px;padding:0 var(--s5);border-radius:var(--r-sm);border:1.5px solid transparent;
   font-weight:900;font-size:16px;cursor:pointer;white-space:nowrap;
   transition:transform .18s var(--ease),background .18s,border-color .18s,box-shadow .18s}
-.btn-primary{background:var(--accent-surface);color:#fff;box-shadow:0 8px 20px rgba(208,26,68,.22)}
-.btn-primary:hover{background:var(--accent-2);transform:translateY(-2px);box-shadow:0 12px 28px rgba(208,26,68,.30)}
+.btn-primary{background:var(--accent-surface);color:#fff;box-shadow:0 8px 20px rgba(218,30,73,.22)}
+.btn-primary:hover{background:var(--accent-2);transform:translateY(-2px);box-shadow:0 12px 28px rgba(218,30,73,.30)}
 .btn-primary:active{transform:translateY(0)}
 .btn-outline{border-color:var(--line-strong);background:var(--surface)}
 .btn-outline:hover{border-color:var(--ink)}
@@ -195,7 +203,7 @@ p{margin:0 0 var(--s4);max-width:64ch}
    مگامنو عیناً از هوم مصوب v4.2 گرفته شده‌اند.
    ══════════════════════════════════════════════════════ */
 .header{position:sticky;top:0;z-index:700;height:var(--header-h);
-  background:rgba(245,243,239,.92);backdrop-filter:blur(16px);
+  background:rgba(245,243,239,.92);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
   border-bottom:1px solid var(--line)}
 .header-in{height:100%;display:flex;align-items:center;gap:var(--s4)}
 .brand{display:flex;align-items:center;gap:var(--s3);flex:0 0 auto;min-height:44px;padding:var(--s1) 0}
@@ -264,6 +272,10 @@ p{margin:0 0 var(--s4);max-width:64ch}
     linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
     linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
   background-size:auto,44px 44px,44px 44px;
+  /* پیشوند وبکیت لازم است: سافاری mask-image بدون پیشوند را نادیده
+     می‌گیرد و در آن صورت شبکهٔ برگهٔ پیش‌نمونه به‌جای محو شدن، تمام
+     سطح تیره را می‌پوشاند. */
+  -webkit-mask-image:radial-gradient(ellipse 88% 74% at 76% 26%,#000 28%,transparent 76%);
   mask-image:radial-gradient(ellipse 88% 74% at 76% 26%,#000 28%,transparent 76%)}
 .sec>.wrap{position:relative;z-index:1}
 .sec-head{margin-bottom:var(--s6);max-width:70ch}
@@ -274,7 +286,7 @@ p{margin:0 0 var(--s4);max-width:64ch}
    ══════════════════════════════════════════════════════ */
 .hero{background:var(--ink);color:#fff;padding:var(--s9) 0 var(--s8);overflow:hidden;position:relative}
 .hero::after{content:'';position:absolute;inset-inline-end:-180px;top:-160px;width:460px;height:460px;
-  border-radius:50%;background:radial-gradient(circle,rgba(208,26,68,.26),transparent 68%);pointer-events:none}
+  border-radius:50%;background:radial-gradient(circle,rgba(218,30,73,.26),transparent 68%);pointer-events:none}
 .hero-grid{display:grid;gap:var(--s7)}
 .hero h1 em{font-style:normal;color:var(--rose)}
 .hero-def{font-size:17.5px;line-height:1.95;color:#D6D2DC;max-width:52ch;margin:var(--s4) 0 0}
@@ -504,7 +516,8 @@ footer{background:#100F14;color:#A9A4B0;padding:var(--s8) 0 var(--s5)}
    ۱۷ · موبایل: تب‌بار، کشو، پاپ‌آپ
    ══════════════════════════════════════════════════════ */
 .tabbar{position:fixed;inset-inline:0;bottom:0;z-index:700;display:none;
-  grid-template-columns:repeat(4,1fr);background:rgba(255,255,255,.97);backdrop-filter:blur(14px);
+  grid-template-columns:repeat(4,1fr);background:rgba(255,255,255,.97);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
   border-top:1px solid var(--line);padding:var(--s1) var(--s1) calc(var(--s1) + env(safe-area-inset-bottom,0px))}
 .tabbar a,.tabbar button{display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:2px;border:0;background:none;cursor:pointer;color:var(--muted);
