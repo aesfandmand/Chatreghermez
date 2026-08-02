@@ -1,0 +1,1280 @@
+<!--
+==========================================================
+  چتر قرمز — صفحهٔ محصول: استرابورد
+  فایل: strabord-v4.html
+  نسخه: v4 | تاریخ: ۱۰ مرداد ۱۴۰۵
+  پایه: strabord-v3.html — محتوا و قفل‌ها حفظ، سیستم بصری بازساخته شد.
+
+  === جهت بصری: نقشهٔ فنی ===
+  مخاطب این صفحه کارشناس فنی شهرداری، مسئول تدارکات و سرمایه‌گذار است،
+  نه خریدار خرد. چیزی که او را قانع می‌کند دقت است نه زرق‌وبرق.
+  پس زبان بصری صفحه از خودِ نقشهٔ اجرایی گرفته شده: کاغذ شطرنجی،
+  خط اندازه، و یادداشت فنی کنار قطعه.
+
+  رنگ کارکردی است، نه تزئینی. سه نقش و بس:
+    قرمز    = وضعیت فعال و دعوت به اقدام
+    فولادی  = ابعاد و یادداشت فنی
+    مسی     = تنها جزء متحرک سازه
+  هیچ رنگ چهارمی در صفحه نیست.
+
+  === سنجه‌های پایه (قاعدهٔ عدم پس‌رفت، سند ۰۹) ===
+  سنجه                v3        v4
+  تعداد بخش           ۱۴        ۱۴
+  واژگان              ۱۲۴۸      ≥۱۲۴۸
+  H1/H2/H3/متن        قفل       قفل، بدون تغییر
+  مسیر ثبت‌نشده        ۰         ۰
+  سرریز افقی          ۰         ۰
+  توکن فاصله          ندارد     ۸px پایه
+  حالت فوکوس          ناقص      همهٔ عناصر تعاملی
+  نوار چسبان پیکربندی  ندارد     دارد
+
+  === بلاک‌کننده‌های باز — بدون تغییر نسبت به v3 ===
+  BLK-01  مسیر نهایی صفحه (قرارداد v4.2)
+  BLK-02  شمارهٔ واتس‌اپ واقعی
+  BLK-03  SPEC-01..11 · FCT-01..02 · PRT-01..02-P — پانزده دادهٔ فنی
+  BLK-04  عکس واقعی PRT-01 و PRT-02
+==========================================================
+-->
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<meta content="#17161b" name="theme-color"/>
+<title>استرابورد: ابعاد، مشخصات فنی و قیمت | چتر قرمز</title>
+<meta content="ساخت و فروش استرابورد افقی ۵×۳ و عمودی ۴×۳، یک‌طرفه و دوطرفه. مشخصات فنی، قیمت مشخص و پیش‌فاکتور رسمی برای مناقصه. ویژهٔ شهرداری، سازمان دارای مجوز و سرمایه‌گذار." name="description"/>
+<link href="https://chatreghermez.com/products/outdoor-structures/straboards/" rel="canonical"/>
+<meta content="index,follow,max-image-preview:large,max-snippet:-1" name="robots"/>
+<meta content="استرابورد: ابعاد، مشخصات فنی و قیمت" property="og:title"/>
+<meta content="ساخت و فروش استرابورد افقی و عمودی. مشخصات فنی و قیمت مشخص، با پیش‌فاکتور رسمی برای مناقصه." property="og:description"/>
+<meta content="product" property="og:type"/>
+<meta content="https://chatreghermez.com/products/outdoor-structures/straboards/" property="og:url"/>
+<meta content="fa_IR" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+
+<style>
+/* ══════════════════════════════════════════════════════
+   ۱ · توکن‌های طراحی
+   ══════════════════════════════════════════════════════ */
+@font-face{font-family:PeydaWeb;src:local('Peyda'),url('/assets/fonts/PeydaWebVF.woff2') format('woff2-variations');font-weight:100 900;font-display:swap}
+@font-face{font-family:DanaWeb;src:local('Dana'),url('/assets/fonts/DanaVF.woff2') format('woff2-variations');font-weight:100 1000;font-display:swap}
+
+:root{
+ /* رنگ — نقش، نه اسم */
+ --ink:#15141A;          /* متن اصلی و سطح تیره */
+ --ink-2:#211F28;        /* سطح تیرهٔ دوم */
+ --ink-3:#34313D;
+ --paper:#F5F3EF;        /* سطح صفحه */
+ --paper-2:#EDE9E2;      /* سطح فرورفته */
+ --surface:#FFFFFF;      /* سطح برجسته */
+ --muted:#5C5966;        /* متن فرعی — کنتراست ۵٫۲:۱ روی paper */
+ --line:#DFD9D0;
+ --line-strong:#C7BFB3;
+
+ --accent:#C11539;       /* قرمز: وضعیت فعال و دعوت */
+ --accent-2:#A00F33;
+ --accent-surface:#D01A44;  /* قرمز سطح: فقط زمینه، نه متن */
+ --accent-soft:#FDECF0;
+ --rose:#FF7C9B;         /* قرمز روی زمینهٔ تیره */
+ --dim:#2A6480;          /* فولادی: ابعاد و یادداشت فنی */
+ --dim-soft:#E7F0F5;
+ --move:#845014;         /* مسی: تنها جزء متحرک */
+ --move-soft:#FBF1E4;
+
+ /* فاصله — پایهٔ ۸ پیکسل */
+ --s1:4px;  --s2:8px;  --s3:12px; --s4:16px; --s5:24px;
+ --s6:32px; --s7:48px; --s8:64px; --s9:80px; --s10:112px;
+
+ /* گردی */
+ --r-sm:10px; --r-md:16px; --r-lg:24px; --r-xl:32px;
+
+ /* ارتفاع */
+ --e1:0 1px 2px rgba(21,20,26,.05);
+ --e2:0 2px 4px rgba(21,20,26,.04),0 10px 24px rgba(21,20,26,.06);
+ --e3:0 4px 8px rgba(21,20,26,.05),0 22px 50px rgba(21,20,26,.10);
+
+ --head:'PeydaWeb','DanaWeb','Noto Sans Arabic',Tahoma,sans-serif;
+ --body:'DanaWeb','PeydaWeb','Noto Sans Arabic',Tahoma,sans-serif;
+ --ease:cubic-bezier(.22,1,.36,1);
+ --header-h:68px;
+ --focus:0 0 0 3px var(--surface),0 0 0 6px var(--accent);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+  font-size:16.5px;line-height:1.9;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit;color:inherit}
+img,svg{display:block;max-width:100%}
+:focus-visible{outline:0;box-shadow:var(--focus);border-radius:var(--r-sm)}
+.skip{position:absolute;inset-inline-start:-9999px;top:var(--s2);z-index:2000;
+  background:var(--ink);color:#fff;padding:var(--s3) var(--s5);border-radius:var(--r-sm)}
+.skip:focus{inset-inline-start:var(--s4)}
+.wrap{width:min(1160px,calc(100% - var(--s6)));margin-inline:auto}
+
+/* ══════════════════════════════════════════════════════
+   ۲ · مقیاس تایپوگرافی — قفل ۶، سند ۰۹
+   ۴۳ ÷ ۲۸ = ۱٫۵۴ · ۲۸ ÷ ۱۹٫۵ = ۱٫۴۴ · ۱۹٫۵ ÷ ۱۶٫۵ = ۱٫۱۸
+   ══════════════════════════════════════════════════════ */
+h1,h2,h3{font-family:var(--head);margin:0;letter-spacing:-.022em;text-wrap:balance}
+h1{font-size:43px;line-height:1.35;max-width:24ch}
+h2{font-size:28px;line-height:1.45;max-width:22ch}
+h3{font-size:19.5px;line-height:1.55}
+p,li,td,th{font-size:16.5px;line-height:1.9}
+p{margin:0 0 var(--s4);max-width:64ch}
+@media(max-width:900px){
+  h1{font-size:31px}h2{font-size:23px}h3{font-size:18px}
+  p,li,td,th{font-size:16px}
+}
+
+.eyebrow{display:inline-flex;align-items:center;gap:var(--s2);font-size:13px;font-weight:900;
+  letter-spacing:.02em;color:var(--accent);margin-bottom:var(--s3)}
+.eyebrow::before{content:'';width:22px;height:2px;background:currentColor;flex:0 0 auto}
+.lede{font-size:17.5px;line-height:1.95;color:var(--muted);max-width:60ch}
+.fine{font-size:15px;line-height:1.85;color:var(--muted);max-width:66ch}
+.on-dark .lede,.on-dark .fine{color:#B3AFBA}
+.on-dark .eyebrow{color:var(--rose)}
+.price-sec>.wrap>div:not(.config)>.eyebrow{color:#FFF5F8}
+.on-dark h1,.on-dark h2,.on-dark h3{color:#fff}
+
+/* ══════════════════════════════════════════════════════
+   ۳ · دکمه‌ها — همهٔ حالت‌ها
+   ══════════════════════════════════════════════════════ */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);
+  min-height:52px;padding:0 var(--s5);border-radius:var(--r-sm);border:1.5px solid transparent;
+  font-weight:900;font-size:16px;cursor:pointer;white-space:nowrap;
+  transition:transform .18s var(--ease),background .18s,border-color .18s,box-shadow .18s}
+.btn-primary{background:var(--accent-surface);color:#fff;box-shadow:0 8px 20px rgba(208,26,68,.22)}
+.btn-primary:hover{background:var(--accent-2);transform:translateY(-2px);box-shadow:0 12px 28px rgba(208,26,68,.30)}
+.btn-primary:active{transform:translateY(0)}
+.btn-outline{border-color:var(--line-strong);background:var(--surface)}
+.btn-outline:hover{border-color:var(--ink);background:var(--surface)}
+.btn-ghost-dark{border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.06);color:#fff}
+.btn-ghost-dark:hover{background:#fff;color:var(--ink)}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none!important}
+.btn-sm{min-height:44px;padding:0 var(--s4);font-size:15px}
+
+/* ══════════════════════════════════════════════════════
+   ۴ · هدر
+   ══════════════════════════════════════════════════════ */
+.header{position:sticky;top:0;z-index:700;height:var(--header-h);
+  background:rgba(245,243,239,.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line)}
+.header-in{height:100%;display:flex;align-items:center;gap:var(--s4)}
+.brand{display:flex;align-items:center;gap:var(--s3);flex:0 0 auto;min-height:44px;padding:var(--s1) 0}
+.brand img{height:40px;width:auto}
+.brand b{font-family:var(--head);font-size:16px;display:block;line-height:1.3}
+.brand small{font-size:12.5px;color:var(--muted);display:block}
+.header-end{margin-inline-start:auto;display:flex;align-items:center;gap:var(--s3)}
+.header-phone{font-weight:900;font-size:15px;direction:ltr;padding:var(--s2)}
+.menu-btn{width:46px;height:46px;border-radius:var(--r-sm);border:1.5px solid var(--line-strong);
+  background:var(--surface);cursor:pointer;font-size:18px;display:none;place-items:center}
+@media(max-width:960px){.brand small{display:none}.header-phone{display:none}.menu-btn{display:grid}}
+@media(max-width:640px){.header-end .btn{display:none}.brand b{font-size:14px}.brand img{height:34px}}
+
+/* ══════════════════════════════════════════════════════
+   ۵ · بخش‌ها و زمینهٔ نقشه
+   ══════════════════════════════════════════════════════ */
+.sec{padding:var(--s9) 0;position:relative}
+.sec-tight{padding:var(--s8) 0}
+.sec-paper{background:var(--paper)}
+.sec-surface{background:var(--surface);border-block:1px solid var(--line)}
+.sec-sunken{background:var(--paper-2)}
+.sec-dark{background:var(--ink);color:#fff}
+.sec-dark-2{background:var(--ink-2);color:#fff}
+@media(max-width:900px){.sec{padding:var(--s8) 0}.sec-tight{padding:var(--s7) 0}}
+
+/* کاغذ شطرنجی — امضای بصری صفحه، فقط روی سطح تیره و بسیار کم‌رنگ */
+.blueprint::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);
+  background-size:32px 32px;
+  mask-image:radial-gradient(ellipse 90% 70% at 70% 30%,#000 30%,transparent 78%)}
+.sec>.wrap{position:relative;z-index:1}
+
+.sec-head{margin-bottom:var(--s6);max-width:70ch}
+.sec-head .lede{margin-top:var(--s3)}
+
+/* ══════════════════════════════════════════════════════
+   ۶ · هیرو
+   ══════════════════════════════════════════════════════ */
+.hero{background:var(--ink);color:#fff;padding:var(--s9) 0 var(--s8);overflow:hidden;position:relative}
+.hero::after{content:'';position:absolute;inset-inline-end:-180px;top:-160px;width:460px;height:460px;
+  border-radius:50%;background:radial-gradient(circle,rgba(208,26,68,.26),transparent 68%);pointer-events:none}
+.hero-grid{display:grid;gap:var(--s7)}
+.hero h1 em{font-style:normal;color:var(--rose)}
+.hero-def{font-size:17.5px;line-height:1.95;color:#D6D2DC;max-width:52ch;margin:var(--s4) 0 0}
+.hero-def b{color:#fff;font-weight:800}
+.hero-actions{display:grid;gap:var(--s3);margin-top:var(--s6)}
+.hero-meta{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s5);margin-top:var(--s5);
+  padding-top:var(--s5);border-top:1px solid rgba(255,255,255,.12)}
+.hero-meta div{display:flex;align-items:baseline;gap:var(--s2)}
+.hero-meta dt{font-size:14px;color:#95909D}
+.hero-meta dd{margin:0;font-family:var(--head);font-size:17px;font-weight:800;color:#fff}
+
+/* صحنهٔ نقشه */
+.stage{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);
+  border-radius:var(--r-lg);padding:var(--s4) var(--s3) var(--s3)}
+.stage figcaption{margin:var(--s3) 0 0;font-size:14px;color:#95909D;text-align:center}
+@keyframes riseY{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.build [data-b]{transform-box:fill-box;opacity:0;animation-fill-mode:forwards;
+  animation-duration:.5s;animation-timing-function:var(--ease)}
+.build [data-b="1"]{transform-origin:bottom;animation-name:riseY,fadeIn;animation-delay:.2s}
+.build [data-b="2"]{animation-name:fadeIn;animation-delay:.66s}
+.build [data-b="3"]{transform-origin:top;animation-name:riseY,fadeIn;animation-delay:.9s;animation-duration:.6s}
+.build [data-b="4"]{animation-name:fadeIn;animation-delay:1.46s}
+
+/* ══════════════════════════════════════════════════════
+   ۷ · کارت‌ها و شبکه‌ها
+   ══════════════════════════════════════════════════════ */
+.grid-3{display:grid;gap:var(--s4)}
+.grid-2{display:grid;gap:var(--s4)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:var(--s5);box-shadow:var(--e1)}
+.card h3{margin-bottom:var(--s2)}
+.card p{margin:0;color:var(--muted);font-size:16px}
+.on-dark .card{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.11)}
+.on-dark .card p{color:#B3AFBA}
+
+/* کارت شکست — شماره‌گذاری‌شده، چون سه محور ترتیب دارند */
+.stakes-list{counter-reset:sk;display:grid;gap:var(--s4);margin-top:var(--s6)}
+.stakes-list article{position:relative;padding-top:var(--s6)}
+.stakes-list article::before{counter-increment:sk;content:'۰' counter(sk);
+  position:absolute;top:var(--s5);inset-inline-start:var(--s5);
+  font-family:var(--head);font-size:13px;font-weight:900;color:var(--rose);letter-spacing:.08em}
+
+/* ══════════════════════════════════════════════════════
+   ۸ · آناتومی
+   ══════════════════════════════════════════════════════ */
+.anat{display:grid;gap:var(--s6)}
+.anat-fig{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:var(--s4) var(--s2)}
+.an-part{cursor:pointer;transition:opacity .25s var(--ease)}
+.anat-fig.picked .an-part{opacity:.22}
+.anat-fig.picked .an-part.on{opacity:1}
+.an-part.on .an-hit{stroke:var(--accent);stroke-width:3;stroke-dasharray:5 4}
+.parts{display:grid;gap:var(--s2);list-style:none;margin:0;padding:0;counter-reset:pp}
+.parts li{border:1px solid var(--line);border-radius:var(--r-md);background:var(--surface);
+  overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.parts button{width:100%;display:flex;align-items:center;gap:var(--s3);
+  padding:var(--s4);background:none;border:0;text-align:start;cursor:pointer;min-height:56px}
+.parts button i{counter-increment:pp;font-style:normal;width:30px;height:30px;flex:0 0 30px;
+  border-radius:var(--r-sm);background:var(--paper-2);color:var(--muted);display:grid;
+  place-items:center;font-weight:900;font-size:13.5px;transition:.2s;font-family:var(--head)}
+.parts button i::before{content:counter(pp)}
+.parts li.on{border-color:var(--accent);box-shadow:0 8px 22px rgba(208,26,68,.10)}
+.parts li.on button i{background:var(--accent);color:#fff}
+.parts li.is-move button i{background:var(--move);color:#fff}
+.parts .detail{display:none;padding:0 var(--s4) var(--s4);font-size:16px;color:var(--muted)}
+.parts li.on .detail{display:block}
+.parts .detail em{font-style:normal;color:var(--move);font-weight:800}
+.tag-move{display:inline-block;margin-inline-start:var(--s2);padding:2px var(--s2);
+  border-radius:99px;background:var(--move-soft);color:var(--move);
+  font-size:12.5px;font-weight:900;vertical-align:middle}
+
+/* ══════════════════════════════════════════════════════
+   ۹ · انتخابگر ابعاد
+   ══════════════════════════════════════════════════════ */
+.segment{display:inline-flex;gap:var(--s1);background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r-md);padding:var(--s1);margin-bottom:var(--s5)}
+.segment button{min-height:46px;padding:0 var(--s5);border:0;border-radius:var(--r-sm);
+  background:none;font-weight:900;font-size:16px;color:var(--muted);cursor:pointer;transition:.2s}
+.segment button[aria-selected="true"]{background:var(--ink);color:#fff}
+.morph{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:var(--s4) var(--s3);margin-bottom:var(--s4)}
+.morph rect,.morph line,.morph text{transition:all .55s var(--ease)}
+.fit-notes{display:grid;gap:var(--s3)}
+.fit-notes div{background:var(--surface);border:1px solid var(--line);
+  border-inline-start:3px solid var(--dim);border-radius:var(--r-md);padding:var(--s4) var(--s5);font-size:16px}
+.fit-notes b{color:var(--dim)}
+
+/* ══════════════════════════════════════════════════════
+   ۱۰ · پیکربند قیمت
+   ══════════════════════════════════════════════════════ */
+.price-sec{background:linear-gradient(155deg,var(--accent-surface),#8E0C2C);color:#fff;
+  padding:var(--s9) 0;position:relative;overflow:hidden}
+.price-grid{display:grid;gap:var(--s7);align-items:start}
+.price-sec>.wrap>div:not(.config)>.fine{color:#FFF5F8}
+.price-sec .config .fine{color:var(--muted)}
+.config{background:var(--surface);color:var(--ink);border-radius:var(--r-xl);
+  padding:var(--s5);box-shadow:var(--e3)}
+.config h3{margin-bottom:var(--s4)}
+.preview{background:var(--paper-2);border-radius:var(--r-md);padding:var(--s3) var(--s2);
+  margin-bottom:var(--s5);min-height:154px;display:grid;place-items:center}
+.preview svg{width:100%;max-height:180px}
+.field{margin-bottom:var(--s5)}
+.field>span{display:block;font-size:13.5px;font-weight:900;color:var(--muted);margin-bottom:var(--s2)}
+.choices{display:flex;gap:var(--s2)}
+.choices button{flex:1;min-height:50px;border:1.5px solid var(--line);border-radius:var(--r-sm);
+  background:var(--surface);font-weight:800;font-size:15.5px;color:var(--muted);cursor:pointer;transition:.2s}
+.choices button:hover{border-color:var(--line-strong)}
+.choices button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.stepper{display:flex;align-items:center;gap:var(--s5)}
+.stepper button{width:50px;height:50px;border:1.5px solid var(--line);border-radius:var(--r-sm);
+  background:var(--surface);font-size:22px;cursor:pointer;transition:.2s}
+.stepper button:hover{border-color:var(--ink)}
+.stepper output{font-family:var(--head);font-size:20px;font-weight:900;min-width:34px;text-align:center}
+.total{background:var(--paper-2);border-radius:var(--r-md);padding:var(--s5);margin:var(--s5) 0 var(--s4)}
+.total>span{display:block;font-size:13.5px;font-weight:900;color:var(--muted);margin-bottom:var(--s1)}
+.total b{display:block;font-family:var(--head);font-size:29px;color:var(--accent);
+  line-height:1.35;font-variant-numeric:tabular-nums}
+.total small{display:block;font-size:15px;color:var(--muted);margin-top:var(--s1)}
+.config-actions{display:grid;gap:var(--s2)}
+.config-actions .btn{width:100%}
+
+/* نوار چسبان — پیکربندی فعلی همراه کاربر می‌ماند */
+.stickybar{position:fixed;inset-inline:0;bottom:0;z-index:650;
+  background:rgba(21,20,26,.96);backdrop-filter:blur(14px);color:#fff;
+  border-top:1px solid rgba(255,255,255,.12);
+  padding:var(--s3) 0 calc(var(--s3) + env(safe-area-inset-bottom,0px));
+  transform:translateY(110%);transition:transform .32s var(--ease);visibility:hidden}
+.stickybar.show{transform:none;visibility:visible}
+.stickybar .wrap{display:flex;align-items:center;gap:var(--s4)}
+.stickybar-copy{min-width:0}
+.stickybar-copy b{display:block;font-family:var(--head);font-size:18px;
+  font-variant-numeric:tabular-nums;line-height:1.4}
+.stickybar-copy span{display:block;font-size:13.5px;color:#A9A4B0;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stickybar .btn{margin-inline-start:auto;flex:0 0 auto}
+@media(max-width:900px){
+  .stickybar{bottom:calc(64px + env(safe-area-inset-bottom,0px))}
+  .stickybar .btn{min-height:44px;padding:0 var(--s4);font-size:15px}
+  .stickybar-copy b{font-size:16px}
+}
+@media(max-width:420px){.stickybar-copy span{display:none}}
+
+/* ══════════════════════════════════════════════════════
+   ۱۱ · جدول مشخصات
+   ══════════════════════════════════════════════════════ */
+.spec-grid{display:grid;gap:var(--s6)}
+.drawing{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:var(--s4) var(--s2);overflow:hidden}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--r-md);
+  border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;background:var(--surface)}
+caption{text-align:start;font-size:15px;color:var(--muted);padding:0 0 var(--s3)}
+th{background:var(--ink);color:#fff;text-align:start;padding:var(--s4);font-size:15px;font-weight:800}
+td{padding:var(--s4);border-top:1px solid var(--line);font-size:16px}
+tbody tr:nth-child(even) td{background:#FBFAF8}
+td:first-child{font-weight:800;width:46%}
+.slot-fact{display:inline-block;background:var(--move-soft);border:1px dashed var(--move);
+  border-radius:var(--r-sm);padding:1px var(--s2);font-size:.94em;font-weight:800;color:var(--move)}
+
+/* ══════════════════════════════════════════════════════
+   ۱۲ · مسیر تحویل
+   ══════════════════════════════════════════════════════ */
+.steps{list-style:none;margin:0 0 var(--s5);padding:0;display:grid;position:relative}
+.steps::before{content:'';position:absolute;inset-inline-start:20px;top:var(--s3);bottom:var(--s3);
+  width:2px;background:var(--line)}
+.steps li{position:relative;padding-inline-start:var(--s8);padding-bottom:var(--s5)}
+.steps li:last-child{padding-bottom:0}
+.steps li::before{content:'';position:absolute;inset-inline-start:13px;top:7px;width:17px;height:17px;
+  border-radius:50%;background:var(--surface);border:3px solid var(--line);
+  transition:border-color .35s var(--ease),background .35s var(--ease),box-shadow .35s var(--ease);z-index:2}
+.steps li.seen::before{border-color:var(--accent);background:var(--accent);
+  box-shadow:0 0 0 5px rgba(208,26,68,.14)}
+.steps h3{margin-bottom:var(--s1)}
+.steps span{display:block;font-size:16px;color:var(--muted);max-width:56ch}
+.sla{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);
+  padding:var(--s4) var(--s5);font-size:16px}
+
+/* ══════════════════════════════════════════════════════
+   ۱۳ · نمونه‌کار
+   ══════════════════════════════════════════════════════ */
+.gallery{display:grid;gap:var(--s4)}
+.gallery figure{margin:0}
+.gallery img{width:100%;border-radius:var(--r-lg);aspect-ratio:16/9;object-fit:cover;
+  border:1px solid var(--line)}
+.gallery img[src=""],.gallery img:not([src]){
+  background:repeating-linear-gradient(45deg,#EAF3EE 0 14px,#F4FAF7 14px 28px);
+  border:2px dashed #1F6B4E;color:#124A35;padding:var(--s5);font-weight:700;font-size:15px;
+  display:flex;align-items:center;justify-content:center;text-align:center}
+.gallery figcaption{font-size:15px;color:var(--muted);margin-top:var(--s3)}
+.gallery figcaption::before{content:'نمونه‌کار · ';font-weight:900;color:#1F6B4E}
+
+/* ══════════════════════════════════════════════════════
+   ۱۴ · پرسش‌ها
+   ══════════════════════════════════════════════════════ */
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);
+  margin-bottom:var(--s2);overflow:hidden}
+.faq summary{padding:var(--s4) var(--s5);font-weight:800;font-size:17px;cursor:pointer;
+  list-style:none;display:flex;justify-content:space-between;gap:var(--s4);
+  align-items:center;min-height:56px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'';flex:0 0 auto;width:14px;height:14px;
+  border-inline-end:2.5px solid var(--accent);border-bottom:2.5px solid var(--accent);
+  transform:rotate(45deg) translateY(-3px);transition:transform .25s var(--ease)}
+.faq details[open] summary::after{transform:rotate(225deg) translateY(-3px)}
+.faq details p{margin:0;padding:0 var(--s5) var(--s5);font-size:16px;color:var(--muted)}
+.faq a{color:var(--accent);font-weight:800;text-decoration:underline;text-underline-offset:3px}
+
+/* ══════════════════════════════════════════════════════
+   ۱۵ · فرم
+   ══════════════════════════════════════════════════════ */
+.form{background:var(--surface);color:var(--ink);border-radius:var(--r-lg);
+  padding:var(--s6);display:grid;gap:var(--s4);box-shadow:var(--e2)}
+.form label{font-size:14.5px;font-weight:900}
+.form input,.form select{width:100%;font-size:16.5px;padding:var(--s3) var(--s4);
+  margin-top:var(--s2);border:1.5px solid var(--line);border-radius:var(--r-sm);
+  background:#FBFAF8;min-height:52px;transition:border-color .2s}
+.form input:hover,.form select:hover{border-color:var(--line-strong)}
+.form input:focus-visible,.form select:focus-visible{border-color:var(--accent);background:var(--surface)}
+.form .hint{font-size:14px;color:var(--muted);font-weight:500;margin-top:var(--s1);display:block}
+
+/* ══════════════════════════════════════════════════════
+   ۱۶ · پاورقی
+   ══════════════════════════════════════════════════════ */
+footer{background:#100F14;color:#A9A4B0;padding:var(--s8) 0 var(--s5)}
+.f-grid{display:grid;gap:var(--s6)}
+.f-id{display:flex;align-items:flex-start;gap:var(--s4)}
+.f-id img{width:54px;height:auto;flex:0 0 auto}
+.f-id h3{color:#fff;margin-bottom:var(--s2)}
+.f-id p{margin:0;font-size:15.5px;color:#A9A4B0;max-width:34ch}
+.f-col{display:grid;align-content:start;gap:2px}
+.f-col b{color:#fff;font-size:16px;margin-bottom:var(--s2)}
+.f-col a{font-size:15.5px;color:#BCB7C1;padding:var(--s2) 0;transition:color .2s}
+.f-col a:hover{color:#fff}
+.f-bottom{border-top:1px solid rgba(255,255,255,.09);margin-top:var(--s6);padding-top:var(--s4);
+  display:flex;justify-content:space-between;gap:var(--s4);flex-wrap:wrap;font-size:14px;color:#7E7986}
+.f-bottom nav{display:flex;gap:var(--s5);flex-wrap:wrap}
+.f-bottom nav a{display:inline-flex;align-items:center;min-height:44px}
+
+/* ══════════════════════════════════════════════════════
+   ۱۷ · موبایل: تب‌بار، کشو، پاپ‌آپ
+   ══════════════════════════════════════════════════════ */
+.tabbar{position:fixed;inset-inline:0;bottom:0;z-index:700;display:none;
+  grid-template-columns:repeat(4,1fr);background:rgba(255,255,255,.97);backdrop-filter:blur(14px);
+  border-top:1px solid var(--line);padding:var(--s1) var(--s1) calc(var(--s1) + env(safe-area-inset-bottom,0px))}
+.tabbar a,.tabbar button{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2px;border:0;background:none;cursor:pointer;color:var(--muted);
+  padding:var(--s2) var(--s1);border-radius:var(--r-sm);min-height:52px}
+.tabbar svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;
+  stroke-linecap:round;stroke-linejoin:round}
+.tabbar span{font-size:11px;font-weight:800}
+.tabbar a[aria-current="true"]{color:var(--accent)}
+@media(max-width:900px){
+  .tabbar{display:grid}
+  body{padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))}
+}
+.drawer{position:fixed;inset:0;z-index:1000;background:rgba(12,10,14,.55);
+  opacity:0;visibility:hidden;transition:opacity .26s var(--ease),visibility .26s}
+.drawer[aria-hidden="false"]{opacity:1;visibility:visible}
+.drawer-panel{position:absolute;inset-inline:0;bottom:0;max-height:84vh;overflow-y:auto;
+  background:var(--surface);border-radius:var(--r-xl) var(--r-xl) 0 0;
+  padding:var(--s5) var(--s4) calc(var(--s5) + env(safe-area-inset-bottom,0px));
+  transform:translateY(100%);transition:transform .3s var(--ease)}
+.drawer[aria-hidden="false"] .drawer-panel{transform:none}
+.drawer-panel::before{content:'';display:block;width:44px;height:4px;border-radius:99px;
+  background:var(--line-strong);margin:0 auto var(--s5)}
+.drawer-panel a{display:block;padding:var(--s4);border-radius:var(--r-md);font-weight:700;
+  font-size:16.5px;border:1px solid var(--line);margin-bottom:var(--s2);min-height:56px}
+.drawer-close{position:absolute;inset-inline-end:var(--s4);top:var(--s3);width:44px;height:44px;
+  border:0;background:var(--paper-2);border-radius:var(--r-sm);font-size:20px;
+  color:var(--muted);cursor:pointer}
+
+.modal{position:fixed;inset:0;z-index:1100;display:grid;place-items:center;padding:var(--s5);
+  opacity:0;visibility:hidden;transition:opacity .22s var(--ease),visibility .22s}
+.modal[aria-hidden="false"]{opacity:1;visibility:visible}
+.modal-backdrop{position:absolute;inset:0;background:rgba(12,10,14,.64)}
+.modal-panel{position:relative;background:var(--surface);border-radius:var(--r-xl);max-width:480px;
+  width:100%;padding:var(--s7) var(--s6) var(--s6);max-height:88vh;overflow-y:auto;
+  transform:translateY(16px) scale(.98);transition:transform .22s var(--ease);box-shadow:var(--e3)}
+.modal[aria-hidden="false"] .modal-panel{transform:none}
+.modal-close{position:absolute;inset-inline-end:var(--s4);top:var(--s4);width:44px;height:44px;min-height:44px;line-height:1;
+  border:0;background:var(--paper-2);border-radius:var(--r-sm);font-size:22px;cursor:pointer;color:var(--muted)}
+.channel{display:block;border:1.5px solid var(--line);border-radius:var(--r-md);
+  padding:var(--s4) var(--s5);transition:.18s;min-height:60px;margin-bottom:var(--s4)}
+.channel:hover{border-color:var(--accent);transform:translateY(-1px)}
+.channel b{display:block;font-size:16.5px}
+.channel span{display:block;font-size:15px;color:var(--muted);margin-top:2px;direction:ltr;text-align:start}
+.divider{display:flex;align-items:center;gap:var(--s3);margin:var(--s5) 0 var(--s4);
+  color:var(--muted);font-size:14.5px}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--line)}
+body.is-locked{overflow:hidden}
+
+/* ══════════════════════════════════════════════════════
+   ۱۸ · نقاط شکست — یک سیستم، نه دسکتاپِ کوچک‌شده
+   ══════════════════════════════════════════════════════ */
+@media(min-width:760px){
+  .grid-2{grid-template-columns:1fr 1fr}
+  .fit-notes{grid-template-columns:1fr 1fr}
+  .gallery{grid-template-columns:1.4fr 1fr;align-items:start}
+  .hero-actions{display:flex;gap:var(--s3)}
+}
+@media(min-width:960px){
+  .grid-3{grid-template-columns:repeat(3,1fr)}
+  .stakes-list{grid-template-columns:repeat(3,1fr)}
+  .hero-grid{grid-template-columns:1.04fr .96fr;align-items:center;gap:var(--s8)}
+  .anat{grid-template-columns:.92fr 1.08fr;align-items:start;gap:var(--s7)}
+  .anat-fig{position:sticky;top:calc(var(--header-h) + var(--s4))}
+  .price-grid{grid-template-columns:1fr .92fr;gap:var(--s8)}
+  .spec-grid{grid-template-columns:1fr 1fr;align-items:start;gap:var(--s7)}
+  .steps{grid-template-columns:1fr 1fr;column-gap:var(--s7)}
+  .steps::before{display:none}
+  .steps li{padding-inline-start:0;padding-top:var(--s5);border-top:3px solid var(--line);
+    transition:border-color .35s var(--ease)}
+  .steps li.seen{border-top-color:var(--accent)}
+  .steps li::before{inset-inline-start:0;top:-10px}
+  .form{grid-template-columns:1fr 1fr}
+  .form label:nth-of-type(3),.form .btn{grid-column:1/-1}
+  .f-grid{grid-template-columns:1.4fr 1fr 1fr 1.05fr}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .build [data-b]{opacity:1!important;transform:none!important}
+  .steps li{border-top-color:var(--accent)}
+  .stickybar{transition:none}
+}
+@media(prefers-contrast:more){
+  :root{--muted:#4A4753;--line:#B8B0A5}
+}
+</style>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[
+{"@type":"Organization","@id":"https://chatreghermez.com/#org","name":"آژانس تبلیغاتی چتر قرمز","url":"https://chatreghermez.com/","slogan":"به آسمان سلام کن","email":"info@chatreghermez.com","telephone":"+983136258310","address":{"@type":"PostalAddress","addressLocality":"اصفهان","addressRegion":"اصفهان","streetAddress":"خیابان شیخ صدوق جنوبی، کوچه ۳۲","addressCountry":"IR"}},
+{"@type":"BreadcrumbList","itemListElement":[
+{"@type":"ListItem","position":1,"name":"خانه","item":"https://chatreghermez.com/"},
+{"@type":"ListItem","position":2,"name":"محصولات","item":"https://chatreghermez.com/products/"},
+{"@type":"ListItem","position":3,"name":"سازه‌های شهری","item":"https://chatreghermez.com/products/outdoor-structures/"},
+{"@type":"ListItem","position":4,"name":"استرابورد"}]},
+{"@type":"Product","name":"استرابورد تبلیغاتی","description":"سازهٔ تبلیغات محیطی، افقی ۵×۳ یا عمودی ۴×۳ متر، یک‌طرفه یا دوطرفه. ساخت و نصب توسط چتر قرمز در اصفهان. ویژهٔ شهرداری، سازمان دارای مجوز و سرمایه‌گذار.","brand":{"@id":"https://chatreghermez.com/#org"},"offers":[
+{"@type":"Offer","name":"استرابورد عمودی ۴×۳ یک‌طرفه","price":"400000000","priceCurrency":"IRR","availability":"https://schema.org/InStock"},
+{"@type":"Offer","name":"استرابورد عمودی ۴×۳ دوطرفه","price":"600000000","priceCurrency":"IRR","availability":"https://schema.org/InStock"},
+{"@type":"Offer","name":"استرابورد افقی ۵×۳ یک‌طرفه","price":"600000000","priceCurrency":"IRR","availability":"https://schema.org/InStock"},
+{"@type":"Offer","name":"استرابورد افقی ۵×۳ دوطرفه","price":"900000000","priceCurrency":"IRR","availability":"https://schema.org/InStock"}]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"چه کسانی می‌توانند استرابورد سفارش دهند؟","acceptedAnswer":{"@type":"Answer","text":"استرابورد سازه‌ای شهری است و نصبش مجوز می‌خواهد. مشتری آن شهرداری‌ها، سازمان‌های دارای مجوز نصب، و سرمایه‌گذارانی هستند که سازه را برای واگذاری به شهرداری تهیه می‌کنند. برای کسب‌وکارها، لایت‌باکس ایندور گزینهٔ مناسب است چون در فضای داخلی خودشان نصب می‌شود."}},
+{"@type":"Question","name":"فرق استرابورد با بیلبورد چیست؟","acceptedAnswer":{"@type":"Answer","text":"بیلبورد سازه‌ای بزرگ برای بزرگراه و جادهٔ برون‌شهری است و از فاصلهٔ دور دیده می‌شود. استرابورد ابعاد جمع‌وجورتری دارد و در معابر شهری، تقاطع و جزیرهٔ ترافیکی نصب می‌شود."}},
+{"@type":"Question","name":"قیمت دوطرفه چرا دو برابر یک‌طرفه نیست؟","acceptedAnswer":{"@type":"Answer","text":"چون پایه و اسکلت سازه بین دو وجه مشترک است و فقط قاب و سطح نمایش دوم اضافه می‌شود. به همین دلیل دوطرفه پنجاه درصد بیشتر از یک‌طرفه محاسبه می‌شود، نه دو برابر."}},
+{"@type":"Question","name":"استرابورد افقی بگیرم یا عمودی؟","acceptedAnswer":{"@type":"Answer","text":"افقی پنج در سه متر برای نمای عریض و محورهایی که فضای جانبی دارند مناسب‌تر است. عمودی چهار در سه متر برای پیاده‌رو، تقاطع و جزیرهٔ ترافیکی. موقعیت نصب تعیین می‌کند، نه سلیقه."}},
+{"@type":"Question","name":"قیمت شامل چاپ و نصب هم می‌شود؟","acceptedAnswer":{"@type":"Answer","text":"قیمت اعلام‌شده مربوط به ساخت سازه است. چاپ بنر و نصب در محل، جداگانه و شفاف در پیش‌فاکتور می‌آید تا بدانید هزینهٔ سازه از هزینهٔ اجرا چقدر است."}},
+{"@type":"Question","name":"برای مناقصه چه مدارکی ارائه می‌دهید؟","acceptedAnswer":{"@type":"Answer","text":"پروانهٔ رسمی فعالیت تبلیغاتی، مشخصات فنی سازه، سوابق اجرایی و مدارک ارزیابی تأمین‌کننده. برای فراخوان و مناقصه، این بسته پیش از جلسه ارسال می‌شود."}},
+{"@type":"Question","name":"سفارش چند عددی هم می‌پذیرید؟","acceptedAnswer":{"@type":"Answer","text":"بله. برای پروژه‌های چندنقطه‌ای که معمولاً شهرداری‌ها و سرمایه‌گذاران دارند، تیراژ در پیش‌فاکتور محاسبه می‌شود."}},
+{"@type":"Question","name":"مجوز نصب با کیست؟","acceptedAnswer":{"@type":"Answer","text":"با خریدار. ما سازه را می‌سازیم و در محل تأییدشده نصب می‌کنیم، اما اخذ مجوز نصب در فضای شهری بر عهدهٔ شهرداری یا سازمان متقاضی است."}}]}]}</script>
+</head>
+<body>
+
+<a class="skip" href="#main">پرش به محتوای اصلی</a>
+
+<header class="header">
+<div class="wrap header-in">
+<a class="brand" href="/">
+<img alt="لوگوی آژانس تبلیغاتی چتر قرمز" src="/assets/img/logo.png" width="38" height="40"/>
+<span><b>آژانس تبلیغاتی چتر قرمز</b><small>طراحی، ساخت، رسانه و رشد</small></span>
+</a>
+<div class="header-end">
+<a class="header-phone" href="tel:+983136258310">۰۳۱-۳۶۲۵۸۳۱۰</a>
+<button class="btn btn-primary btn-sm" data-open-contact type="button">پیش‌فاکتور رسمی</button>
+<button class="menu-btn" id="menuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false" aria-controls="drawer">☰</button>
+</div>
+</div>
+</header>
+
+<main id="main">
+
+<!-- ═══ ۱ · هیرو ═══ -->
+<section class="hero blueprint on-dark" id="top">
+<div class="wrap hero-grid">
+<div>
+<span class="eyebrow">ساخت و فروش سازه · اصفهان</span>
+<h1>استرابورد چیست و <em>چند تمام می‌شود</em></h1>
+<p class="hero-def"><b>استرابورد یک قاب تبلیغاتی ایستاده است روی یک ستون فلزی.</b> بنر بین دو فک بالا و پایین کشیده می‌شود و با گیرهٔ کناری مهار می‌گردد. جای آن پیاده‌رو، تقاطع و جزیرهٔ ترافیکی است، نه بزرگراه. نصبش هم مجوز شهری می‌خواهد.</p>
+<div class="hero-actions">
+<button class="btn btn-primary" data-open-contact type="button">دریافت پیش‌فاکتور رسمی</button>
+<a class="btn btn-ghost-dark" href="#spec">مشخصات فنی</a>
+</div>
+<dl class="hero-meta">
+<div><dt>ابعاد</dt><dd>۵×۳ و ۴×۳</dd></div>
+<div><dt>حالت</dt><dd>یک‌طرفه و دوطرفه</dd></div>
+<div><dt>شروع از</dt><dd>۴۰ میلیون تومان</dd></div>
+</dl>
+</div>
+<figure class="stage" style="margin:0">
+<svg class="build" viewBox="0 0 380 300" role="img" aria-label="نقشهٔ استرابورد عمودی: ستون فلزی، فک بالا و پایین، قاب بنر چهار در سه متر، کنار یک آدم برای نشان‌دادن مقیاس">
+  <line x1="0" y1="272" x2="380" y2="272" stroke="rgba(255,255,255,.28)" stroke-width="1.5"/>
+  <g opacity=".55" fill="#fff">
+    <circle cx="80" cy="209" r="7"/><rect x="72" y="219" width="16" height="28" rx="7"/>
+    <rect x="74" y="246" width="4.5" height="26" rx="2"/><rect x="81.5" y="246" width="4.5" height="26" rx="2"/>
+  </g>
+  <text x="80" y="288" fill="#95909D" font-size="11" text-anchor="middle">۱٫۷۵ متر</text>
+  <g data-b="1">
+    <rect x="234" y="192" width="12" height="80" rx="2" fill="#8E8A95"/>
+    <path d="M212 272 L268 272 L274 286 L206 286 Z" fill="#6C6873"/>
+  </g>
+  <g data-b="2">
+    <rect x="172" y="26" width="136" height="9" rx="3" fill="#C9C5CE"/>
+    <rect x="172" y="189" width="136" height="9" rx="3" fill="#A3651F"/>
+    <rect x="174" y="32" width="7" height="160" rx="2" fill="#8E8A95"/>
+    <rect x="299" y="32" width="7" height="160" rx="2" fill="#8E8A95"/>
+  </g>
+  <g data-b="3">
+    <rect x="181" y="33" width="118" height="158" fill="#D01A44" opacity=".92"/>
+    <rect x="191" y="52" width="72" height="8" rx="4" fill="#fff" opacity=".85"/>
+    <rect x="191" y="70" width="98" height="8" rx="4" fill="#fff" opacity=".55"/>
+    <rect x="191" y="88" width="54" height="8" rx="4" fill="#fff" opacity=".55"/>
+  </g>
+  <g data-b="4" stroke="#5FA8C4" fill="#5FA8C4">
+    <line x1="181" y1="16" x2="299" y2="16" stroke-width="1.4"/>
+    <path d="M181 16 l7 -4 v8 z M299 16 l-7 -4 v8 z" stroke="none"/>
+    <text x="240" y="10" font-size="12" text-anchor="middle" stroke="none">۳ متر</text>
+    <line x1="330" y1="33" x2="330" y2="191" stroke-width="1.4"/>
+    <path d="M330 33 l-4 7 h8 z M330 191 l-4 -7 h8 z" stroke="none"/>
+    <text x="349" y="118" font-size="12" text-anchor="middle" stroke="none">۴ متر</text>
+  </g>
+</svg>
+<figcaption>استرابورد عمودی ۴×۳ — ترتیب مونتاژ: ستون، فک، سطح نمایش</figcaption>
+</figure>
+</div>
+</section>
+
+<!-- ═══ ۲ · بخش شکست — قفل ۲، پیش از راه‌حل ═══ -->
+<section class="sec sec-dark-2 blueprint on-dark" id="stakes"><div class="wrap">
+<div class="sec-head">
+<span class="eyebrow">پیش از تصمیم</span>
+<h2>سه چیزی که دیر فهمیدنش گران تمام می‌شود</h2>
+</div>
+<div class="stakes-list">
+<article class="card">
+<h3>سازهٔ بی‌شناسنامه در ارزیابی رد می‌شود</h3>
+<p>در فراخوان و مناقصه، پیش از قیمت، مدارک فنی تأمین‌کننده بررسی می‌شود. اگر جنس اسکلت، ضخامت ورق، پوشش ضدزنگ و مقاومت باد مکتوب نباشد، پرونده پیش از رسیدن به مرحلهٔ قیمت کنار گذاشته می‌شود. قیمت ارزان‌تر این را جبران نمی‌کند.</p>
+</article>
+<article class="card">
+<h3>کجی نصب بعد از فونداسیون اصلاح‌ناپذیر است</h3>
+<p>فک پایین تنها جزء متحرک سازه است و کجی جزئی زمین را جبران می‌کند. اما اگر فونداسیون بدون در نظر گرفتن جنس زمین اجرا شود، سازه کج می‌ایستد و اصلاحش یعنی تخریب بتن و اجرای دوباره؛ یعنی هزینه‌ای چند برابر خودِ فونداسیون.</p>
+</article>
+<article class="card">
+<h3>موقعیت شهری تمام‌شدنی است</h3>
+<p>تعداد نقاط مجاز نصب در هر محور محدود است و با واگذاری پر می‌شود. تفاوت یک محور پرتردد با محور کناری‌اش در دیده‌شدن، چند برابر تفاوت قیمت سازه است. تصمیم دیرهنگام یعنی همان سازه در موقعیت ضعیف‌تر.</p>
+</article>
+</div>
+</div></section>
+
+<!-- ═══ ۳ · آناتومی ═══ -->
+<section class="sec sec-surface" id="anatomy"><div class="wrap">
+<div class="sec-head">
+<span class="eyebrow">آناتومی سازه</span>
+<h2>هر جزء چه کاری می‌کند</h2>
+<p class="lede">روی هر نام بزنید تا همان قطعه روی نقشه مشخص شود. یک قطعه در این میان متحرک است و بیشترین اثر را روی کیفیت نصب می‌گذارد.</p>
+</div>
+
+<div class="anat">
+<div class="anat-fig" id="anatFig">
+<svg viewBox="0 0 420 336" role="img" aria-label="نقشهٔ تفکیکی اجزای استرابورد">
+  <line x1="0" y1="300" x2="420" y2="300" stroke="#C7BFB3" stroke-width="1.5"/>
+  <g class="an-part" data-part="p6">
+    <path d="M178 298 L242 298 L250 322 L170 322 Z" fill="#B4AFB8"/>
+    <rect class="an-hit" x="164" y="292" width="92" height="36" rx="8" fill="none"/>
+  </g>
+  <g class="an-part" data-part="p1">
+    <rect x="203" y="216" width="14" height="84" rx="2" fill="#6C6873"/>
+    <rect class="an-hit" x="195" y="210" width="30" height="94" rx="9" fill="none"/>
+  </g>
+  <g class="an-part" data-part="p2">
+    <rect x="138" y="40" width="144" height="11" rx="4" fill="#34313D"/>
+    <rect class="an-hit" x="132" y="34" width="156" height="23" rx="9" fill="none"/>
+  </g>
+  <g class="an-part" data-part="p3">
+    <rect x="138" y="210" width="144" height="11" rx="4" fill="#A3651F"/>
+    <path d="M292 205 l0 -9 l7 0 l-10 -12 l-10 12 l7 0 l0 9 z" fill="#A3651F"/>
+    <path d="M292 226 l0 9 l7 0 l-10 12 l-10 -12 l7 0 l0 -9 z" fill="#A3651F"/>
+    <rect class="an-hit" x="132" y="204" width="172" height="46" rx="9" fill="none"/>
+  </g>
+  <g class="an-part" data-part="p4">
+    <rect x="140" y="48" width="9" height="166" rx="3" fill="#6C6873"/>
+    <rect x="271" y="48" width="9" height="166" rx="3" fill="#6C6873"/>
+    <rect class="an-hit" x="132" y="42" width="156" height="178" rx="10" fill="none"/>
+  </g>
+  <g class="an-part" data-part="p5">
+    <rect x="149" y="49" width="122" height="164" fill="#D01A44" opacity=".9"/>
+    <rect x="160" y="70" width="76" height="9" rx="4" fill="#fff" opacity=".85"/>
+    <rect x="160" y="90" width="100" height="9" rx="4" fill="#fff" opacity=".5"/>
+    <rect x="160" y="110" width="58" height="9" rx="4" fill="#fff" opacity=".5"/>
+    <rect class="an-hit" x="143" y="43" width="134" height="176" rx="8" fill="none"/>
+  </g>
+</svg>
+</div>
+
+<ul class="parts" id="anatList">
+<li data-part="p1"><button type="button" aria-expanded="false"><i></i><h3>ستون مرکزی</h3></button>
+<div class="detail">تیر فلزی قائم که کل بار سازه روی آن است. باد، وزن قاب و کشش بنر همه به همین ستون منتقل می‌شود.</div></li>
+<li data-part="p2"><button type="button" aria-expanded="false"><i></i><h3>فک بالا</h3></button>
+<div class="detail">تیر افقی ثابت در لبهٔ بالایی. بنر از این لبه آویزان و مهار می‌شود.</div></li>
+<li class="is-move" data-part="p3"><button type="button" aria-expanded="false"><i></i><h3>فک پایین<span class="tag-move">تنها جزء متحرک</span></h3></button>
+<div class="detail"><em>این تنها جزء متحرک سازه است.</em> بنر را از پایین می‌کشد تا صاف بایستد و چروک نیفتد. چون قابل تنظیم است، اگر تراز زمین دقیق نباشد سازه بدون کجی می‌ایستد. اصلاح این کجی بعد از نصب، گران تمام می‌شود.</div></li>
+<li data-part="p4"><button type="button" aria-expanded="false"><i></i><h3>گیره‌های کناری</h3></button>
+<div class="detail">دو ریل قائم در دو لبهٔ قاب که بنر را از طرفین نگه می‌دارند و در باد اجازهٔ بال‌زدن نمی‌دهند.</div></li>
+<li data-part="p5"><button type="button" aria-expanded="false"><i></i><h3>سطح نمایش</h3></button>
+<div class="detail">همان بنر چاپ‌شده. مستقل از اسکلت تعویض می‌شود؛ یعنی وقتی پیام عوض شد، سازه سر جای خودش می‌ماند و فقط بنر می‌رود.</div></li>
+<li data-part="p6"><button type="button" aria-expanded="false"><i></i><h3>فونداسیون</h3></button>
+<div class="detail">بتن مدفون زیر ستون. نوع آن به جنس زمین و امکان دسترسی محل نصب بستگی دارد و پیش از حمل سازه اجرا می‌شود.</div></li>
+</ul>
+</div>
+</div></section>
+
+<!-- ═══ ۴ · محل نصب ═══ -->
+<section class="sec sec-dark blueprint on-dark" id="where"><div class="wrap">
+<div class="sec-head">
+<span class="eyebrow">محل نصب</span>
+<h2>استرابورد در خیابان می‌ایستد، نه بزرگراه</h2>
+<p class="lede">ابعاد جمع‌وجورتر یعنی جایی می‌ایستد که بیلبورد نمی‌تواند. سه موقعیت رایج آن اینهاست.</p>
+</div>
+
+<figure class="stage" style="margin:0 0 var(--s5)">
+<svg viewBox="0 0 640 190" role="img" aria-label="مقطع خیابان: استرابورد در پیاده‌رو، جزیرهٔ ترافیکی و حاشیهٔ بلوار">
+  <rect x="0" y="132" width="640" height="46" fill="#2B2830"/>
+  <rect x="0" y="126" width="150" height="52" fill="#3A3740"/>
+  <rect x="292" y="126" width="66" height="52" fill="#3A3740"/>
+  <rect x="500" y="126" width="140" height="52" fill="#3A3740"/>
+  <g stroke="#6E6A76" stroke-width="2.5" stroke-dasharray="16 14">
+    <line x1="150" y1="155" x2="292" y2="155"/><line x1="358" y1="155" x2="500" y2="155"/>
+  </g>
+  <g fill="#D01A44"><rect x="58" y="46" width="34" height="46"/><rect x="316" y="46" width="34" height="46"/><rect x="552" y="46" width="34" height="46"/></g>
+  <g fill="#8E8A95"><rect x="72" y="92" width="6" height="34"/><rect x="330" y="92" width="6" height="34"/><rect x="566" y="92" width="6" height="34"/></g>
+  <g fill="#C9C5CE"><rect x="55" y="42" width="40" height="5" rx="2"/><rect x="313" y="42" width="40" height="5" rx="2"/><rect x="549" y="42" width="40" height="5" rx="2"/></g>
+  <g fill="#A3651F"><rect x="55" y="91" width="40" height="5" rx="2"/><rect x="313" y="91" width="40" height="5" rx="2"/><rect x="549" y="91" width="40" height="5" rx="2"/></g>
+  <g fill="#95909D" font-size="13" text-anchor="middle" direction="rtl">
+    <text x="75" y="24">پیاده‌رو</text><text x="333" y="24">جزیرهٔ ترافیکی</text><text x="569" y="24">حاشیهٔ بلوار</text>
+  </g>
+</svg>
+</figure>
+
+<div class="grid-2">
+<article class="card"><h3>فرق آن با بیلبورد</h3><p>بیلبورد سازه‌ای بزرگ برای بزرگراه و جادهٔ برون‌شهری است و از فاصلهٔ دور دیده می‌شود. استرابورد در تراز نگاه عابر و رانندهٔ شهری قرار می‌گیرد. برای پوشش یک محور شهری، چند استرابورد کاری می‌کند که یک بیلبورد نمی‌کند.</p></article>
+<article class="card"><h3>این صفحه برای کیست</h3><p>شهرداری، سازمان دارای مجوز نصب، و سرمایه‌گذاری که سازه را برای واگذاری تهیه می‌کند. یک مغازه نمی‌تواند استرابورد بخرد و کنار خیابان بگذارد. اگر دنبال تابلوی فضای داخلی خودتان هستید، <a href="/products/indoor-lightboxes/" style="color:var(--rose);font-weight:800">لایت‌باکس ایندور</a> مسیر شماست.</p></article>
+</div>
+</div></section>
+
+<!-- ═══ ۵ · افقی یا عمودی ═══ -->
+<section class="sec sec-sunken" id="types"><div class="wrap">
+<div class="sec-head">
+<span class="eyebrow">دو ابعاد</span>
+<h2>افقی ۵×۳ یا عمودی ۴×۳</h2>
+<p class="lede">هر دو با یک استاندارد ساخت تولید می‌شوند. تفاوت در جهت و محل نصب است، نه در کیفیت اسکلت.</p>
+</div>
+
+<div class="segment" role="tablist" aria-label="انتخاب ابعاد">
+<button type="button" role="tab" aria-selected="true" data-orient="v">عمودی ۴×۳</button>
+<button type="button" role="tab" aria-selected="false" data-orient="h">افقی ۵×۳</button>
+</div>
+
+<div class="morph">
+<svg viewBox="0 0 420 250" role="img" aria-label="مقایسهٔ ابعاد استرابورد عمودی و افقی در کنار یک آدم">
+  <line x1="0" y1="228" x2="420" y2="228" stroke="#C7BFB3" stroke-width="1.5"/>
+  <g opacity=".4" fill="#15141A">
+    <circle cx="58" cy="168" r="6"/><rect x="51" y="177" width="14" height="26" rx="6"/>
+    <rect x="53" y="202" width="4" height="26" rx="2"/><rect x="59.5" y="202" width="4" height="26" rx="2"/>
+  </g>
+  <rect id="mCol" x="222" y="182" width="12" height="46" fill="#6C6873"/>
+  <rect id="mJawT" x="164" y="26" width="128" height="8" rx="3" fill="#34313D"/>
+  <rect id="mJawB" x="164" y="178" width="128" height="8" rx="3" fill="#A3651F"/>
+  <rect id="mFrame" x="171" y="32" width="114" height="152" fill="#D01A44" opacity=".9"/>
+  <g stroke="#2A6480" fill="#2A6480">
+    <line id="mDimW" x1="171" y1="16" x2="285" y2="16" stroke-width="1.4"/>
+    <text id="mDimWT" x="228" y="11" font-size="12" text-anchor="middle" stroke="none">۳ متر</text>
+    <line id="mDimH" x1="312" y1="32" x2="312" y2="184" stroke-width="1.4"/>
+    <text id="mDimHT" x="333" y="112" font-size="12" text-anchor="middle" stroke="none">۴ متر</text>
+  </g>
+</svg>
+</div>
+
+<div class="fit-notes">
+<div id="fitNote"><b>مناسب برای:</b> پیاده‌رو، تقاطع و جزیرهٔ ترافیکی</div>
+<div><b>حالت:</b> یک‌طرفه یا دوطرفه</div>
+</div>
+</div></section>
+
+<!-- ═══ ۶ · قیمت ═══ -->
+<section class="price-sec on-dark" id="price"><div class="wrap price-grid">
+<div>
+<span class="eyebrow">قیمت و سفارش</span>
+<h2>همان‌جا که انتخاب می‌کنید، مبلغ را می‌بینید</h2>
+<p style="color:#FFF5F8;font-size:17.5px;max-width:52ch">هیچ رقیبی در این بازار عدد نمی‌گذارد. ما می‌گذاریم، چون قیمت ساخت سازه ثابت است و پنهان‌کردنش فقط وقت شما را می‌گیرد. آنچه ثابت نیست — چاپ، نصب، فونداسیون — جداگانه و شفاف در پیش‌فاکتور می‌آید.</p>
+<p class="fine">برای فراخوان و مناقصه، پیش‌فاکتور رسمی همراه پروانهٔ فعالیت، مشخصات فنی و مدارک ارزیابی تأمین‌کننده ارسال می‌شود.</p>
+</div>
+
+<div class="config">
+<h3>پیکربندی و برآورد</h3>
+<div class="preview">
+<svg viewBox="0 0 320 150" id="cfgSvg" role="img" aria-label="پیش‌نمایش پیکربندی انتخاب‌شده"></svg>
+</div>
+<div class="field"><span id="lblSize">ابعاد</span><div class="choices" role="group" aria-labelledby="lblSize">
+<button type="button" aria-pressed="true" data-size="v">عمودی ۴×۳</button>
+<button type="button" aria-pressed="false" data-size="h">افقی ۵×۳</button></div></div>
+<div class="field"><span id="lblFace">حالت</span><div class="choices" role="group" aria-labelledby="lblFace">
+<button type="button" aria-pressed="true" data-face="1">یک‌طرفه</button>
+<button type="button" aria-pressed="false" data-face="2">دوطرفه</button></div></div>
+<div class="field"><span id="lblQty">تعداد</span><div class="stepper" role="group" aria-labelledby="lblQty">
+<button type="button" data-step="-1" aria-label="کاهش تعداد">−</button>
+<output id="cfgQty" aria-live="polite">۱</output>
+<button type="button" data-step="1" aria-label="افزایش تعداد">+</button></div></div>
+<div class="total"><span>برآورد ساخت سازه</span>
+<b id="cfgPrice" aria-live="polite">۴۰٬۰۰۰٬۰۰۰ تومان</b>
+<small id="cfgNote">استرابورد عمودی ۴×۳ یک‌طرفه</small></div>
+<div class="config-actions">
+<button class="btn btn-primary" type="button" data-open-contact>دریافت پیش‌فاکتور رسمی</button>
+<button class="btn btn-outline" id="cfgCart" type="button">افزودن به سبد خرید</button>
+</div>
+<p class="fine" style="margin:var(--s4) 0 0">دوطرفه پنجاه درصد بیشتر از یک‌طرفه است، نه دو برابر؛ چون پایه و اسکلت میان دو وجه مشترک است.</p>
+</div>
+</div></section>
+
+<!-- ═══ ۷ · مرز قیمت ═══ -->
+<section class="sec sec-surface" id="scope"><div class="wrap">
+<div class="sec-head">
+<span class="eyebrow">مرز قیمت</span>
+<h2>در این مبلغ چه هست و چه نیست</h2>
+<p class="lede">جداکردن این دو، کار خودتان را در بودجه‌بندی و در دفاع از ردیف هزینه راحت می‌کند.</p>
+</div>
+<div class="grid-2">
+<article class="card" style="border-inline-start:3px solid var(--dim)">
+<h3>در مبلغ اعلام‌شده هست</h3>
+<p>تولید کامل اسکلت در کارگاه خودمان: برش، جوش، مونتاژ فک بالا و پایین، گیره‌های کناری، پوشش ضدزنگ و رنگ نهایی. به‌علاوهٔ نقشهٔ اجرایی که پیش از تولید برای تأیید شما می‌آید، و مستندات تحویل سازه.</p>
+</article>
+<article class="card" style="border-inline-start:3px solid var(--move)">
+<h3>جداگانه محاسبه می‌شود</h3>
+<p>فونداسیون، چون به جنس زمین و دسترسی محل بستگی دارد و پیش از بازدید نمی‌شود عدد گذاشت. حمل به محل نصب. اجرای نصب. چاپ بنر. و اگر سیستم روشنایی بخواهید، آن هم جدا می‌آید.</p>
+</article>
+</div>
+<p class="fine" style="margin-top:var(--s5)">دلیل این تفکیک ساده است: هزینهٔ ساخت سازه ثابت است و می‌شود همین‌جا نوشت، ولی هزینهٔ اجرا به موقعیت بستگی دارد. اگر کسی برای هر دو با هم یک عدد قطعی بدهد، یا موقعیت را ندیده یا ریسکش را در قیمت سازه پنهان کرده است.</p>
+</div></section>
+
+<!-- ═══ ۸ · مشخصات فنی ═══ -->
+<section class="sec sec-paper" id="spec"><div class="wrap">
+<div class="sec-head">
+<span class="eyebrow">مشخصات فنی</span>
+<h2>آنچه برای ارزیابی و پیوست مناقصه لازم دارید</h2>
+</div>
+<div class="spec-grid">
+<div class="drawing">
+<svg viewBox="0 0 380 300" role="img" aria-label="نقشهٔ ابعادی استرابورد عمودی با اندازه‌گذاری">
+  <line x1="0" y1="272" x2="380" y2="272" stroke="#C7BFB3" stroke-width="1.5"/>
+  <rect x="234" y="192" width="12" height="80" fill="#6C6873"/>
+  <path d="M212 272 L268 272 L274 288 L206 288 Z" fill="#B4AFB8"/>
+  <rect x="172" y="26" width="136" height="9" rx="3" fill="#34313D"/>
+  <rect x="172" y="189" width="136" height="9" rx="3" fill="#A3651F"/>
+  <rect x="174" y="32" width="7" height="160" fill="#6C6873"/>
+  <rect x="299" y="32" width="7" height="160" fill="#6C6873"/>
+  <rect x="181" y="33" width="118" height="158" fill="#D01A44" opacity=".16" stroke="#D01A44" stroke-dasharray="5 4"/>
+  <g stroke="#2A6480" fill="#2A6480">
+    <line x1="181" y1="16" x2="299" y2="16" stroke-width="1.4"/>
+    <path d="M181 16 l7 -4 v8 z M299 16 l-7 -4 v8 z" stroke="none"/>
+    <text x="240" y="11" font-size="12" text-anchor="middle" stroke="none">۳ متر</text>
+    <line x1="330" y1="33" x2="330" y2="191" stroke-width="1.4"/>
+    <path d="M330 33 l-4 7 h8 z M330 191 l-4 -7 h8 z" stroke="none"/>
+    <text x="350" y="118" font-size="12" text-anchor="middle" stroke="none">۴ متر</text>
+    <line x1="316" y1="193" x2="316" y2="206" stroke-width="1.4"/>
+  </g>
+  <text x="316" y="222" font-size="11" text-anchor="middle" fill="#A3651F">تنظیم فک پایین</text>
+</svg>
+</div>
+<div>
+<div class="table-scroll">
+<table>
+<caption>مقادیر برچسب‌دار، دادهٔ فنی مالک‌اند و پیش از انتشار پر می‌شوند.</caption>
+<thead><tr><th scope="col">مشخصه</th><th scope="col">مقدار</th></tr></thead>
+<tbody>
+<tr><td>جنس اسکلت</td><td><span class="slot-fact" data-fact="SPEC-01">[SPEC-01 — جنس اسکلت]</span></td></tr>
+<tr><td>ابعاد پروفیل</td><td><span class="slot-fact" data-fact="SPEC-02">[SPEC-02 — ابعاد پروفیل]</span></td></tr>
+<tr><td>ضخامت ورق</td><td><span class="slot-fact" data-fact="SPEC-03">[SPEC-03 — ضخامت ورق]</span></td></tr>
+<tr><td>پوشش ضدزنگ</td><td><span class="slot-fact" data-fact="SPEC-04">[SPEC-04 — پوشش ضدزنگ]</span></td></tr>
+<tr><td>نوع رنگ نهایی</td><td><span class="slot-fact" data-fact="SPEC-05">[SPEC-05 — رنگ نهایی]</span></td></tr>
+<tr><td>نوع فونداسیون</td><td><span class="slot-fact" data-fact="SPEC-06">[SPEC-06 — نوع فونداسیون]</span></td></tr>
+<tr><td>سیستم روشنایی</td><td><span class="slot-fact" data-fact="SPEC-07">[SPEC-07 — روشنایی]</span></td></tr>
+<tr><td>وزن تقریبی سازه</td><td><span class="slot-fact" data-fact="SPEC-08">[SPEC-08 — وزن تقریبی]</span></td></tr>
+<tr><td>مقاومت باد</td><td><span class="slot-fact" data-fact="SPEC-09">[SPEC-09 — مقاومت باد]</span></td></tr>
+<tr><td>ارتفاع کل از زمین</td><td><span class="slot-fact" data-fact="SPEC-10">[SPEC-10 — ارتفاع کل]</span></td></tr>
+<tr><td>دامنهٔ تنظیم فک پایین</td><td><span class="slot-fact" data-fact="SPEC-11">[SPEC-11 — دامنهٔ تنظیم]</span></td></tr>
+</tbody></table>
+</div>
+<p class="fine" style="margin-top:var(--s4)">اگر مشخصهٔ دیگری برای ارزیابی لازم دارید، در تماس بگویید تا در پیش‌فاکتور شما بیاید.</p>
+</div>
+</div>
+</div></section>
+
+<!-- ═══ ۹ · مسیر تحویل ═══ -->
+<section class="sec sec-surface" id="process"><div class="wrap">
+<div class="sec-head">
+<span class="eyebrow">از سفارش تا نصب</span>
+<h2>مسیر تحویل</h2>
+</div>
+<ol class="steps" id="steps">
+<li><h3>تأیید نقشه</h3><span>ابعاد، حالت و محل نصب نهایی می‌شود و نقشهٔ اجرایی برای تأیید شما می‌رود.</span></li>
+<li><h3>تولید در کارگاه</h3><span>برش، جوش، پوشش ضدزنگ و رنگ نهایی، در کارگاه خودمان.</span></li>
+<li><h3>فونداسیون</h3><span>آماده‌سازی محل بر اساس جنس زمین و شرایط دسترسی، پیش از حمل سازه.</span></li>
+<li><h3>نصب و تحویل</h3><span>برپایی سازه و تحویل با مستندات.</span></li>
+</ol>
+<p class="sla">زمان تحویل از لحظهٔ تأیید نقشه تا نصب: <span class="slot-fact" data-fact="FCT-01">[زمان تحویل، به روز]</span> · ضمانت سازه: <span class="slot-fact" data-fact="FCT-02">[مدت ضمانت]</span></p>
+</div></section>
+
+<!-- ═══ ۱۰ · آمادگی برآورد ═══ -->
+<section class="sec sec-sunken" id="prepare"><div class="wrap">
+<div class="sec-head">
+<span class="eyebrow">پیش از تماس</span>
+<h2>چهار چیزی که برآورد را دقیق می‌کند</h2>
+<p class="lede">بدون این‌ها هم پاسخ می‌دهیم، ولی پاسخ محدوده‌ای می‌شود نه عدد. با این‌ها پیش‌فاکتور در همان نوبت اول قابل استناد است.</p>
+</div>
+<div class="grid-2">
+<article class="card"><h3>نشانی یا مختصات محل نصب</h3><p>موقعیت تعیین می‌کند سازه افقی بهتر است یا عمودی، و آیا دسترسی برای جرثقیل هست یا نه. یک عکس ساده از محل هم کافی است.</p></article>
+<article class="card"><h3>تعداد نقاط</h3><p>پروژهٔ چندنقطه‌ای محاسبهٔ متفاوتی دارد، چون حمل و استقرار تیم نصب میان نقاط سرشکن می‌شود.</p></article>
+<article class="card"><h3>وضعیت مجوز</h3><p>مجوز نصب گرفته شده یا در جریان است؟ این روی زمان‌بندی اثر می‌گذارد، نه روی قیمت. اگر هنوز اقدام نکرده‌اید، همان اول بگویید تا ترتیب کارها را درست بچینیم.</p></article>
+<article class="card"><h3>قالب مدارک مورد نیاز</h3><p>هر سازمانی فرم ارزیابی تأمین‌کنندهٔ خودش را دارد. اگر فرم را بفرستید، پرشده برمی‌گردد و یک رفت‌وبرگشت کم می‌شود.</p></article>
+</div>
+</div></section>
+
+<!-- ═══ ۱۱ · نمونه‌کار ═══ -->
+<section class="sec sec-paper" id="portfolio"><div class="wrap">
+<div class="sec-head">
+<span class="eyebrow">کارهای اجراشده</span>
+<h2>نمونه‌کار</h2>
+</div>
+<div class="gallery">
+<figure><img alt="[PRT-01] استرابورد اجراشده در تقاطع شهری اصفهان، نمای روز" src=""/>
+<figcaption>اجراشده · <span class="slot-fact" data-fact="PRT-01-P">[محل و سال]</span></figcaption></figure>
+<figure><img alt="[PRT-02] چند استرابورد در یک محور شهری، پروژهٔ چندنقطه‌ای" src=""/>
+<figcaption>پروژهٔ چندنقطه‌ای · <span class="slot-fact" data-fact="PRT-02-P">[محل و سال]</span></figcaption></figure>
+</div>
+</div></section>
+
+<!-- ═══ ۱۲ · سرمایه‌گذاری ═══ -->
+<section class="sec sec-tight sec-dark-2 on-dark" id="invest"><div class="wrap">
+<span class="eyebrow">مسیر سرمایه‌گذاری</span>
+<h2>سازه را می‌خرید تا اجاره بدهید؟</h2>
+<p class="lede">در آن حالت سازه از یک هزینه به یک دارایی درآمدزا تبدیل می‌شود و محاسبهٔ بازگشت سرمایه شکل دیگری دارد. شرایط مشارکت جداگانه توضیح داده شده است.</p>
+<a class="btn btn-ghost-dark" href="/services/urban-investment/" style="margin-top:var(--s4)">سرمایه‌گذاری و مشارکت در تبلیغات محیطی</a>
+</div></section>
+
+<!-- ═══ ۱۳ · پرسش‌ها ═══ -->
+<section class="sec sec-paper faq" id="faq"><div class="wrap">
+<div class="sec-head">
+<span class="eyebrow">پرسش‌های متداول</span>
+<h2>پیش از سفارش</h2>
+</div>
+<details><summary>چه کسانی می‌توانند استرابورد سفارش دهند؟</summary><p>استرابورد سازه‌ای شهری است و نصبش مجوز می‌خواهد. مشتری آن شهرداری‌ها، سازمان‌های دارای مجوز نصب، و سرمایه‌گذارانی هستند که سازه را برای واگذاری به شهرداری تهیه می‌کنند. برای کسب‌وکارها، <a href="/products/indoor-lightboxes/">لایت‌باکس ایندور</a> گزینهٔ مناسب است چون در فضای داخلی خودشان نصب می‌شود.</p></details>
+<details><summary>فرق استرابورد با بیلبورد چیست؟</summary><p>بیلبورد سازه‌ای بزرگ برای بزرگراه و جادهٔ برون‌شهری است و از فاصلهٔ دور دیده می‌شود. استرابورد ابعاد جمع‌وجورتری دارد و در معابر شهری، تقاطع و جزیرهٔ ترافیکی نصب می‌شود؛ یعنی در تراز نگاه عابر و رانندهٔ شهری.</p></details>
+<details><summary>قیمت دوطرفه چرا دو برابر یک‌طرفه نیست؟</summary><p>چون پایه و اسکلت سازه بین دو وجه مشترک است و فقط قاب و سطح نمایش دوم اضافه می‌شود. به همین دلیل دوطرفه پنجاه درصد بیشتر از یک‌طرفه محاسبه می‌شود.</p></details>
+<details><summary>استرابورد افقی بگیرم یا عمودی؟</summary><p>افقی پنج در سه متر برای نمای عریض و محورهایی که فضای جانبی دارند مناسب‌تر است. عمودی چهار در سه متر برای پیاده‌رو، تقاطع و جزیرهٔ ترافیکی. موقعیت نصب تعیین می‌کند، نه سلیقه.</p></details>
+<details><summary>قیمت شامل چاپ و نصب هم می‌شود؟</summary><p>قیمت اعلام‌شده مربوط به ساخت سازه است. چاپ بنر و نصب در محل، جداگانه و شفاف در پیش‌فاکتور می‌آید تا بدانید هزینهٔ سازه از هزینهٔ اجرا چقدر است.</p></details>
+<details><summary>برای مناقصه چه مدارکی ارائه می‌دهید؟</summary><p>پروانهٔ رسمی فعالیت تبلیغاتی، مشخصات فنی سازه، سوابق اجرایی و مدارک ارزیابی تأمین‌کننده. برای فراخوان و مناقصه، این بسته پیش از جلسه ارسال می‌شود.</p></details>
+<details><summary>سفارش چند عددی هم می‌پذیرید؟</summary><p>بله. برای پروژه‌های چندنقطه‌ای که معمولاً شهرداری‌ها و سرمایه‌گذاران دارند، تیراژ در پیش‌فاکتور محاسبه می‌شود.</p></details>
+<details><summary>مجوز نصب با کیست؟</summary><p>با خریدار. ما سازه را می‌سازیم و در محل تأییدشده نصب می‌کنیم، اما اخذ مجوز نصب در فضای شهری بر عهدهٔ شهرداری یا سازمان متقاضی است.</p></details>
+</div></section>
+
+<!-- ═══ ۱۴ · تماس ═══ -->
+<section class="sec sec-dark blueprint on-dark" id="consult"><div class="wrap">
+<div class="sec-head">
+<span class="eyebrow">تماس</span>
+<h2>پرسش فنی یا سفارش سازمانی</h2>
+<p class="lede">اگر مشخصات خاصی لازم دارید یا پروژهٔ چندنقطه‌ای در دست شماست، مستقیم بگویید تا همان را بررسی کنیم.</p>
+</div>
+<form class="form" action="#" method="post">
+<label>نام و سازمان<input name="org" autocomplete="organization" required=""/></label>
+<label>شماره تماس<input name="phone" autocomplete="tel" inputmode="tel" required=""/>
+<span class="hint">در ساعت کاری تماس می‌گیریم.</span></label>
+<label>موضوع<select name="topic">
+<option>پیش‌فاکتور رسمی برای مناقصه</option>
+<option>سفارش سازه</option>
+<option>پرسش فنی</option>
+<option>پروژهٔ چندنقطه‌ای</option>
+</select></label>
+<button class="btn btn-primary" type="submit">ارسال</button>
+</form>
+</div></section>
+
+</main>
+
+<footer>
+<div class="wrap">
+<div class="f-grid">
+<div class="f-id">
+<img alt="لوگوی آژانس تبلیغاتی چتر قرمز" src="/assets/img/logo.png" width="54" height="58"/>
+<div><h3>آژانس تبلیغاتی چتر قرمز</h3><p>طراحی و برندینگ، وب و محتوا، ساخت و چاپ، تبلیغات محیطی و سرمایه‌گذاری؛ با یک مسیر پاسخ‌گو.</p></div>
+</div>
+<nav class="f-col" aria-label="دسترسی سریع"><b>دسترسی سریع</b><a href="/">صفحه نخست</a><a href="/portfolio/">نمونه‌کارها</a><a href="/blog/">مجله</a><a href="/about-us/">درباره ما</a></nav>
+<nav class="f-col" aria-label="محصولات"><b>محصولات</b><a href="/products/outdoor-structures/">سازه‌های شهری</a><a href="/products/outdoor-structures/billboards/">بیلبورد</a><a href="/products/indoor-lightboxes/">لایت‌باکس ایندور</a><a href="/services/urban-investment/">سرمایه‌گذاری</a></nav>
+<div class="f-col"><b>ارتباط</b><a href="tel:+983136258310" style="direction:ltr;text-align:start">۰۳۱-۳۶۲۵۸۳۱۰</a><a href="mailto:info@chatreghermez.com" style="direction:ltr;text-align:start">info@chatreghermez.com</a><a href="/contact-us/">نشانی دفاتر و مسیرهای تماس</a></div>
+</div>
+<div class="f-bottom"><span>© ۱۴۰۵ آژانس تبلیغاتی چتر قرمز</span>
+<nav aria-label="پیوندهای حقوقی"><a href="/privacy/">حریم خصوصی</a><a href="/terms/">قوانین و مقررات</a><a href="/faq/">پرسش‌های متداول</a></nav></div>
+</div>
+</footer>
+
+<!-- نوار چسبان: پیکربندی فعلی همراه کاربر می‌ماند -->
+<div class="stickybar" id="stickybar" role="region" aria-label="پیکربندی انتخاب‌شده">
+<div class="wrap">
+<div class="stickybar-copy">
+<b id="barPrice">۴۰٬۰۰۰٬۰۰۰ تومان</b>
+<span id="barNote">استرابورد عمودی ۴×۳ یک‌طرفه</span>
+</div>
+<button class="btn btn-primary btn-sm" data-open-contact type="button">پیش‌فاکتور رسمی</button>
+</div>
+</div>
+
+<nav class="tabbar" aria-label="ناوبری اصلی موبایل">
+<a href="#spec" data-tab><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg><span>مشخصات</span></a>
+<a href="#price" data-tab><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span>قیمت</span></a>
+<button data-open-contact type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg><span>پیش‌فاکتور</span></button>
+<button id="tabMenu" type="button" aria-label="باز کردن منو"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg><span>منو</span></button>
+</nav>
+
+<div class="drawer" id="drawer" aria-hidden="true" role="dialog" aria-modal="true" aria-label="منوی سایت">
+<div class="drawer-panel">
+<button class="drawer-close" type="button" aria-label="بستن منو">×</button>
+<a href="/">خانه</a>
+<a href="/products/outdoor-structures/">سازه‌های شهری</a>
+<a href="/products/indoor-lightboxes/">لایت‌باکس ایندور</a>
+<a href="/services/outdoor-advertising/">تبلیغات محیطی</a>
+<a href="/services/urban-investment/">سرمایه‌گذاری</a>
+<a href="/printing/">چاپ</a>
+<a href="/portfolio/">نمونه‌کارها</a>
+<a href="/about-us/">درباره ما</a>
+<a href="/contact-us/">تماس</a>
+</div></div>
+
+<div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+<div class="modal-backdrop" data-close-contact></div>
+<div class="modal-panel">
+<button class="modal-close" aria-label="بستن" data-close-contact type="button">×</button>
+<span class="eyebrow">بدون تعهد</span>
+<h3 id="modalTitle">پیش‌فاکتور رسمی و مدارک ارزیابی</h3>
+<p class="lede" style="font-size:16px">پروانهٔ فعالیت، مشخصات فنی سازه و سوابق اجرایی، در یک بسته و پیش از جلسه.</p>
+<a class="channel" href="tel:+983136258310"><b>تماس تلفنی</b><span>۰۳۱-۳۶۲۵۸۳۱۰ · شنبه تا چهارشنبه</span></a>
+<div class="divider"><span>یا شماره‌تان را بگذارید تا تماس بگیریم</span></div>
+<form action="#" method="post" style="display:grid;gap:var(--s4)">
+<label style="font-size:14.5px;font-weight:900">نام و سازمان<input autocomplete="organization" name="org" required="" style="width:100%;font-size:16.5px;padding:12px 16px;margin-top:8px;border:1.5px solid var(--line);border-radius:10px;background:#FBFAF8;min-height:52px"/></label>
+<label style="font-size:14.5px;font-weight:900">شماره تماس<input autocomplete="tel" inputmode="tel" name="phone" required="" style="width:100%;font-size:16.5px;padding:12px 16px;margin-top:8px;border:1.5px solid var(--line);border-radius:10px;background:#FBFAF8;min-height:52px"/></label>
+<button class="btn btn-primary" type="submit">درخواست پیش‌فاکتور</button>
+</form>
+</div></div>
+
+<script>
+(function(){
+  'use strict';
+  var fa=function(n){return String(n).replace(/[0-9]/g,function(d){return '۰۱۲۳۴۵۶۷۸۹'[d]})};
+  var sep=function(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'٬')};
+  var RM=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $=function(id){return document.getElementById(id)};
+
+  /* ── آناتومی ── */
+  var fig=$('anatFig'), list=$('anatList');
+  if(fig&&list){
+    var setPart=function(id){
+      list.querySelectorAll('li').forEach(function(li){
+        var on=li.dataset.part===id;
+        li.classList.toggle('on',on);
+        li.querySelector('button').setAttribute('aria-expanded',String(on));
+      });
+      fig.querySelectorAll('.an-part').forEach(function(g){g.classList.toggle('on',g.dataset.part===id)});
+      fig.classList.add('picked');
+    };
+    var clearPart=function(){
+      list.querySelectorAll('li').forEach(function(li){
+        li.classList.remove('on');li.querySelector('button').setAttribute('aria-expanded','false')});
+      fig.querySelectorAll('.an-part').forEach(function(g){g.classList.remove('on')});
+      fig.classList.remove('picked');
+    };
+    list.querySelectorAll('li').forEach(function(li){
+      li.querySelector('button').addEventListener('click',function(){
+        li.classList.contains('on') ? clearPart() : setPart(li.dataset.part);
+      });
+    });
+    fig.querySelectorAll('.an-part').forEach(function(g){
+      g.addEventListener('click',function(){
+        setPart(g.dataset.part);
+        var li=list.querySelector('li[data-part="'+g.dataset.part+'"]');
+        if(li) li.scrollIntoView({block:'nearest',behavior:RM?'auto':'smooth'});
+      });
+    });
+    setPart('p3'); /* قطعهٔ متحرک، پیش‌فرض: تمایز اصلی سازه همین است */
+  }
+
+  /* ── افقی / عمودی ── */
+  var GEO={
+    v:{fx:171,fy:32,fw:114,fh:152,jx:164,jtY:26,jbY:178,jw:128,colY:186,colH:42,
+       dwX1:171,dwX2:285,dwY:16,dwT:'۳ متر',dwTY:11,
+       dhX:312,dhY1:32,dhY2:184,dhT:'۴ متر',dhTY:112,dhTX:333,
+       fit:'پیاده‌رو، تقاطع و جزیرهٔ ترافیکی'},
+    h:{fx:133,fy:70,fw:190,fh:114,jx:126,jtY:64,jbY:178,jw:204,colY:186,colH:42,
+       dwX1:133,dwX2:323,dwY:54,dwT:'۵ متر',dwTY:49,
+       dhX:345,dhY1:70,dhY2:184,dhT:'۳ متر',dhTY:130,dhTX:366,
+       fit:'محورهای عریض، بلوار و ورودی شهر'}
+  };
+  function morph(k){
+    var g=GEO[k]; if(!$('mFrame'))return;
+    $('mFrame').setAttribute('x',g.fx);$('mFrame').setAttribute('y',g.fy);
+    $('mFrame').setAttribute('width',g.fw);$('mFrame').setAttribute('height',g.fh);
+    $('mJawT').setAttribute('x',g.jx);$('mJawT').setAttribute('y',g.jtY);$('mJawT').setAttribute('width',g.jw);
+    $('mJawB').setAttribute('x',g.jx);$('mJawB').setAttribute('y',g.jbY);$('mJawB').setAttribute('width',g.jw);
+    $('mCol').setAttribute('y',g.colY);$('mCol').setAttribute('height',g.colH);
+    $('mDimW').setAttribute('x1',g.dwX1);$('mDimW').setAttribute('x2',g.dwX2);
+    $('mDimW').setAttribute('y1',g.dwY);$('mDimW').setAttribute('y2',g.dwY);
+    $('mDimWT').setAttribute('y',g.dwTY);$('mDimWT').textContent=g.dwT;
+    $('mDimH').setAttribute('x1',g.dhX);$('mDimH').setAttribute('x2',g.dhX);
+    $('mDimH').setAttribute('y1',g.dhY1);$('mDimH').setAttribute('y2',g.dhY2);
+    $('mDimHT').setAttribute('x',g.dhTX);$('mDimHT').setAttribute('y',g.dhTY);$('mDimHT').textContent=g.dhT;
+    var n=$('fitNote'); if(n) n.innerHTML='<b>مناسب برای:</b> '+g.fit;
+  }
+  var tabs=[].slice.call(document.querySelectorAll('.segment button'));
+  tabs.forEach(function(b,i){
+    b.addEventListener('click',function(){
+      tabs.forEach(function(x){x.setAttribute('aria-selected',String(x===b))});
+      morph(b.dataset.orient);
+    });
+    /* ناوبری با کلید جهت — RTL: چپ و راست جابه‌جا */
+    b.addEventListener('keydown',function(e){
+      var d = e.key==='ArrowLeft' ? 1 : e.key==='ArrowRight' ? -1 : 0;
+      if(!d)return;
+      e.preventDefault();
+      var next=tabs[(i+d+tabs.length)%tabs.length];
+      next.focus();next.click();
+    });
+  });
+
+  /* ── پیکربند قیمت ── */
+  var PRICE={v:40000000,h:60000000};
+  var LABEL={v:'استرابورد عمودی ۴×۳',h:'استرابورد افقی ۵×۳'};
+  var size='v',face=1,qty=1;
+
+  function unitSvg(cx,y,k,two){
+    var fw=(k==='v')?33:55, fh=(k==='v')?44:33, colH=22, ch=6, fy=y-colH-fh, o='';
+    if(two) o+='<rect x="'+(cx-fw/2+5)+'" y="'+(fy-4)+'" width="'+fw+'" height="'+fh+'" fill="#15141A" opacity=".16"/>';
+    o+='<rect x="'+(cx-2)+'" y="'+(y-colH)+'" width="4" height="'+colH+'" fill="#6C6873"/>';
+    o+='<rect x="'+(cx-fw/2-3)+'" y="'+(fy-ch/2)+'" width="'+(fw+6)+'" height="'+ch/2+'" rx="1.5" fill="#34313D"/>';
+    o+='<rect x="'+(cx-fw/2-3)+'" y="'+(fy+fh)+'" width="'+(fw+6)+'" height="'+ch/2+'" rx="1.5" fill="#A3651F"/>';
+    o+='<rect x="'+(cx-fw/2)+'" y="'+fy+'" width="'+fw+'" height="'+fh+'" fill="#D01A44" opacity=".9"/>';
+    return o;
+  }
+  function drawCfg(){
+    var svg=$('cfgSvg'); if(!svg)return;
+    var show=Math.min(qty,5), ground=132, step=320/show, out='';
+    out+='<line x1="0" y1="'+ground+'" x2="320" y2="'+ground+'" stroke="#C7BFB3" stroke-width="1.5"/>';
+    for(var i=0;i<show;i++) out+=unitSvg(step*(i+.5),ground,size,face===2);
+    if(qty>show) out+='<text x="160" y="148" font-size="12" fill="#6E6B75" text-anchor="middle">و '+fa(qty-show)+' سازهٔ دیگر</text>';
+    svg.innerHTML=out;
+  }
+  function render(){
+    var total=PRICE[size]*(face===2?1.5:1)*qty;
+    var money=fa(sep(total))+' تومان';
+    var note=LABEL[size]+' '+(face===2?'دوطرفه':'یک‌طرفه')+(qty>1?' · '+fa(qty)+' عدد':'');
+    $('cfgPrice').textContent=money; $('cfgNote').textContent=note;
+    $('barPrice').textContent=money; $('barNote').textContent=note;
+    $('cfgQty').textContent=fa(qty);
+    drawCfg();
+  }
+  document.querySelectorAll('[data-size]').forEach(function(b){
+    b.addEventListener('click',function(){size=b.dataset.size;
+      document.querySelectorAll('[data-size]').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});
+      render()})});
+  document.querySelectorAll('[data-face]').forEach(function(b){
+    b.addEventListener('click',function(){face=parseInt(b.dataset.face,10);
+      document.querySelectorAll('[data-face]').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});
+      render()})});
+  document.querySelectorAll('[data-step]').forEach(function(b){
+    b.addEventListener('click',function(){
+      qty=Math.max(1,Math.min(99,qty+parseInt(b.dataset.step,10)));render()})});
+  var cart=$('cfgCart');
+  if(cart) cart.addEventListener('click',function(){
+    document.dispatchEvent(new CustomEvent('cg:add-to-cart',{detail:{
+      product:'strabord',size:size,face:face,qty:qty,unit:PRICE[size]*(face===2?1.5:1)}}));
+    cart.textContent='به سبد اضافه شد ✓';
+    setTimeout(function(){cart.textContent='افزودن به سبد خرید'},1800);
+  });
+
+  /* ── نوار چسبان: فقط بعد از عبور از پیکربند ── */
+  var bar=$('stickybar'), priceSec=$('price'), consult=$('consult');
+  if(bar&&priceSec&&'IntersectionObserver' in window){
+    var past=false, atEnd=false;
+    var sync=function(){bar.classList.toggle('show',past&&!atEnd)};
+    new IntersectionObserver(function(es){
+      es.forEach(function(e){past=e.boundingClientRect.top<0&&!e.isIntersecting;sync()});
+    },{threshold:0}).observe(priceSec);
+    new IntersectionObserver(function(es){
+      es.forEach(function(e){atEnd=e.isIntersecting;sync()});
+    },{threshold:.1}).observe(consult);
+  }
+
+  /* ── مسیر تحویل ── */
+  var steps=document.querySelectorAll('#steps li');
+  if(steps.length){
+    if(!('IntersectionObserver' in window)||RM){
+      steps.forEach(function(li){li.classList.add('seen')});
+    } else {
+      var so=new IntersectionObserver(function(es){
+        es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('seen');so.unobserve(e.target)}})
+      },{rootMargin:'0px 0px -22% 0px'});
+      steps.forEach(function(li){so.observe(li)});
+    }
+  }
+
+  /* ── لایه‌ها: کشو و پاپ‌آپ، با تلهٔ فوکوس ── */
+  var lastFocus=null;
+  function trap(panel,e){
+    var f=panel.querySelectorAll('a[href],button:not([disabled]),input,select,textarea');
+    if(!f.length)return;
+    var first=f[0], last=f[f.length-1];
+    if(e.shiftKey && document.activeElement===first){e.preventDefault();last.focus()}
+    else if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus()}
+  }
+  function toggleLayer(el,open,firstSel){
+    if(!el)return;
+    el.setAttribute('aria-hidden',String(!open));
+    document.body.classList.toggle('is-locked',open);
+    if(open){
+      lastFocus=document.activeElement;
+      var t=el.querySelector(firstSel||'button,a,input');
+      if(t) setTimeout(function(){t.focus()},RM?0:180);
+    } else if(lastFocus&&lastFocus.focus) lastFocus.focus();
+  }
+  var drawer=$('drawer'), modal=$('modal');
+  ['menuBtn','tabMenu'].forEach(function(id){
+    var el=$(id); if(el) el.addEventListener('click',function(){
+      toggleLayer(drawer,true,'a');
+      var mb=$('menuBtn'); if(mb) mb.setAttribute('aria-expanded','true');
+    });
+  });
+  if(drawer) drawer.addEventListener('click',function(e){
+    if(e.target===drawer||e.target.closest('.drawer-close')||e.target.closest('a')){
+      toggleLayer(drawer,false);
+      var mb=$('menuBtn'); if(mb) mb.setAttribute('aria-expanded','false');
+    }
+  });
+  document.addEventListener('click',function(e){
+    if(e.target.closest('[data-open-contact]')){e.preventDefault();toggleLayer(modal,true,'a,input')}
+    else if(e.target.closest('[data-close-contact]')) toggleLayer(modal,false);
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){
+      if(modal&&modal.getAttribute('aria-hidden')==='false') toggleLayer(modal,false);
+      if(drawer&&drawer.getAttribute('aria-hidden')==='false'){
+        toggleLayer(drawer,false);
+        var mb=$('menuBtn'); if(mb) mb.setAttribute('aria-expanded','false');
+      }
+    }
+    if(e.key==='Tab'){
+      if(modal&&modal.getAttribute('aria-hidden')==='false') trap(modal.querySelector('.modal-panel'),e);
+      else if(drawer&&drawer.getAttribute('aria-hidden')==='false') trap(drawer.querySelector('.drawer-panel'),e);
+    }
+  });
+
+  /* ── تب‌بار فعال ── */
+  document.querySelectorAll('.tabbar a[data-tab]').forEach(function(a){
+    var el=document.getElementById((a.getAttribute('href')||'').replace('#',''));
+    if(!el||!('IntersectionObserver' in window))return;
+    new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(!e.isIntersecting)return;
+        document.querySelectorAll('.tabbar a[data-tab]').forEach(function(x){x.removeAttribute('aria-current')});
+        a.setAttribute('aria-current','true');
+      });
+    },{rootMargin:'-45% 0px -50% 0px'}).observe(el);
+  });
+
+  if($('mFrame')) morph('v');
+  render();
+})();
+</script>
+</body>
+</html>
