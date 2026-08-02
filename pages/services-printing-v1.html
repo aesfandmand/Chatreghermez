@@ -1,0 +1,1440 @@
+<!--
+==========================================================
+  چتر قرمز — هاب چاپ
+  فایل: services-printing-v1.html
+  نسخه: v1 | تاریخ: ۱۱ مرداد ۱۴۰۵
+  مسیر کانونیکال: /services/printing/
+  نوع صفحه: هاب خدمت اصلی (پیلار) — قفل ۷، سند ۰۹
+
+  === چرا مسیر /services/printing/ و نه /printing/ ===
+  سند ۱۲ (کوئری‌مپ چاپ) نوشته «هاب چاپ» ساخته شود و مسیرش را
+  /printing نوشته است. اما قرارداد Route قفل‌شدهٔ v4.2 در
+  content_and_system_routes_initial صریح است:
+      /printing/ → «301 redirect to /services/printing/ until a
+      distinct printing hub is approved» · index: Noindex redirect
+  و abs_05 معماری، صفحهٔ «چاپ» را با logical_url برابر
+  /services/printing/ ثبت کرده است. مگامنوی هوم مصوب هم لینک
+  «دیدن همهٔ ۱۶ خدمت چاپ» را به همان /services/printing/ می‌برد.
+  پس هاب روی /services/printing/ ساخته شد و /printing/ همان
+  ریدایرکت ثبت‌شده می‌ماند. هیچ مسیر تازه‌ای اختراع نشد و قرارداد
+  دست‌نخورده ماند — درسی که از BLOCKER ممیزی مسیر صفحهٔ
+  سرمایه‌گذاری v15 گرفته شد.
+
+  === تعارض دوم و نحوهٔ حلش: نام فرزندها ===
+  سند ۱۲ فرزندها را /printing/banner و /printing/textile و
+  /printing/business-card پیشنهاد کرده. هیچ‌کدام در قرارداد ثبت
+  نیستند. مسیرهای ثبت‌شده عمیق‌ترند
+  (/printing/large-format/banner-printing/ و مانند آن). لینک‌های
+  این صفحه به مسیر ثبت‌شده می‌روند، ولی برچسب دیدنی لینک با نام
+  محصول نوشته شده، نه با نام روش — چون سند ۱۲ صریح گفته «افست» و
+  «لارج‌فرمت» واژهٔ خریدار نیستند و در متن صفحه نمی‌آیند.
+
+  === جهت بصری: برگهٔ پیش‌نمونه ===
+  زبان بصری این صفحه از چیزی گرفته شده که وعدهٔ محوری صفحه است:
+  بررسی فایل پیش از چاپ. یعنی علامت تنظیم رنگ، نوار کنترل رنگ و
+  خط برش — همان چیزی که روی برگهٔ پیش‌نمونهٔ واقعی دیده می‌شود.
+  رنگ کارکردی است:
+    قرمز    = دعوت به اقدام و وضعیت فعال
+    فولادی  = یادداشت فنی، ابعاد و عدد
+    نوار CMYK = فقط یک بار، در بخش بررسی فایل، چون همان‌جا معنا دارد
+  هیچ رنگ تزئینی چهارمی در صفحه نیست.
+
+  === سنجه‌های پایه (قاعدهٔ عدم پس‌رفت، سند ۰۹ تب ۴) ===
+  این صفحه نسخهٔ اول است و نسخهٔ تأییدشدهٔ قبلی ندارد؛ ستون
+  «حداقل مجاز» از قفل ۷ برای «صفحهٔ خدمت اصلی (پیلار)» آمده.
+  سنجه                حداقل قفل    این نسخه (اندازه‌گیری‌شده)
+  کل واژگان            ۱۸۰۰         ۲۰۹۴
+  پرسش متداول          ۸            ۱۲
+  شواهد اثبات          ۵            ۷
+  بخش شکست             دارد         دارد، سه محور، پیش از راه‌حل
+  اسکیمای اولویت ۱     ۳ از ۳       Service · FAQPage · BreadcrumbList
+  نسبت شما به ما       ۲:۱          ۴٫۹:۱
+  شهرهای نام‌برده       ۵            ۶ (همه با نقش واقعی ثبت‌شده)
+  H1                   ۴۳px         ۴۳px · ۸ واژه · ۲ خط
+  مسیر ثبت‌نشده         ۰            ۰
+  سرریز افقی           ۰            ۰
+
+  === بلاک‌کننده‌های باز ===
+  BLK-P1  پروندهٔ پرسونا v2 در پروژه غایب است (سند ۰۰، پیوست
+          بلاک‌کننده‌ها). پس قفل ۴ «همهٔ اعتراض‌های پرونده پاسخ
+          گرفته‌اند» قابل شمارش نیست. اعتراض‌های این صفحه از سند ۱۲
+          و رفتار واقعی جست‌وجو استخراج شده، نه از پروندهٔ پرسونا.
+  BLK-P2  عکس واقعی کارگاه یووی تهران و چاپخانهٔ زرین‌شهر نرسیده.
+          سند ۰۰ این را «بحرانی» علامت زده. هر شش جای تصویر در این
+          صفحه جای‌نگهدار است، نه عکس ساختگی.
+  BLK-P3  قیمت متری تکستایل و عرض دستگاه یووی نرسیده. سند ۰۰ این
+          را برای «صفحهٔ چاپ تکستایل» بحرانی علامت زده. در این
+          صفحه هیچ عددی برایش نوشته نشد و بخش قیمت فقط عوامل را
+          توضیح می‌دهد، دقیقاً مطابق تصمیم سند ۱۲.
+  BLK-P4  فهرست رسمی شهرهای تحت پوشش ارسال. شش شهر نام‌برده در
+          بخش «کجا تحویل می‌دهیم» همان‌هایی‌اند که سند ۰۰ نقش
+          واقعی‌شان را ثبت کرده (دفتر/کارگاه/چاپخانه/پروژه).
+          شاهین‌شهر و نجف‌آباد که سند ۱۲ کوئری‌شان را هدف گرفته،
+          در سند ۰۰ نقش ثبت‌شده ندارند و ادعای پوشش برایشان
+          نوشته نشد.
+  BLK-P5  تحقیق زندهٔ صفحه‌به‌صفحهٔ رقبا در این محیط اجرا نشد؛
+          سیاست شبکه دامنه‌های بیرونی را می‌بندد. شواهد در حد
+          نتایج جست‌وجوی امروز است به‌علاوهٔ مشاهده‌های صفحه‌به‌صفحهٔ
+          خودِ سند ۱۲. در گزارش QC با همین صراحت ثبت شده.
+==========================================================
+-->
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<meta content="#17161b" name="theme-color"/>
+<title>چاپ بنر، کاتالوگ و پارچهٔ لایت‌باکس اصفهان | طراحی و نصب</title>
+<meta content="چاپ بنر، فلکس، مش، پارچهٔ لایت‌باکس، کاتالوگ و ست اداری در اصفهان. طرح دارید یا ندارید، از طراحی تا نصب با ماست. فایل پیش از چاپ بررسی می‌شود." name="description"/>
+<link href="https://chatreghermez.com/services/printing/" rel="canonical"/>
+<meta content="index,follow,max-image-preview:large,max-snippet:-1" name="robots"/>
+<meta content="چاپ بنر، کاتالوگ و پارچهٔ لایت‌باکس اصفهان" property="og:title"/>
+<meta content="طرح دارید یا ندارید، از طراحی تا نصب. فایل پیش از چاپ بررسی می‌شود و اگر در آن ابعاد کار نکند، پیش از تولید گفته می‌شود." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://chatreghermez.com/services/printing/" property="og:url"/>
+<meta content="fa_IR" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Vazirmatn — همان فونتی که سند ۰۰، ۰۹ و ۱۲ پروژه با آن کار می‌کنند و
+     صفحهٔ استرابورد در v5 به آن برگردانده شد. با link در head، نه @import،
+     تا رندر صفحه پشت رسیدن فونت مسدود نشود و اسکنر پیش‌بارگذاری مرورگر
+     بتواند زودتر کشفش کند. -->
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════
+   ۱ · توکن‌های طراحی — از سیستم strabord-v5، بدون انشعاب
+   ══════════════════════════════════════════════════════ */
+:root{
+ --ink:#15141A; --ink-2:#211F28; --ink-3:#34313D;
+ --paper:#F5F3EF; --paper-2:#EDE9E2; --surface:#FFFFFF;
+ --muted:#5C5966; --line:#DFD9D0; --line-strong:#C7BFB3;
+
+ --accent:#C11539;          /* قرمز متنی: کنتراست آزموده‌شده */
+ --accent-2:#A00F33;
+ --accent-surface:#D01A44;  /* قرمز سطح: فقط زمینه، نه متن */
+ --accent-soft:#FDECF0;
+ --rose:#FF7C9B;            /* قرمز روی زمینهٔ تیره */
+ --dim:#2A6480;             /* فولادی: یادداشت فنی و عدد */
+ --dim-soft:#E7F0F5;
+ --proof:#1F6B4E;           /* سبز برگهٔ تأیید: فقط جای‌نگهدار و تأیید */
+
+ --s1:4px;  --s2:8px;  --s3:12px; --s4:16px; --s5:24px;
+ --s6:32px; --s7:48px; --s8:64px; --s9:80px; --s10:112px;
+ --r-sm:10px; --r-md:16px; --r-lg:24px; --r-xl:32px;
+ --e1:0 1px 2px rgba(21,20,26,.05);
+ --e2:0 2px 4px rgba(21,20,26,.04),0 10px 24px rgba(21,20,26,.06);
+ --e3:0 4px 8px rgba(21,20,26,.05),0 22px 50px rgba(21,20,26,.10);
+ --head:'Vazirmatn','Noto Sans Arabic',Tahoma,sans-serif;
+ --body:'Vazirmatn','Noto Sans Arabic',Tahoma,sans-serif;
+ --ease:cubic-bezier(.22,1,.36,1);
+ --header-h:68px;
+ --focus:0 0 0 3px var(--surface),0 0 0 6px var(--accent);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+  font-size:16.5px;line-height:1.9;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit;color:inherit}
+img,svg{display:block;max-width:100%}
+:focus-visible{outline:0;box-shadow:var(--focus);border-radius:var(--r-sm)}
+.skip{position:absolute;inset-inline-start:-9999px;top:var(--s2);z-index:2000;
+  background:var(--ink);color:#fff;padding:var(--s3) var(--s5);border-radius:var(--r-sm)}
+.skip:focus{inset-inline-start:var(--s4)}
+.wrap{width:min(1160px,calc(100% - var(--s6)));margin-inline:auto}
+
+/* ══════════════════════════════════════════════════════
+   ۲ · تایپوگرافی — قفل ۶، سند ۰۹، اعداد دست‌نخورده
+   ۴۳ ÷ ۲۸ = ۱٫۵۴ · ۲۸ ÷ ۱۹٫۵ = ۱٫۴۴ · ۱۹٫۵ ÷ ۱۶٫۵ = ۱٫۱۸
+   پلهٔ سوم زیر کف ۱٫۳۵ است. این ایرادِ خودِ قفل است نه ایرادِ صفحه،
+   و اصلاحش (پیشنهاد ۱٫۱۵ تا ۱٫۲۵ برای پلهٔ H3 به متن) در فهرست
+   تصمیم‌های باز مالک ثبت است. تا تصمیم مکتوب، عدد قفل اجرا می‌شود.
+   بدون letter-spacing منفی: فاصلهٔ منفی، اتصال حروف فارسی را می‌گسلد.
+   ══════════════════════════════════════════════════════ */
+h1,h2,h3{font-family:var(--head);margin:0;letter-spacing:0;text-wrap:balance}
+h1{font-size:43px;line-height:1.35;max-width:24ch;font-weight:800}
+h2{font-size:28px;line-height:1.45;max-width:22ch;font-weight:800}
+h3{font-size:19.5px;line-height:1.55;font-weight:700}
+p,li,td,th{font-size:16.5px;line-height:1.9}
+p{margin:0 0 var(--s4);max-width:64ch}
+@media(max-width:900px){
+  h1{font-size:31px}h2{font-size:23px}h3{font-size:18px}
+  p,li,td,th{font-size:16px}
+}
+.eyebrow{display:inline-flex;align-items:center;gap:var(--s2);font-size:13px;font-weight:900;
+  color:var(--accent);margin-bottom:var(--s3)}
+.eyebrow::before{content:'';width:22px;height:2px;background:currentColor;flex:0 0 auto}
+.lede{font-size:17.5px;line-height:1.95;color:var(--muted);max-width:60ch}
+.fine{font-size:15px;line-height:1.85;color:var(--muted);max-width:66ch}
+.on-dark .lede,.on-dark .fine{color:#B3AFBA}
+.on-dark .eyebrow{color:var(--rose)}
+.on-dark h1,.on-dark h2,.on-dark h3{color:#fff}
+
+/* ══════════════════════════════════════════════════════
+   ۳ · دکمه‌ها — همهٔ حالت‌ها
+   ══════════════════════════════════════════════════════ */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);
+  min-height:52px;padding:0 var(--s5);border-radius:var(--r-sm);border:1.5px solid transparent;
+  font-weight:900;font-size:16px;cursor:pointer;white-space:nowrap;
+  transition:transform .18s var(--ease),background .18s,border-color .18s,box-shadow .18s}
+.btn-primary{background:var(--accent-surface);color:#fff;box-shadow:0 8px 20px rgba(208,26,68,.22)}
+.btn-primary:hover{background:var(--accent-2);transform:translateY(-2px);box-shadow:0 12px 28px rgba(208,26,68,.30)}
+.btn-primary:active{transform:translateY(0)}
+.btn-outline{border-color:var(--line-strong);background:var(--surface)}
+.btn-outline:hover{border-color:var(--ink)}
+.btn-ghost-dark{border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.06);color:#fff}
+.btn-ghost-dark:hover{background:#fff;color:var(--ink)}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none!important}
+.btn-sm{min-height:44px;padding:0 var(--s4);font-size:15px}
+
+/* ══════════════════════════════════════════════════════
+   ۴ · هدر و مگامنو — شِل قفل‌شده، قفل ۸
+   مگامنو با کارت دستهٔ هر گروه، نه فهرست ساده. شش دستهٔ
+   مگامنو عیناً از هوم مصوب v4.2 گرفته شده‌اند.
+   ══════════════════════════════════════════════════════ */
+.header{position:sticky;top:0;z-index:700;height:var(--header-h);
+  background:rgba(245,243,239,.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line)}
+.header-in{height:100%;display:flex;align-items:center;gap:var(--s4)}
+.brand{display:flex;align-items:center;gap:var(--s3);flex:0 0 auto;min-height:44px;padding:var(--s1) 0}
+.brand img{height:40px;width:auto}
+.brand b{font-family:var(--head);font-size:16px;display:block;line-height:1.3}
+.brand small{font-size:12.5px;color:var(--muted);display:block}
+.header-end{margin-inline-start:auto;display:flex;align-items:center;gap:var(--s3)}
+.header-phone{font-weight:900;font-size:15px;direction:ltr;padding:var(--s2)}
+.menu-btn{width:46px;height:46px;border-radius:var(--r-sm);border:1.5px solid var(--line-strong);
+  background:var(--surface);cursor:pointer;font-size:18px;display:none;place-items:center}
+
+/* پنل مگامنو به خودِ نوار ناوبری لنگر می‌اندازد، نه به تک‌تک دکمه‌ها.
+   اگر به دکمه لنگر بیندازد، پنلِ ۸۶۰ پیکسلیِ دکمه‌های کناری از لبهٔ
+   صفحه بیرون می‌زند و در ۱۲۸۰px سرریز افقی می‌سازد؛ همین ایراد در
+   اندازه‌گیری مرورگر با ۴۱ پیکسل سرریز گرفته شد. */
+.nav{display:flex;align-items:center;gap:var(--s1);margin-inline-start:var(--s5);position:relative}
+.nav-group{position:static}
+.nav-btn{border:0;background:none;cursor:pointer;font-size:15.5px;font-weight:800;
+  padding:var(--s2) var(--s3);border-radius:var(--r-sm);min-height:44px;
+  display:inline-flex;align-items:center;gap:6px;color:var(--ink)}
+/* پیکان بازشونده باید همیشه رو به پایین باشد. با border-inline-end
+   در حالت راست‌به‌چپ گوشهٔ چپ‌ـ‌پایین ساخته می‌شد و پیکان به‌جای پایین،
+   به پهلو می‌افتاد؛ در اسکرین‌شات ۱۴۴۰ همین دیده شد. پیکان پایین نماد
+   جهت‌دار نیست، پس نباید آینه شود و مرز فیزیکی می‌گیرد. */
+.nav-btn::after{content:'';width:7px;height:7px;border-right:2px solid var(--muted);
+  border-bottom:2px solid var(--muted);transform:rotate(45deg) translateY(-2px);
+  transition:transform .2s var(--ease)}
+.nav-btn:hover{background:var(--paper-2)}
+.nav-btn[aria-expanded="true"]{background:var(--paper-2);color:var(--accent)}
+.nav-btn[aria-expanded="true"]::after{transform:rotate(225deg) translateY(-2px);border-color:var(--accent)}
+.nav-btn[aria-current="page"]{color:var(--accent)}
+.mega{position:absolute;top:calc(100% + 10px);inset-inline:0;margin-inline:auto;
+  width:min(860px,calc(100vw - var(--s6)));transform:translateY(-8px);
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r-lg);box-shadow:var(--e3);padding:var(--s5);z-index:800;
+  opacity:0;visibility:hidden;transition:opacity .2s var(--ease),transform .2s var(--ease),visibility .2s}
+.nav-group.is-open .mega{opacity:1;visibility:visible;transform:translateY(0)}
+.mm-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4)}
+.mm-card{display:block;border:1px solid var(--line);border-radius:var(--r-md);
+  padding:var(--s4);transition:border-color .18s,transform .18s var(--ease);background:var(--paper)}
+.mm-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.mm-card b{display:block;font-family:var(--head);font-size:16px;font-weight:800;margin-bottom:4px}
+.mm-card span{display:block;font-size:14.5px;line-height:1.75;color:var(--muted)}
+.mm-all{display:inline-flex;align-items:center;min-height:44px;margin-top:var(--s4);
+  font-weight:900;font-size:15px;color:var(--accent)}
+@media(max-width:1100px){.nav{display:none}}
+@media(max-width:960px){.brand small{display:none}.header-phone{display:none}.menu-btn{display:grid}}
+@media(max-width:640px){.header-end .btn{display:none}.brand b{font-size:14px}.brand img{height:34px}}
+
+/* ══════════════════════════════════════════════════════
+   ۵ · بخش‌ها و زمینهٔ برگهٔ پیش‌نمونه
+   ══════════════════════════════════════════════════════ */
+.sec{padding:var(--s9) 0;position:relative}
+.sec-tight{padding:var(--s8) 0}
+.sec-paper{background:var(--paper)}
+.sec-surface{background:var(--surface);border-block:1px solid var(--line)}
+.sec-sunken{background:var(--paper-2)}
+.sec-dark{background:var(--ink);color:#fff}
+.sec-dark-2{background:var(--ink-2);color:#fff}
+@media(max-width:900px){.sec{padding:var(--s8) 0}.sec-tight{padding:var(--s7) 0}}
+/* علامت تنظیم رنگ — امضای بصری صفحه. فقط روی سطح تیره و بسیار کم‌رنگ.
+   این همان نشانی است که روی برگهٔ پیش‌نمونهٔ چاپ می‌آید. */
+.regmark::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:
+    radial-gradient(circle at 8% 18%,transparent 15px,rgba(255,255,255,.05) 15px,rgba(255,255,255,.05) 16px,transparent 16px),
+    linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:auto,44px 44px,44px 44px;
+  mask-image:radial-gradient(ellipse 88% 74% at 76% 26%,#000 28%,transparent 76%)}
+.sec>.wrap{position:relative;z-index:1}
+.sec-head{margin-bottom:var(--s6);max-width:70ch}
+.sec-head .lede{margin-top:var(--s3)}
+
+/* ══════════════════════════════════════════════════════
+   ۶ · هیرو
+   ══════════════════════════════════════════════════════ */
+.hero{background:var(--ink);color:#fff;padding:var(--s9) 0 var(--s8);overflow:hidden;position:relative}
+.hero::after{content:'';position:absolute;inset-inline-end:-180px;top:-160px;width:460px;height:460px;
+  border-radius:50%;background:radial-gradient(circle,rgba(208,26,68,.26),transparent 68%);pointer-events:none}
+.hero-grid{display:grid;gap:var(--s7)}
+.hero h1 em{font-style:normal;color:var(--rose)}
+.hero-def{font-size:17.5px;line-height:1.95;color:#D6D2DC;max-width:52ch;margin:var(--s4) 0 0}
+.hero-def b{color:#fff;font-weight:800}
+.hero-actions{display:grid;gap:var(--s3);margin-top:var(--s6)}
+.hero-meta{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s5);margin-top:var(--s5);
+  padding-top:var(--s5);border-top:1px solid rgba(255,255,255,.12)}
+.hero-meta div{display:flex;align-items:baseline;gap:var(--s2)}
+.hero-meta dt{font-size:14px;color:#95909D}
+.hero-meta dd{margin:0;font-family:var(--head);font-size:17px;font-weight:800;color:#fff}
+.tagline{margin-top:var(--s5);font-size:14px;color:#95909D;letter-spacing:.02em}
+.tagline b{color:var(--rose);font-weight:800}
+
+/* ══════════════════════════════════════════════════════
+   ۷ · کارت‌ها، شبکه‌ها و بخش شکست
+   ══════════════════════════════════════════════════════ */
+.grid-3{display:grid;gap:var(--s4)}
+.grid-2{display:grid;gap:var(--s4)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:var(--s5);box-shadow:var(--e1)}
+.card h3{margin-bottom:var(--s2)}
+.card p{margin:0;color:var(--muted);font-size:16px}
+.on-dark .card{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.11)}
+.on-dark .card p{color:#B3AFBA}
+.stakes-list{counter-reset:sk;display:grid;gap:var(--s4);margin-top:var(--s6)}
+.stakes-list article{position:relative;padding-top:var(--s6)}
+.stakes-list article::before{counter-increment:sk;content:'۰' counter(sk);
+  position:absolute;top:var(--s5);inset-inline-start:var(--s5);
+  font-family:var(--head);font-size:13px;font-weight:900;color:var(--rose)}
+
+/* فهرست پرشی سکشن‌ها — صفحهٔ بلند */
+.jump{display:flex;flex-wrap:wrap;gap:var(--s2);margin-top:var(--s5);padding:0;list-style:none}
+.jump a{display:inline-flex;align-items:center;min-height:44px;padding:0 var(--s4);
+  border:1px solid var(--line);border-radius:99px;font-size:15px;font-weight:700;
+  background:var(--surface);transition:border-color .18s,color .18s}
+.jump a:hover{border-color:var(--accent);color:var(--accent)}
+
+/* دو در ورودی — هیچ‌کدام درجه‌دو نیست، پس هم‌وزن چیده شده‌اند */
+.doors{display:grid;gap:var(--s4)}
+.door{background:var(--surface);border:1.5px solid var(--line);border-radius:var(--r-lg);
+  padding:var(--s6);display:flex;flex-direction:column;gap:var(--s3)}
+.door h3{margin:0}
+.door ul{margin:0;padding-inline-start:var(--s5);color:var(--muted);display:grid;gap:2px}
+/* این‌ها پیوند ناوبری‌اند، نه پیوند درون جمله. پس استثنای «درون‌متنی»
+   بند ۲.۵.۸ شاملشان نمی‌شود و هدف لمسی کامل می‌گیرند. */
+.door ul li a{display:inline-flex;align-items:center;min-height:44px;
+  color:var(--accent);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.door .btn{margin-top:auto;align-self:start}
+
+/* ══════════════════════════════════════════════════════
+   ۸ · خانوادهٔ چاپ‌ها — سطح معرفی، نه دیوار کارت
+   ══════════════════════════════════════════════════════ */
+.fam{display:grid;gap:var(--s5)}
+.fam-block{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+  overflow:hidden;box-shadow:var(--e1)}
+.fam-head{padding:var(--s5) var(--s5) var(--s4);border-bottom:1px solid var(--line);
+  background:linear-gradient(180deg,var(--paper) 0%,var(--surface) 100%)}
+.fam-head h3{margin-bottom:6px}
+.fam-head p{margin:0;font-size:15.5px;color:var(--muted)}
+.fam-who{display:inline-block;margin-top:var(--s3);font-size:13.5px;font-weight:800;
+  color:var(--dim);background:var(--dim-soft);padding:5px var(--s3);border-radius:99px}
+.fam-links{list-style:none;margin:0;padding:var(--s3) var(--s4) var(--s4)}
+.fam-links li{border-bottom:1px dashed var(--line)}
+.fam-links li:last-child{border-bottom:0}
+.fam-links a{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);
+  min-height:52px;padding:var(--s2) var(--s2);font-weight:700;font-size:16px;
+  border-radius:var(--r-sm);transition:color .18s,padding .18s var(--ease)}
+.fam-links a:hover{color:var(--accent);padding-inline-start:var(--s3)}
+.fam-links span{font-size:14px;color:var(--muted);font-weight:500;text-align:end}
+.fam-links a:hover span{color:var(--accent)}
+
+/* ══════════════════════════════════════════════════════
+   ۹ · برگهٔ پیش‌نمونه و نوار کنترل رنگ
+   تنها جایی از صفحه که نوار CMYK می‌آید، چون همان‌جا معنا دارد.
+   ══════════════════════════════════════════════════════ */
+.proofsheet{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:var(--s5);box-shadow:var(--e2)}
+.cmyk{display:flex;height:14px;border-radius:4px;overflow:hidden;margin-bottom:var(--s4)}
+.cmyk i{flex:1}
+.cmyk i:nth-child(1){background:#00AEEF}
+.cmyk i:nth-child(2){background:#EC008C}
+.cmyk i:nth-child(3){background:#FFF200}
+.cmyk i:nth-child(4){background:#231F20}
+.checklist{list-style:none;margin:0;padding:0;display:grid;gap:var(--s3)}
+.checklist li{display:grid;grid-template-columns:26px 1fr;gap:var(--s3);align-items:start;
+  font-size:16px;line-height:1.85}
+.checklist li::before{content:'✓';width:26px;height:26px;display:grid;place-items:center;
+  border-radius:50%;background:#E7F3EE;color:var(--proof);font-weight:900;font-size:14px;margin-top:3px}
+.checklist b{font-weight:800}
+
+/* ══════════════════════════════════════════════════════
+   ۱۰ · ماژول فاصلهٔ خواندن — تنها تعامل صفحه
+   حرکت فقط وقتی که وضعیت را توضیح دهد. این ماژول تنها چیزی را
+   نشان می‌دهد که کل تفاوت این صفحه رویش بنا شده: طرحی که روی
+   مانیتور خوب است، از سی متری ممکن است هیچ نباشد.
+   ══════════════════════════════════════════════════════ */
+.dist{display:grid;gap:var(--s5)}
+.dist-ctl{display:flex;flex-wrap:wrap;gap:var(--s2)}
+.dist-ctl button{min-height:48px;padding:0 var(--s5);border-radius:var(--r-sm);cursor:pointer;
+  border:1.5px solid rgba(255,255,255,.24);background:rgba(255,255,255,.06);color:#fff;
+  font-weight:800;font-size:15.5px;transition:.18s}
+.dist-ctl button:hover{border-color:#fff}
+.dist-ctl button[aria-checked="true"]{background:var(--accent-surface);border-color:var(--accent-surface)}
+.dist-stage{background:#0E0D11;border:1px solid rgba(255,255,255,.14);border-radius:var(--r-lg);
+  padding:var(--s6) var(--s5);min-height:230px;display:grid;align-content:center;justify-items:center;
+  text-align:center;overflow:hidden}
+.dist-sign{width:100%;max-width:420px;background:#fff;color:var(--ink);border-radius:8px;
+  padding:var(--s5) var(--s4);display:grid;gap:6px;justify-items:center;
+  transition:filter .3s var(--ease)}
+.dist-sign strong{font-family:var(--head);font-weight:900;line-height:1.2;
+  font-size:var(--sign-lead,30px);transition:font-size .3s var(--ease)}
+.dist-sign em{font-style:normal;font-size:var(--sign-sub,15px);color:var(--muted);
+  line-height:1.6;transition:font-size .3s var(--ease)}
+.dist-sign small{font-size:var(--sign-fine,11px);color:var(--muted);
+  display:var(--sign-fine-show,block);transition:font-size .3s var(--ease)}
+.dist-stage[data-d="30"] .dist-sign{filter:blur(1.6px)}
+.dist-stage[data-d="10"] .dist-sign{filter:blur(.5px)}
+.dist-read{margin:0;font-size:16px;line-height:1.9;color:#D6D2DC;min-height:3.8em}
+.dist-read b{color:#fff}
+
+/* ══════════════════════════════════════════════════════
+   ۱۱ · جدول‌های فنی — در ظرف خودشان اسکرول می‌کنند
+   ══════════════════════════════════════════════════════ */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r-md);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:420px}
+caption{text-align:start;font-size:14.5px;color:var(--muted);padding:var(--s3) var(--s4);
+  border-bottom:1px solid var(--line)}
+th,td{padding:var(--s3) var(--s4);text-align:start;border-bottom:1px solid var(--line);font-size:16px}
+th{font-weight:900;background:var(--paper);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+td b{color:var(--dim);font-weight:800}
+
+/* ══════════════════════════════════════════════════════
+   ۱۲ · مسیر کار
+   ══════════════════════════════════════════════════════ */
+.steps{list-style:none;counter-reset:st;margin:0;padding:0;display:grid;gap:var(--s5);position:relative}
+.steps::before{content:'';position:absolute;inset-inline-start:15px;top:8px;bottom:8px;
+  width:2px;background:var(--line)}
+.steps li{position:relative;padding-inline-start:var(--s7)}
+.steps li::before{counter-increment:st;content:counter(st);position:absolute;
+  inset-inline-start:0;top:0;width:32px;height:32px;border-radius:50%;
+  background:var(--surface);border:2px solid var(--line);display:grid;place-items:center;
+  font-weight:900;font-size:14px;color:var(--muted);
+  transition:border-color .35s var(--ease),color .35s var(--ease)}
+.steps li.seen::before{border-color:var(--accent);color:var(--accent)}
+.steps h3{margin-bottom:4px}
+.steps p{margin:0;color:var(--muted);font-size:16px}
+
+/* ══════════════════════════════════════════════════════
+   ۱۳ · جای‌نگهدار تصویر — عکس ساختگی ممنوع
+   متن alt پیشنهادی داخل خودِ جای‌نگهدار دیده می‌شود تا عباس
+   بداند دقیقاً چه عکسی و با چه شرحی باید جایش بنشیند.
+   ══════════════════════════════════════════════════════ */
+.shots{display:grid;gap:var(--s4)}
+.shot{margin:0}
+.ph{aspect-ratio:16/10;border-radius:var(--r-lg);border:2px dashed var(--proof);
+  background:repeating-linear-gradient(45deg,#EAF3EE 0 14px,#F4FAF7 14px 28px);
+  color:#124A35;padding:var(--s5);display:grid;align-content:center;gap:var(--s2);
+  text-align:center;font-size:14.5px;line-height:1.75}
+.ph b{font-size:15.5px;font-weight:900}
+.ph code{font-family:var(--body);font-size:13px;background:rgba(18,74,53,.09);
+  padding:3px var(--s2);border-radius:6px;justify-self:center}
+.shot figcaption{font-size:15px;color:var(--muted);margin-top:var(--s3)}
+/* روی سطح تیره، رنگ فرعیِ روشن لازم است. اندازه‌گیری کنتراست نشان داد
+   figcaption هیرو روی زمینهٔ تیره فقط ۲٫۶۸ به ۱ بود. */
+.on-dark .shot figcaption{color:#B3AFBA}
+
+/* شهرها */
+.cities{list-style:none;margin:0;padding:0;display:grid;gap:var(--s3)}
+.cities li{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--s2) var(--s3);
+  padding:var(--s3) 0;border-bottom:1px dashed var(--line)}
+.cities li:last-child{border-bottom:0}
+.cities b{font-family:var(--head);font-size:17px;font-weight:800;min-width:5.5em}
+.cities span{font-size:15.5px;color:var(--muted)}
+.cities i{font-style:normal;font-size:13px;font-weight:800;color:var(--dim);
+  background:var(--dim-soft);padding:3px var(--s3);border-radius:99px}
+
+/* ══════════════════════════════════════════════════════
+   ۱۴ · پرسش‌ها
+   ══════════════════════════════════════════════════════ */
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);
+  margin-bottom:var(--s2);overflow:hidden}
+.faq summary{padding:var(--s4) var(--s5);font-weight:800;font-size:17px;cursor:pointer;
+  list-style:none;display:flex;justify-content:space-between;gap:var(--s4);
+  align-items:center;min-height:56px}
+.faq summary::-webkit-details-marker{display:none}
+/* همان قاعده: پیکان باز و بستهٔ پرسش هم باید پایین و بالا باشد، نه پهلو. */
+.faq summary::after{content:'';flex:0 0 auto;width:14px;height:14px;
+  border-right:2.5px solid var(--accent);border-bottom:2.5px solid var(--accent);
+  transform:rotate(45deg) translateY(-3px);transition:transform .25s var(--ease)}
+.faq details[open] summary::after{transform:rotate(225deg) translateY(-3px)}
+.faq details p{margin:0;padding:0 var(--s5) var(--s5);font-size:16px;color:var(--muted)}
+.faq a{color:var(--accent);font-weight:800;text-decoration:underline;text-underline-offset:3px}
+
+/* ══════════════════════════════════════════════════════
+   ۱۵ · فرم — سه فیلد اجباری، نه بیشتر
+   ══════════════════════════════════════════════════════ */
+.form{background:var(--surface);color:var(--ink);border-radius:var(--r-lg);
+  padding:var(--s6);display:grid;gap:var(--s4);box-shadow:var(--e2)}
+.form label{font-size:14.5px;font-weight:900}
+.form input,.form select{width:100%;font-size:16.5px;padding:var(--s3) var(--s4);
+  margin-top:var(--s2);border:1.5px solid var(--line);border-radius:var(--r-sm);
+  background:#FBFAF8;min-height:52px;transition:border-color .2s}
+.form input:hover,.form select:hover{border-color:var(--line-strong)}
+.form input:focus-visible,.form select:focus-visible{border-color:var(--accent);background:var(--surface)}
+.form .hint{font-size:14px;color:var(--muted);font-weight:500;margin-top:var(--s1);display:block}
+
+/* ══════════════════════════════════════════════════════
+   ۱۶ · پاورقی — دو ستونی به بالا، فشرده
+   ══════════════════════════════════════════════════════ */
+footer{background:#100F14;color:#A9A4B0;padding:var(--s8) 0 var(--s5)}
+.f-grid{display:grid;gap:var(--s6)}
+.f-id{display:flex;align-items:flex-start;gap:var(--s4)}
+.f-id img{width:54px;height:auto;flex:0 0 auto}
+.f-id h3{color:#fff;margin-bottom:var(--s2)}
+.f-id p{margin:0;font-size:15.5px;color:#A9A4B0;max-width:34ch}
+.f-col{display:grid;align-content:start;gap:2px}
+.f-col b{color:#fff;font-size:16px;margin-bottom:var(--s2)}
+.f-col a{font-size:15.5px;color:#BCB7C1;padding:var(--s2) 0;transition:color .2s}
+.f-col a:hover{color:#fff}
+.f-bottom{border-top:1px solid rgba(255,255,255,.09);margin-top:var(--s6);padding-top:var(--s4);
+  display:flex;justify-content:space-between;gap:var(--s4);flex-wrap:wrap;font-size:14px;color:#7E7986}
+.f-bottom nav{display:flex;gap:var(--s5);flex-wrap:wrap}
+.f-bottom nav a{display:inline-flex;align-items:center;min-height:44px}
+
+/* ══════════════════════════════════════════════════════
+   ۱۷ · موبایل: تب‌بار، کشو، پاپ‌آپ
+   ══════════════════════════════════════════════════════ */
+.tabbar{position:fixed;inset-inline:0;bottom:0;z-index:700;display:none;
+  grid-template-columns:repeat(4,1fr);background:rgba(255,255,255,.97);backdrop-filter:blur(14px);
+  border-top:1px solid var(--line);padding:var(--s1) var(--s1) calc(var(--s1) + env(safe-area-inset-bottom,0px))}
+.tabbar a,.tabbar button{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2px;border:0;background:none;cursor:pointer;color:var(--muted);
+  padding:var(--s2) var(--s1);border-radius:var(--r-sm);min-height:52px}
+.tabbar svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;
+  stroke-linecap:round;stroke-linejoin:round}
+.tabbar span{font-size:11px;font-weight:800}
+.tabbar a[aria-current="true"]{color:var(--accent)}
+@media(max-width:900px){
+  .tabbar{display:grid}
+  body{padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))}
+}
+/* افقی موبایل: ارتفاع کم است، پس تب‌بار جمع‌تر می‌شود ولی نمی‌رود */
+@media(max-width:900px) and (max-height:460px){
+  .tabbar span{font-size:10px}
+  .tabbar a,.tabbar button{min-height:44px;padding:var(--s1)}
+  body{padding-bottom:calc(52px + env(safe-area-inset-bottom,0px))}
+}
+/* visibility با تأخیر بسته می‌شود ولی بدون تأخیر باز می‌شود.
+   دلیلش یک ایراد واقعی است که در آزمون مرورگر گرفته شد: وقتی
+   visibility هم مثل opacity ترنزیشن می‌گرفت، در لحظهٔ باز شدن هنوز
+   hidden محاسبه می‌شد، و فراخوانی focus روی عنصر نامرئی بی‌اثر است.
+   نتیجه این بود که دیالوگ باز می‌شد و فوکوس بیرون از آن می‌ماند. */
+.drawer{position:fixed;inset:0;z-index:1000;background:rgba(12,10,14,.55);
+  opacity:0;visibility:hidden;transition:opacity .26s var(--ease),visibility 0s linear .26s}
+.drawer[aria-hidden="false"]{opacity:1;visibility:visible;
+  transition:opacity .26s var(--ease),visibility 0s linear 0s}
+.drawer-panel{position:absolute;inset-inline:0;bottom:0;max-height:84vh;overflow-y:auto;
+  background:var(--surface);border-radius:var(--r-xl) var(--r-xl) 0 0;
+  padding:var(--s5) var(--s4) calc(var(--s5) + env(safe-area-inset-bottom,0px));
+  transform:translateY(100%);transition:transform .3s var(--ease)}
+.drawer[aria-hidden="false"] .drawer-panel{transform:none}
+.drawer-panel::before{content:'';display:block;width:44px;height:4px;border-radius:99px;
+  background:var(--line-strong);margin:0 auto var(--s5)}
+.drawer-panel a{display:block;padding:var(--s4);border-radius:var(--r-md);font-weight:700;
+  font-size:16.5px;border:1px solid var(--line);margin-bottom:var(--s2);min-height:56px}
+.drawer-panel a[aria-current="page"]{border-color:var(--accent);color:var(--accent)}
+.drawer-close{position:absolute;inset-inline-end:var(--s4);top:var(--s3);width:44px;height:44px;
+  border:0;background:var(--paper-2);border-radius:var(--r-sm);font-size:20px;
+  color:var(--muted);cursor:pointer}
+.modal{position:fixed;inset:0;z-index:1100;display:grid;place-items:center;padding:var(--s5);
+  opacity:0;visibility:hidden;transition:opacity .22s var(--ease),visibility 0s linear .22s}
+.modal[aria-hidden="false"]{opacity:1;visibility:visible;
+  transition:opacity .22s var(--ease),visibility 0s linear 0s}
+.modal-backdrop{position:absolute;inset:0;background:rgba(12,10,14,.64)}
+.modal-panel{position:relative;background:var(--surface);border-radius:var(--r-xl);max-width:480px;
+  width:100%;padding:var(--s7) var(--s6) var(--s6);max-height:88vh;overflow-y:auto;
+  transform:translateY(16px) scale(.98);transition:transform .22s var(--ease);box-shadow:var(--e3)}
+.modal[aria-hidden="false"] .modal-panel{transform:none}
+.modal-close{position:absolute;inset-inline-end:var(--s4);top:var(--s4);width:44px;height:44px;min-height:44px;
+  line-height:1;border:0;background:var(--paper-2);border-radius:var(--r-sm);font-size:22px;
+  cursor:pointer;color:var(--muted)}
+.channel{display:block;border:1.5px solid var(--line);border-radius:var(--r-md);
+  padding:var(--s4) var(--s5);transition:.18s;min-height:60px;margin-bottom:var(--s4)}
+.channel:hover{border-color:var(--accent);transform:translateY(-1px)}
+.channel b{display:block;font-size:16.5px}
+.channel span{display:block;font-size:15px;color:var(--muted);margin-top:2px;direction:ltr;text-align:start}
+.divider{display:flex;align-items:center;gap:var(--s3);margin:var(--s5) 0 var(--s4);
+  color:var(--muted);font-size:14.5px}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--line)}
+body.is-locked{overflow:hidden}
+
+/* ══════════════════════════════════════════════════════
+   ۱۸ · نقاط شکست — یک سیستم، نه دسکتاپِ کوچک‌شده
+   ══════════════════════════════════════════════════════ */
+@media(min-width:760px){
+  .grid-2{grid-template-columns:1fr 1fr}
+  .doors{grid-template-columns:1fr 1fr}
+  .shots{grid-template-columns:1fr 1fr}
+  .hero-actions{display:flex;gap:var(--s3)}
+  .cities{grid-template-columns:1fr 1fr;column-gap:var(--s6)}
+}
+@media(min-width:960px){
+  .grid-3{grid-template-columns:repeat(3,1fr)}
+  .stakes-list{grid-template-columns:repeat(3,1fr)}
+  .hero-grid{grid-template-columns:1.04fr .96fr;align-items:center;gap:var(--s8)}
+  .fam{grid-template-columns:repeat(3,1fr);align-items:start}
+  .proof-grid{grid-template-columns:1.05fr .95fr;gap:var(--s8);align-items:start}
+  .dist{grid-template-columns:.9fr 1.1fr;align-items:center;gap:var(--s7)}
+  .price-grid{grid-template-columns:1fr 1fr;gap:var(--s7);align-items:start}
+  .steps{grid-template-columns:1fr 1fr;column-gap:var(--s7)}
+  .steps::before{display:none}
+  .steps li{padding-inline-start:0;padding-top:var(--s5);border-top:3px solid var(--line);
+    transition:border-color .35s var(--ease)}
+  .steps li.seen{border-top-color:var(--accent)}
+  .steps li::before{inset-inline-start:0;top:-10px}
+  .form{grid-template-columns:1fr 1fr}
+  .form label:nth-of-type(3),.form .btn{grid-column:1/-1}
+  .f-grid{grid-template-columns:1.4fr 1fr 1fr 1.05fr}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .steps li{border-top-color:var(--accent)}
+  .steps li::before{border-color:var(--accent);color:var(--accent)}
+}
+@media(prefers-contrast:more){
+  :root{--muted:#4A4753;--line:#B8B0A5}
+}
+</style>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[
+{"@type":"Organization","@id":"https://chatreghermez.com/#org","name":"آژانس تبلیغاتی چتر قرمز","url":"https://chatreghermez.com/","slogan":"به آسمان سلام کن","email":"info@chatreghermez.com","telephone":"+983136258310","address":{"@type":"PostalAddress","addressLocality":"اصفهان","addressRegion":"اصفهان","streetAddress":"خیابان شیخ صدوق جنوبی، کوچه ۳۲","addressCountry":"IR"}},
+{"@type":"WebPage","@id":"https://chatreghermez.com/services/printing/#page","url":"https://chatreghermez.com/services/printing/","name":"چاپ بنر، کاتالوگ و پارچهٔ لایت‌باکس اصفهان","inLanguage":"fa-IR","isPartOf":{"@id":"https://chatreghermez.com/#org"}},
+{"@type":"BreadcrumbList","@id":"https://chatreghermez.com/services/printing/#breadcrumb","itemListElement":[
+{"@type":"ListItem","position":1,"name":"خانه","item":"https://chatreghermez.com/"},
+{"@type":"ListItem","position":2,"name":"خدمات","item":"https://chatreghermez.com/services/"},
+{"@type":"ListItem","position":3,"name":"چاپ"}]},
+{"@type":"Service","@id":"https://chatreghermez.com/services/printing/#service","name":"چاپ بنر، پارچهٔ لایت‌باکس و اقلام کاغذی","serviceType":"چاپ تبلیغاتی","description":"چاپ بنر، فلکس، مش، استیکر، پرچم، پارچهٔ لایت‌باکس و تکستایل یووی، به‌علاوهٔ کارت ویزیت، ست اداری، کاتالوگ و بروشور. بررسی فایل پیش از چاپ، و در صورت نیاز طراحی و نصب.","provider":{"@id":"https://chatreghermez.com/#org"},"areaServed":[
+{"@type":"City","name":"اصفهان"},{"@type":"City","name":"فولادشهر"},{"@type":"City","name":"زرین‌شهر"},{"@type":"City","name":"مبارکه"},{"@type":"City","name":"چمگردان"},{"@type":"City","name":"تهران"}],
+"hasOfferCatalog":{"@type":"OfferCatalog","name":"خانواده‌های چاپ","itemListElement":[
+{"@type":"OfferCatalog","name":"بنر و متریال فضای باز","url":"https://chatreghermez.com/printing/large-format/"},
+{"@type":"OfferCatalog","name":"پارچه و سطح نورگذر","url":"https://chatreghermez.com/printing/large-format/uv-textile/"},
+{"@type":"OfferCatalog","name":"کاغذی و اداری","url":"https://chatreghermez.com/printing/offset/"}]}},
+{"@type":"ItemList","@id":"https://chatreghermez.com/services/printing/#list","name":"فهرست چاپ‌های چتر قرمز","itemListElement":[
+{"@type":"ListItem","position":1,"name":"چاپ بنر","url":"https://chatreghermez.com/printing/large-format/banner-printing/"},
+{"@type":"ListItem","position":2,"name":"چاپ فلکس","url":"https://chatreghermez.com/printing/large-format/flex-printing/"},
+{"@type":"ListItem","position":3,"name":"چاپ مش","url":"https://chatreghermez.com/printing/large-format/mesh-printing/"},
+{"@type":"ListItem","position":4,"name":"چاپ استیکر و لیبل","url":"https://chatreghermez.com/printing/large-format/sticker-printing/"},
+{"@type":"ListItem","position":5,"name":"چاپ پرچم","url":"https://chatreghermez.com/printing/large-format/flag-printing/"},
+{"@type":"ListItem","position":6,"name":"چاپ پارچهٔ تبلیغاتی","url":"https://chatreghermez.com/printing/large-format/textile-printing/"},
+{"@type":"ListItem","position":7,"name":"چاپ تکستایل یووی","url":"https://chatreghermez.com/printing/large-format/uv-textile/"},
+{"@type":"ListItem","position":8,"name":"چاپ استند نمایشگاهی","url":"https://chatreghermez.com/printing/large-format/exhibition-displays/"},
+{"@type":"ListItem","position":9,"name":"چاپ کاتالوگ","url":"https://chatreghermez.com/printing/offset/catalog-printing/"},
+{"@type":"ListItem","position":10,"name":"چاپ کارت ویزیت و ست اداری","url":"https://chatreghermez.com/printing/offset/"}]},
+{"@type":"FAQPage","@id":"https://chatreghermez.com/services/printing/#faq","mainEntity":[
+{"@type":"Question","name":"طرح آماده دارم، فقط چاپ و نصب می‌خواهم. انجام می‌دهید؟","acceptedAnswer":{"@type":"Answer","text":"بله. این یکی از دو مسیر عادی سفارش است و هیچ فرقی در اولویت کار ندارد. فایل را می‌فرستید، پیش از چاپ بررسی می‌شود، و اگر مشکلی در رزولوشن، حاشیه یا فضای رنگ داشت پیش از تولید به شما گفته می‌شود. سازمان‌ها و شرکت‌هایی که طراح داخلی دارند معمولاً از همین مسیر می‌آیند."}},
+{"@type":"Question","name":"طرح ندارم. طراحی هم انجام می‌دهید؟","acceptedAnswer":{"@type":"Answer","text":"بله. طراحی بنر، کاتالوگ، ست اداری و استند نمایشگاهی در همین مجموعه انجام می‌شود و بعد به همان کارگاه چاپ می‌رود. مزیت عملی‌اش این است که طراح از اول می‌داند فایل روی چه متریالی و در چه ابعادی چاپ می‌شود."}},
+{"@type":"Question","name":"قیمت چاپ به چه چیزهایی بستگی دارد؟","acceptedAnswer":{"@type":"Answer","text":"به متراژ کار، جنس و ضخامت متریال، مقدار سفارش، کارهای تکمیلی مانند لیفه و پانچ و دوردوزی، و محل تحویل. قیمت ثابت متری برای همهٔ کارها واقعی نیست؛ به همین دلیل عدد پس از دیدن فایل و ابعاد اعلام می‌شود."}},
+{"@type":"Question","name":"رزولوشن فایل بنر چقدر باشد؟","acceptedAnswer":{"@type":"Answer","text":"معیار درست، رزولوشن در ابعاد واقعی کار است نه عدد تنها. برای بنرهای معمولی شهری حدود ۱۰۰ تا ۱۲۰ نقطه بر اینچ در ابعاد نهایی کافی است، و برای کارهای بسیار بزرگ که از فاصلهٔ دور دیده می‌شوند عدد کمتر هم جواب می‌دهد. برای اقلام کاغذی که از فاصلهٔ نزدیک خوانده می‌شوند ۳۰۰ نقطه بر اینچ معیار است."}},
+{"@type":"Question","name":"فایل را CMYK بدهم یا RGB؟","acceptedAnswer":{"@type":"Answer","text":"CMYK. فضای رنگ چاپ CMYK است و اگر فایل RGB باشد، هنگام تبدیل بعضی رنگ‌ها جابه‌جا می‌شوند؛ بیشترین تفاوت در آبی‌های اشباع و سبزهای روشن دیده می‌شود. بهتر است از همان ابتدای طراحی حالت رنگ روی CMYK باشد."}},
+{"@type":"Question","name":"بنر ایرانی بهتر است یا خارجی؟ انس یعنی چه؟","acceptedAnswer":{"@type":"Answer","text":"انس واحد وزن و ضخامت بنر است و در بازار ۸، ۱۰ و ۱۳ رایج است. هرچه عدد بالاتر باشد بنر ضخیم‌تر و مقاوم‌تر است. بنر ایرانی از نظر قیمت به‌صرفه‌تر است و برای کار کوتاه‌مدت پاسخ می‌دهد؛ بنرهای وارداتی معمولاً سطح یکنواخت‌تر و ثبات رنگ بهتری دارند. انتخاب به مدت ماندگاری کار و شرایط نصب بستگی دارد."}},
+{"@type":"Question","name":"لیفه و پانچ چیست و کِی لازم است؟","acceptedAnswer":{"@type":"Answer","text":"لیفه یعنی برگرداندن و دوختن لبهٔ بنر تا میله یا چوب از داخلش رد شود و لبه در برابر کشش پاره نشود. پانچ یعنی نصب حلقهٔ فلزی روی لبه برای بستن با طناب یا بست. برای نصب روی داربست و سازه، هر دو معمولاً لازم می‌شوند و بهتر است هنگام سفارش تعیین شوند."}},
+{"@type":"Question","name":"پارچهٔ لایت‌باکس، تکستایل و پارچهٔ یووی فرقی دارند؟","acceptedAnswer":{"@type":"Answer","text":"این سه نام در بازار به یک متریال گفته می‌شود. بک‌لایت هم چتر بزرگ‌تری است که هم نوع طلقی و هم نوع پارچه‌ای را شامل می‌شود. پس اگر جایی «چاپ پارچهٔ لایت‌باکس» دیدید و جای دیگر «چاپ تکستایل یووی»، لازم نیست دنبال دو چیز متفاوت بگردید."}},
+{"@type":"Question","name":"چاپ فوری چقدر طول می‌کشد؟","acceptedAnswer":{"@type":"Answer","text":"زمان واقعی به سه چیز بستگی دارد: سالم بودن فایل، موجود بودن متریال در همان ابعاد، و کارهای تکمیلی مانند دوردوزی و نصب. بیشترین تأخیرهایی که دیده می‌شود از رفت‌وبرگشت فایل می‌آید نه از خود دستگاه؛ به همین دلیل بررسی فایل پیش از چاپ انجام می‌شود."}},
+{"@type":"Question","name":"نصب هم انجام می‌دهید یا فقط چاپ؟","acceptedAnswer":{"@type":"Answer","text":"نصب هم انجام می‌شود. برای بنر روی سازه و داربست، لایت‌باکس داخل مجتمع و مطب، و استند نمایشگاهی، اجرا و نصب بخشی از همان سفارش است. برای نصب در فضای شهری، مجوز نصب با کارفرما یا شهرداری است."}},
+{"@type":"Question","name":"به شهرستان‌های اصفهان ارسال دارید؟","acceptedAnswer":{"@type":"Answer","text":"بله. دفتر اصفهان و دفتر فولادشهر و چاپخانهٔ زرین‌شهر، تحویل در استان را کوتاه می‌کنند و پروژه‌های فعال مبارکه و چمگردان از همین مسیر اجرا شده‌اند. برای شهرهای دیگر استان، زمان و روش ارسال هنگام تأیید سفارش مشخص می‌شود."}},
+{"@type":"Question","name":"اگر رنگ چاپ با مانیتور فرق کرد، تکلیف چیست؟","acceptedAnswer":{"@type":"Answer","text":"مانیتور نور می‌تاباند و کاغذ و بنر نور را بازمی‌تابانند، پس یکی‌بودن کامل ممکن نیست. کاری که انجام می‌شود این است که پیش از تولید انبوه، رنگ‌های حساس کار مانند رنگ سازمانی برند به شما گفته می‌شود و در صورت نیاز نمونهٔ چاپی گرفته می‌شود تا تصمیم روی کاغذ گرفته شود، نه روی صفحه."}}]}]}</script>
+</head>
+<body>
+
+<a class="skip" href="#main">پرش به محتوای اصلی</a>
+
+<header class="header">
+<div class="wrap header-in">
+<a class="brand" href="/">
+<img alt="لوگوی آژانس تبلیغاتی چتر قرمز" src="/assets/img/logo.png" width="38" height="40"/>
+<span><b>آژانس تبلیغاتی چتر قرمز</b><small>طراحی، ساخت، رسانه و رشد</small></span>
+</a>
+
+<!-- مگامنو: شش دستهٔ هوم مصوب v4.2، هرکدام با کارت‌های مهم همان دسته.
+     فهرست ساده جایگزین مگامنو نیست (قفل ۸). -->
+<nav class="nav" aria-label="منوی اصلی">
+  <div class="nav-group" data-nav>
+    <button class="nav-btn" type="button" aria-expanded="false" aria-controls="mm-outdoor">تبلیغات محیطی</button>
+    <div class="mega" id="mm-outdoor">
+      <div class="mm-grid">
+        <a class="mm-card" href="/products/outdoor-structures/"><b>سازه‌های شهری و بیلبورد</b><span>بیلبورد، استرابورد، برایت‌برد و تیربورد؛ ساخت و نصب.</span></a>
+        <a class="mm-card" href="/products/indoor-lightboxes/"><b>لایت‌باکس و تابلوهای نورانی</b><span>لایت‌باکس دیواری، ایستاده و ایندور برای فضای داخلی.</span></a>
+        <a class="mm-card" href="/services/urban-investment/"><b>مشارکت و سرمایه‌گذاری</b><span>سرمایه‌گذاری در تبلیغات شهری، ویژهٔ شهرداری و مالک مکان.</span></a>
+        <a class="mm-card" href="/services/outdoor-advertising/"><b>اکران و بهره‌برداری</b><span>انتخاب موقعیت، اجرا و نگهداری کمپین محیطی.</span></a>
+      </div>
+      <a class="mm-all" href="/services/outdoor-advertising/">دیدن همهٔ ۱۸ خدمت «تبلیغات محیطی» ←</a>
+    </div>
+  </div>
+  <div class="nav-group" data-nav>
+    <button class="nav-btn" type="button" aria-expanded="false" aria-controls="mm-graphic">گرافیک</button>
+    <div class="mega" id="mm-graphic">
+      <div class="mm-grid">
+        <a class="mm-card" href="/services/environmental-exhibition-design/"><b>طراحی محیطی و نمایشگاهی</b><span>طراحی بیلبورد، بنر، لایت‌باکس، رول‌آپ و استند غرفه.</span></a>
+        <a class="mm-card" href="/services/brand-collateral-design/"><b>هویت بصری و اقلام برند</b><span>لوگو، ست اداری، کارت ویزیت، کاتالوگ و بروشور.</span></a>
+        <a class="mm-card" href="/services/packaging-label-design/"><b>بسته‌بندی و لیبل</b><span>طراحی لیبل محصول، جعبه و بسته‌بندی.</span></a>
+        <a class="mm-card" href="/services/digital-graphic-design/"><b>گرافیک وب و شبکه‌های اجتماعی</b><span>اینفوگرافیک، بنر سایت، پست و استوری اینستاگرام.</span></a>
+      </div>
+      <a class="mm-all" href="/services/design-graphics/">دیدن همهٔ ۳۰ خدمت «طراحی و گرافیک» ←</a>
+    </div>
+  </div>
+  <div class="nav-group" data-nav>
+    <button class="nav-btn" type="button" aria-expanded="false" aria-controls="mm-print" aria-current="page">چاپ</button>
+    <div class="mega" id="mm-print">
+      <div class="mm-grid">
+        <a class="mm-card" href="/printing/large-format/uv-textile/"><b>چاپ تکستایل و بک‌لایت</b><span>پارچهٔ لایت‌باکس و تکستایل یووی، در کارگاه خودمان.</span></a>
+        <a class="mm-card" href="/printing/large-format/"><b>چاپ لارج‌فرمت</b><span>بنر، فلکس، مش، استیکر و پرچم.</span></a>
+        <a class="mm-card" href="/printing/offset/"><b>چاپ اداری و ست سازمانی</b><span>کارت ویزیت، سربرگ، پاکت نامه و پاکت A4.</span></a>
+        <a class="mm-card" href="/printing/offset/catalog-printing/"><b>کاتالوگ و بروشور</b><span>کاتالوگ صنعتی، بروشور، پوستر و تراکت.</span></a>
+      </div>
+      <a class="mm-all" href="/services/printing/">دیدن همهٔ ۱۶ خدمت «چاپ» ←</a>
+    </div>
+  </div>
+  <div class="nav-group" data-nav>
+    <button class="nav-btn" type="button" aria-expanded="false" aria-controls="mm-digital">دیجیتال</button>
+    <div class="mega" id="mm-digital">
+      <div class="mm-grid">
+        <a class="mm-card" href="/services/web-design/"><b>طراحی و توسعه وب‌سایت</b><span>سایت شرکتی، بازطراحی و توسعهٔ اختصاصی.</span></a>
+        <a class="mm-card" href="/services/seo-analytics/"><b>سئو و بهبود تبدیل</b><span>سئوی تکنیکال و تحلیل نرخ تبدیل سایت.</span></a>
+        <a class="mm-card" href="/services/social-media/"><b>شبکه‌های اجتماعی</b><span>استراتژی، تقویم محتوا و تولید محتوای اینستاگرام.</span></a>
+        <a class="mm-card" href="/services/web-design/ai-automation/"><b>اتوماسیون و هوش مصنوعی</b><span>خودکارسازی کارهای تکراری کسب‌وکار.</span></a>
+      </div>
+      <a class="mm-all" href="/services/digital-marketing/">دیدن همهٔ ۱۳ خدمت «دیجیتال مارکتینگ» ←</a>
+    </div>
+  </div>
+  <div class="nav-group" data-nav>
+    <button class="nav-btn" type="button" aria-expanded="false" aria-controls="mm-video">ویدئو و عکس</button>
+    <div class="mega" id="mm-video">
+      <div class="mm-grid">
+        <a class="mm-card" href="/services/industrial-video/"><b>تولید ویدئو، ریلز و تیزر</b><span>تیزر صنعتی، ویدئوی معرفی و محتوای کوتاه.</span></a>
+        <a class="mm-card" href="/services/event-aerial-video/"><b>تصویربرداری تخصصی</b><span>پوشش رویداد و تصویربرداری هوایی.</span></a>
+        <a class="mm-card" href="/services/industrial-photography/"><b>عکاسی صنعتی و محصول</b><span>عکس محصول برای کاتالوگ، سایت و فروشگاه.</span></a>
+        <a class="mm-card" href="/video/textile-printing/"><b>ویدئوی چاپ تکستایل</b><span>فرایند چاپ پارچه در کارگاه، از نزدیک.</span></a>
+      </div>
+      <a class="mm-all" href="/services/industrial-photo-video/">دیدن همهٔ ۹ خدمت «فیلمبرداری و عکاسی» ←</a>
+    </div>
+  </div>
+  <div class="nav-group" data-nav>
+    <button class="nav-btn" type="button" aria-expanded="false" aria-controls="mm-consult">مشاوره</button>
+    <div class="mega" id="mm-consult">
+      <div class="mm-grid">
+        <a class="mm-card" href="/services/strategy/marketing-message/"><b>مشاوره تبلیغات و پیام</b><span>تعیین پیام و انتخاب رسانهٔ متناسب با بودجه.</span></a>
+        <a class="mm-card" href="/services/business-strategy/"><b>استراتژی فروش و سیستم‌سازی</b><span>مسیر فروش، قیمت‌گذاری و نظم اجرایی.</span></a>
+        <a class="mm-card" href="/consulting/"><b>جلسهٔ تشخیص اولیه</b><span>پیش از انتخاب خدمت، مسئله روشن می‌شود.</span></a>
+        <a class="mm-card" href="/credentials/"><b>مدارک و اعتبار</b><span>پروانه، گواهی‌ها و سوابق قابل راستی‌آزمایی.</span></a>
+      </div>
+      <a class="mm-all" href="/services/business-strategy/">دیدن همهٔ ۸ خدمت «مشاوره» ←</a>
+    </div>
+  </div>
+</nav>
+
+<div class="header-end">
+<a class="header-phone" href="tel:+983136258310">۰۳۱-۳۶۲۵۸۳۱۰</a>
+<button class="btn btn-primary btn-sm" data-open-contact type="button">بررسی فایل</button>
+<button class="menu-btn" id="menuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false" aria-controls="drawer">☰</button>
+</div>
+</div>
+</header>
+
+<main id="main">
+
+<!-- ═══ ۱ · هیرو ═══ -->
+<section class="hero regmark on-dark" id="top">
+<div class="wrap hero-grid">
+<div>
+<span class="eyebrow">چاپ و اجرا · اصفهان</span>
+<h1>چاپ بنر، کاتالوگ و پارچهٔ لایت‌باکس <em>در اصفهان</em></h1>
+<p class="hero-def"><b>فایل شما پیش از چاپ بررسی می‌شود.</b> اگر طرح در آن ابعاد کار نکند، پیش از تولید به شما گفته می‌شود، نه بعد از آنکه متریال بریده شد. بنر، فلکس، مش، استیکر، پارچهٔ لایت‌باکس، کارت ویزیت و کاتالوگ؛ با طرح آماده یا بدون طرح.</p>
+<div class="hero-actions">
+<button class="btn btn-primary" data-open-contact type="button">ارسال فایل برای بررسی رایگان</button>
+<a class="btn btn-ghost-dark" href="#what">دیدن فهرست چاپ‌ها</a>
+</div>
+<dl class="hero-meta">
+<div><dt>بررسی فایل</dt><dd>رایگان، پیش از چاپ</dd></div>
+<div><dt>دو مسیر</dt><dd>با طرح، یا از صفر</dd></div>
+<div><dt>تحویل</dt><dd>اصفهان و شهرستان‌ها</dd></div>
+</dl>
+<p class="tagline"><b>به آسمان سلام کن</b></p>
+</div>
+
+<figure class="shot" style="margin:0">
+<div class="ph" data-shot="PRT-HERO">
+<b>عکس واقعی: خروج بنر چاپ‌شده از دستگاه</b>
+<span>نمای نزدیک، لحظهٔ خروج کار از دستگاه چاپ عرض‌بزرگ. دست اپراتور در قاب باشد.</span>
+<code>نسبت ۱۶:۱۰ · حداقل ۱۶۰۰ پیکسل عرض</code>
+<span>متن جایگزین پیشنهادی: «خروج بنر چاپ‌شده از دستگاه لارج‌فرمت در کارگاه چتر قرمز»</span>
+</div>
+<figcaption>جای‌نگهدار تا رسیدن عکس واقعی کارگاه. عکس ساختگی جایگزین مدرک نمی‌شود.</figcaption>
+</figure>
+</div>
+</section>
+
+<!-- ═══ ۲ · پاسخ کوتاه و فهرست پرشی ═══ -->
+<section class="sec sec-tight sec-surface" id="summary">
+<div class="wrap">
+<div class="sec-head">
+<span class="eyebrow">پاسخ کوتاه</span>
+<h2>چاپ در چتر قرمز، در یک نگاه</h2>
+<p class="lede">دو خانوادهٔ تولید اینجا کنار هم‌اند: کارهای عرض‌بزرگ مثل بنر و پارچهٔ لایت‌باکس، و کارهای کاغذی مثل کارت ویزیت و کاتالوگ. تفاوت عملی برای شما در جای دیگری است: فایل پیش از رفتن روی دستگاه خوانده می‌شود، و اگر طرح در ابعاد واقعی یا از فاصلهٔ خواندن کار نکند، همان‌جا گفته می‌شود. اگر طرح ندارید، طراحی هم از همین‌جا شروع می‌شود.</p>
+</div>
+<ul class="jump">
+<li><a href="#what">چه چیزهایی چاپ می‌شود</a></li>
+<li><a href="#check">بررسی فایل</a></li>
+<li><a href="#distance">فاصلهٔ خواندن</a></li>
+<li><a href="#banner">انس و جنس بنر</a></li>
+<li><a href="#textile">پارچهٔ لایت‌باکس</a></li>
+<li><a href="#price">عوامل قیمت</a></li>
+<li><a href="#time">زمان تحویل</a></li>
+<li><a href="#where">شهرها</a></li>
+<li><a href="#faq">پرسش‌ها</a></li>
+</ul>
+</div>
+</section>
+
+<!-- ═══ ۳ · بخش شکست — قفل ۲، پیش از راه‌حل، سه محور راست ═══ -->
+<section class="sec sec-dark-2 regmark on-dark" id="stakes">
+<div class="wrap">
+<div class="sec-head">
+<span class="eyebrow">هزینهٔ کاری که درست چاپ نشود</span>
+<h2>پول چاپ چطور بی‌سروصدا آب می‌شود</h2>
+<p class="lede">مشکل معمولاً گران بودن چاپ نیست. سه اتفاق است که خرجش را کسی جداگانه حساب نمی‌کند.</p>
+</div>
+<div class="stakes-list">
+<article class="card">
+<h3>متریالی که دوباره خریده می‌شود</h3>
+<p>فایل با رزولوشن کم یا در فضای رنگ اشتباه می‌رود روی دستگاه. بنر بریده شده، جوهر رفته، و کار دور ریختنی است. هزینهٔ چاپ دوم را کسی به‌عنوان «هزینهٔ تبلیغات» ثبت نمی‌کند، ولی از همان جیب می‌رود.</p>
+</article>
+<article class="card">
+<h3>تابلویی که خوانده نمی‌شود</h3>
+<p>طرح روی مانیتور مرتب است. همان طرح از آن‌طرف خیابان یک لکهٔ رنگی است و اسم کسب‌وکار در آن گم می‌شود. اجارهٔ آن نقطه، هزینهٔ سازه و هزینهٔ چاپ پرداخت شده و پیام به مخاطب نرسیده است.</p>
+</article>
+<article class="card">
+<h3>روزی که کار عقب می‌افتد</h3>
+<p>غرفهٔ نمایشگاه فردا باز می‌شود و استند هنوز نرسیده، چون فایل سه بار رفت‌وبرگشت خورده. اینجا ضرر دیگر متری حساب نمی‌شود؛ به اندازهٔ کل آن رویداد است.</p>
+</article>
+</div>
+</div>
+</section>
+
+<!-- ═══ ۴ · دو در ورودی ═══ -->
+<section class="sec sec-paper" id="doors">
+<div class="wrap">
+<div class="sec-head">
+<span class="eyebrow">دو مسیر، هر دو معتبر</span>
+<h2>طرح دارید، یا از اول شروع کنیم؟</h2>
+<p class="lede">هیچ‌کدام از این دو مسیر درجه‌دو نیست. انتخاب با شماست و روی اولویت کار هم اثری ندارد.</p>
+</div>
+<div class="doors">
+<div class="door">
+<h3>طرح آماده دارید</h3>
+<p class="fine">فایل را می‌فرستید و پیش از چاپ خوانده می‌شود: ابعاد واقعی، رزولوشن در همان ابعاد، فضای رنگ، حاشیهٔ برش و فضای لیفه. هرچه ایراد داشته باشد، پیش از تولید به شما گزارش می‌شود.</p>
+<ul>
+<li>شرکت‌هایی که طراح داخلی دارند</li>
+<li>سازمان‌هایی که فایل مصوب دارند</li>
+<li>آژانس‌هایی که فقط تولید می‌خواهند</li>
+</ul>
+<button class="btn btn-primary" data-open-contact type="button">فرستادن فایل</button>
+</div>
+<div class="door">
+<h3>طرح ندارید</h3>
+<p class="fine">طراحی از همین‌جا شروع می‌شود و بعد به همان کارگاه چاپ می‌رود. سود عملی‌اش این است که طراح از روز اول می‌داند کار روی چه متریالی، در چه ابعادی و از چه فاصله‌ای دیده می‌شود.</p>
+<ul>
+<li><a href="/services/brand-collateral-design/catalog-design/">طراحی کاتالوگ صنعتی</a></li>
+<li><a href="/services/environmental-exhibition-design/">طراحی بنر و استند نمایشگاهی</a></li>
+<li><a href="/services/visual-identity/">هویت بصری و ست اداری</a></li>
+</ul>
+<a class="btn btn-outline" href="/consulting/">شروع از یک جلسهٔ کوتاه</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ═══ ۵ · خانوادهٔ چاپ‌ها — سطح معرفی ═══ -->
+<section class="sec sec-surface" id="what">
+<div class="wrap">
+<div class="sec-head">
+<span class="eyebrow">فهرست کارها</span>
+<h2>چه چیزهایی چاپ می‌کنیم</h2>
+<p class="lede">سه خانواده، بر اساس اینکه کار کجا می‌نشیند و از چه فاصله‌ای دیده می‌شود. برای رفتن به جزئیات و قیمت هر کدام، روی نامش بزنید.</p>
+</div>
+<div class="fam">
+
+<div class="fam-block">
+<div class="fam-head">
+<h3>بنر و متریال فضای باز</h3>
+<p>کارهایی که بیرون نصب می‌شوند و باید آفتاب، باد و باران را تحمل کنند.</p>
+<span class="fam-who">برای سازه، داربست، معبر و کمپین</span>
+</div>
+<ul class="fam-links">
+<li><a href="/printing/large-format/banner-printing/">چاپ بنر<span>پرکاربردترین</span></a></li>
+<li><a href="/printing/large-format/flex-printing/">چاپ فلکس<span>سطح براق</span></a></li>
+<li><a href="/printing/large-format/mesh-printing/">چاپ مش<span>باد رد می‌شود</span></a></li>
+<li><a href="/printing/large-format/sticker-printing/">چاپ استیکر و لیبل<span>شیشه و بدنه</span></a></li>
+<li><a href="/printing/large-format/flag-printing/">چاپ پرچم<span>ساحلی و رومیزی</span></a></li>
+</ul>
+</div>
+
+<div class="fam-block">
+<div class="fam-head">
+<h3>پارچه و سطح نورگذر</h3>
+<p>کارهایی که نور از پشتشان می‌آید و به همین دلیل کوچک‌ترین لکه و درز در آن‌ها دیده می‌شود.</p>
+<span class="fam-who">برای لایت‌باکس، غرفه و فضای داخلی</span>
+</div>
+<ul class="fam-links">
+<li><a href="/printing/large-format/uv-textile/">چاپ تکستایل یووی<span>کارگاه خودمان</span></a></li>
+<li><a href="/printing/large-format/textile-printing/">چاپ پارچهٔ تبلیغاتی<span>پارچهٔ لایت‌باکس</span></a></li>
+<li><a href="/printing/large-format/exhibition-displays/">چاپ استند نمایشگاهی<span>رول‌آپ و عنکبوتی</span></a></li>
+<li><a href="/products/indoor-lightboxes/">سازهٔ لایت‌باکس ایندور<span>قاب و نور</span></a></li>
+<li><a href="/video/textile-printing/">ویدئوی فرایند چاپ پارچه<span>از نزدیک</span></a></li>
+</ul>
+</div>
+
+<div class="fam-block">
+<div class="fam-head">
+<h3>کاغذی و اداری</h3>
+<p>کارهایی که از فاصلهٔ سی سانتی خوانده می‌شوند و کوچک‌ترین خطای رنگ و برش در آن‌ها پیداست.</p>
+<span class="fam-who">برای جلسه، نمایشگاه و معرفی محصول</span>
+</div>
+<ul class="fam-links">
+<li><a href="/printing/offset/catalog-printing/">چاپ کاتالوگ<span>صنعتی و محصول</span></a></li>
+<li><a href="/printing/offset/">چاپ کارت ویزیت<span>و ست اداری</span></a></li>
+<li><a href="/printing/offset/">چاپ سربرگ و پاکت<span>هویت سازمانی</span></a></li>
+<li><a href="/printing/offset/">چاپ بروشور و تراکت<span>معرفی و پخش</span></a></li>
+<li><a href="/printing/offset/">چاپ پوستر<span>دیواری و رویداد</span></a></li>
+</ul>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ═══ ۶ · وعدهٔ محوری: بررسی فایل ═══ -->
+<section class="sec sec-sunken" id="check">
+<div class="wrap">
+<div class="sec-head">
+<span class="eyebrow">پیشنهاد رایگان و قابل‌لمس</span>
+<h2>فایل شما پیش از چاپ بررسی می‌شود</h2>
+<p class="lede">این کار وقت می‌برد و پولی هم بابتش گرفته نمی‌شود. دلیلش ساده است: کاری که دوباره چاپ شود، برای شما گران تمام می‌شود و برای ما هم نمونه‌کار خوبی نیست.</p>
+</div>
+<div class="grid-2 price-grid">
+<div class="proofsheet">
+<div class="cmyk" role="img" aria-label="نوار کنترل رنگ چاپ، چهار رنگ آبی، سرخابی، زرد و مشکی"><i></i><i></i><i></i><i></i></div>
+<ul class="checklist">
+<li><b>ابعاد واقعی کار.</b> فایل در همان اندازه‌ای که قرار است نصب شود سنجیده می‌شود، نه در اندازهٔ دلخواه.</li>
+<li><b>رزولوشن در همان ابعاد.</b> عدد تنها معنا ندارد؛ آنچه اهمیت دارد نقطه بر اینچ در اندازهٔ نهایی است.</li>
+<li><b>فضای رنگ.</b> اگر فایل RGB باشد، در تبدیل به CMYK بعضی رنگ‌ها جابه‌جا می‌شوند و پیش از چاپ گفته می‌شود کدام‌ها.</li>
+<li><b>حاشیهٔ برش و فضای لیفه.</b> اگر متن یا لوگو نزدیک لبه باشد، بعد از برش یا دوخت لبه ناقص می‌شود.</li>
+<li><b>خوانایی از فاصلهٔ نصب.</b> همان چیزی که در بخش بعد با یک ابزار کوچک نشانتان می‌دهد.</li>
+</ul>
+</div>
+<div>
+<h3>چرا اصلاً این کار انجام می‌شود</h3>
+<p>یک دفتر فنی هر فایلی را که بدهید می‌زند و سر متر با بغل‌دستی‌اش رقابت می‌کند. کار درست، ولی کار متفاوتی است.</p>
+<p>اینجا کسی که فایل را باز می‌کند، به تبلیغات فکر می‌کند: این تابلو کجا نصب می‌شود، از چند متری خوانده می‌شود، و چند ثانیه فرصت دارد. به همین دلیل ممکن است پیشنهادش این باشد که نصف متن حذف شود.</p>
+<h3>چه چیزی لازم است بفرستید</h3>
+<p>خودِ فایل، ابعاد واقعی کار، و اینکه کجا نصب می‌شود. همین سه تا برای شروع کافی است و اگر چیز دیگری لازم شد، پرسیده می‌شود.</p>
+<p class="fine">بررسی رایگان است و تعهدی برای سفارش ایجاد نمی‌کند. اگر تصمیم گرفتید کار را جای دیگری چاپ کنید، گزارش فایل باز هم دست شماست.</p>
+<button class="btn btn-primary" data-open-contact type="button">فرستادن فایل برای بررسی</button>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ═══ ۷ · فاصلهٔ خواندن — تنها ماژول تعاملی صفحه ═══ -->
+<section class="sec sec-dark regmark on-dark" id="distance">
+<div class="wrap">
+<div class="sec-head">
+<span class="eyebrow">همان چیزی که روی مانیتور دیده نمی‌شود</span>
+<h2>چرا طرح خوب روی بنر بد درمی‌آید</h2>
+<p class="lede">پیام تابلوی شهری باید در چند ثانیه و از فاصلهٔ دور خوانده شود. فاصله را عوض کنید و ببینید از یک طرح شلوغ چه چیزی باقی می‌ماند.</p>
+</div>
+<div class="dist">
+<div>
+<div class="dist-ctl" role="radiogroup" aria-label="فاصلهٔ دیده‌شدن تابلو">
+<button type="button" role="radio" aria-checked="true" data-d="3" tabindex="0">۳ متر</button>
+<button type="button" role="radio" aria-checked="false" data-d="10" tabindex="-1">۱۰ متر</button>
+<button type="button" role="radio" aria-checked="false" data-d="30" tabindex="-1">۳۰ متر</button>
+</div>
+<p class="dist-read" id="distRead" role="status"><b>از ۳ متری:</b> همه‌چیز خوانده می‌شود. این همان فاصله‌ای است که پشت مانیتور دارید و به همین دلیل طرح اینجا همیشه خوب به‌نظر می‌رسد.</p>
+</div>
+<div class="dist-stage" id="distStage" data-d="3">
+<div class="dist-sign">
+<strong>رستوران گلستان</strong>
+<em>غذای ایرانی، صبحانه تا شام، پارکینگ اختصاصی</em>
+<small>خیابان شیخ صدوق شمالی، جنب بانک، طبقهٔ همکف، تلفن رزرو ۰۳۱۳۶۲۵۸۳۱۰</small>
+</div>
+</div>
+</div>
+<p class="fine" style="margin-top:var(--s6)">نتیجهٔ عملی: هرچه فاصلهٔ نصب بیشتر باشد، تعداد کلمه‌ها باید کمتر و اندازهٔ اسم بزرگ‌تر شود. آدرس و شمارهٔ تلفن روی تابلوی بزرگراهی تقریباً همیشه بی‌فایده‌اند، چون کسی فرصت خواندنشان را ندارد.</p>
+</div>
+</section>
+
+<!-- ═══ ۸ · انس و جنس بنر ═══ -->
+<section class="sec sec-paper" id="banner">
+<div class="wrap">
+<div class="sec-head">
+<span class="eyebrow">واژه‌هایی که هنگام سفارش می‌شنوید</span>
+<h2>بنر ایرانی یا خارجی، کدام برای شما</h2>
+<p class="lede">ضخامت بنر با «انس» سنجیده می‌شود. هرچه عدد بزرگ‌تر، بنر سنگین‌تر و مقاوم‌تر. این جدول برای همان لحظه‌ای است که پای تلفن از شما می‌پرسند چند انس.</p>
+</div>
+<div class="grid-2 price-grid">
+<div class="tablewrap">
+<table>
+<caption>راهنمای انتخاب، بر اساس مدت ماندگاری کار</caption>
+<thead><tr><th scope="col">انس</th><th scope="col">مناسب برای</th><th scope="col">نکته</th></tr></thead>
+<tbody>
+<tr><td><b>۸</b></td><td>کار کوتاه‌مدت داخل سالن، همایش، غرفه</td><td>سبک و ارزان‌تر، برای فضای باز طولانی‌مدت پیشنهاد نمی‌شود</td></tr>
+<tr><td><b>۱۰</b></td><td>بیشتر کارهای شهری با ماندگاری متوسط</td><td>انتخاب متعارف بازار</td></tr>
+<tr><td><b>۱۳</b></td><td>نصب روی سازه و داربست، باد و ماندگاری بلند</td><td>ضخیم‌تر و سنگین‌تر، کشش لبه را بهتر تحمل می‌کند</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<h3>ایرانی یا وارداتی</h3>
+<p>بنر ایرانی از نظر قیمت به‌صرفه‌تر است و برای کارهای کوتاه‌مدت جواب می‌دهد. بنرهای وارداتی معمولاً سطح یکنواخت‌تری دارند و رنگ را بهتر نگه می‌دارند.</p>
+<p>معیار انتخاب، مدت ماندگاری کار است نه گران و ارزان بودن. برای بنری که سه ماه بالای سر یک معبر می‌ماند، صرفه‌جویی چند درصدی روی متریال معنا ندارد.</p>
+<h3>لیفه و پانچ، به زبان ساده</h3>
+<p>لیفه یعنی لبهٔ بنر برگردانده و دوخته شود تا میله از داخلش رد شود و لبه زیر کشش پاره نشود. پانچ یعنی حلقهٔ فلزی روی لبه، برای بستن با طناب یا بست.</p>
+<p class="fine">هر دو هنگام سفارش تعیین می‌شوند، چون روی ابعاد فایل اثر دارند: اگر لیفه لازم باشد، باید فضایش از قبل در طرح دیده شود.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ═══ ۹ · پارچهٔ لایت‌باکس ═══ -->
+<section class="sec sec-surface" id="textile">
+<div class="wrap">
+<div class="sec-head">
+<span class="eyebrow">یک متریال، چند نام</span>
+<h2>پارچهٔ لایت‌باکس، در کارگاه خودمان</h2>
+<p class="lede">پارچهٔ لایت‌باکس، تکستایل و پارچهٔ یووی سه نام یک چیزند. بک‌لایت هم چتر بزرگ‌تری است که نوع طلقی و نوع پارچه‌ای را با هم شامل می‌شود. اگر دنبال هرکدام از این نام‌ها آمده‌اید، جای درستی هستید.</p>
+</div>
+<div class="grid-2 price-grid">
+<div>
+<h3>چرا نور همه‌چیز را سخت‌تر می‌کند</h3>
+<p>در تابلوی معمولی نور از جلو می‌تابد. در لایت‌باکس نور از پشت می‌آید و از پارچه رد می‌شود. یعنی هر لکه، هر درز و هر ناهماهنگی چگالی جوهر، به‌جای پنهان شدن، برجسته می‌شود.</p>
+<p>به همین دلیل کاری که روی بنر معمولی قابل قبول است، ممکن است پشت نور افتضاح از آب دربیاید. جوهر یووی روی خود پارچه تثبیت می‌شود و در برابر رطوبت و سایش مقاوم‌تر است.</p>
+<h3>کجا به‌کار می‌آید</h3>
+<p>مطب، داروخانه و بخش‌های بیمارستان؛ مجتمع تجاری و ویترین؛ غرفهٔ نمایشگاهی و قاب‌های فریم‌لس. در فضای داخلی، لایت‌باکس عملاً همان نقشی را دارد که تابلو در خیابان دارد.</p>
+</div>
+<div class="tablewrap">
+<table>
+<caption>تفاوت عملی دو انتخاب رایج پشت نور</caption>
+<thead><tr><th scope="col">محور</th><th scope="col">پارچهٔ لایت‌باکس</th><th scope="col">بک‌لایت طلقی</th></tr></thead>
+<tbody>
+<tr><th scope="row">جنس</th><td>پارچهٔ نورگذر</td><td>طلق نازک نورگذر</td></tr>
+<tr><th scope="row">نصب</th><td>در قاب فریم‌لس با نوار سیلیکون</td><td>معمولاً پشت سطح شفاف</td></tr>
+<tr><th scope="row">جابه‌جایی</th><td>تا می‌شود و حمل آسان‌تری دارد</td><td>لوله می‌شود، به تا خوردن حساس‌تر است</td></tr>
+<tr><th scope="row">تعویض طرح</th><td>ساده، بدون باز کردن کل قاب</td><td>بسته به نوع قاب</td></tr>
+</tbody>
+</table>
+<p class="fine" style="margin-top:var(--s4)">مشخصات دقیق دستگاه و قیمت متری این بخش، پس از تأیید مالک در همین جدول اضافه می‌شود. <b>[نیازمند تأیید: عرض دستگاه یووی و قیمت متری تکستایل]</b></p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ═══ ۱۰ · عوامل قیمت ═══ -->
+<section class="sec sec-sunken" id="price">
+<div class="wrap">
+<div class="sec-head">
+<span class="eyebrow">چرا عدد ثابت اعلام نمی‌شود</span>
+<h2>قیمت به چه چیزهایی بستگی دارد</h2>
+<p class="lede">قیمت متری ثابت برای همهٔ کارها واقعی نیست و هر جا دیدید، احتمالاً برای یک حالت خاص نوشته شده. این پنج عامل، عددی را که به شما گفته می‌شود می‌سازند.</p>
+</div>
+<div class="grid-3">
+<article class="card"><h3>متراژ و ابعاد</h3><p>مساحت کار مبنای اصلی است، ولی ابعاد هم اثر دارد: کاری که با عرض متریال جور درنیاید، دورریز می‌سازد و دورریز در قیمت می‌نشیند.</p></article>
+<article class="card"><h3>جنس و ضخامت</h3><p>انس بنر، نوع پارچه، گرماژ کاغذ و سلفون. همان طرح روی دو متریال، دو قیمت دارد.</p></article>
+<article class="card"><h3>مقدار سفارش</h3><p>در کارهای کاغذی، هزینهٔ آماده‌سازی روی تیراژ پخش می‌شود. به همین دلیل قیمت هر عدد در تیراژ بالاتر پایین می‌آید.</p></article>
+<article class="card"><h3>کارهای تکمیلی</h3><p>لیفه، پانچ، دوردوزی، نوار سیلیکون، برش خاص و صحافی. این‌ها معمولاً از قلم می‌افتند و بعد قیمت را تغییر می‌دهند.</p></article>
+<article class="card"><h3>نصب و محل تحویل</h3><p>نصب روی سازه با نصب داخل مغازه فرق دارد. شهر مقصد و ارتفاع نصب هم در برآورد می‌آید.</p></article>
+<article class="card"><h3>زمان</h3><p>کاری که باید بین کارهای در جریان جا باز کند، هزینهٔ خودش را دارد. اگر ددلاین دارید، همان اول بگویید.</p></article>
+</div>
+<p class="fine" style="margin-top:var(--s6)">پس از دیدن فایل و ابعاد، عدد مشخص و تفکیک‌شده اعلام می‌شود؛ یعنی جدا می‌بینید چقدر متریال است، چقدر چاپ و چقدر اجرا.</p>
+</div>
+</section>
+
+<!-- ═══ ۱۱ · زمان ═══ -->
+<section class="sec sec-paper" id="time">
+<div class="wrap">
+<div class="sec-head">
+<span class="eyebrow">صادقانه‌ترین جواب</span>
+<h2>چقدر طول می‌کشد</h2>
+<p class="lede">وسوسه‌انگیز است که اینجا یک عدد جذاب نوشته شود. عدد واقعی به سه چیز بستگی دارد و دو تای آن‌ها دست شماست.</p>
+</div>
+<ol class="steps">
+<li><h3>سالم بودن فایل</h3><p>بیشترین تأخیری که دیده می‌شود از رفت‌وبرگشت فایل می‌آید، نه از سرعت دستگاه. فایل درست، یعنی کار همان روز وارد صف تولید می‌شود.</p></li>
+<li><h3>موجود بودن متریال</h3><p>عرض و جنس خاص همیشه موجود نیست. هنگام تأیید سفارش گفته می‌شود که متریال درخواستی هست یا باید تأمین شود.</p></li>
+<li><h3>کارهای تکمیلی و نصب</h3><p>دوردوزی، صحافی و نصب، زمان جدا دارند. کاری که فقط چاپ می‌شود با کاری که نصب هم دارد، دو برنامهٔ متفاوت است.</p></li>
+</ol>
+<p class="fine" style="margin-top:var(--s5)">اگر ددلاین مشخصی دارید، همان تماس اول بگویید؛ در بیشتر موارد می‌شود ترتیب کار را با آن تاریخ جور کرد یا صادقانه گفت که نمی‌رسد. <b>[نیازمند تأیید: بازهٔ زمانی رسمی تحویل برای هر خانوادهٔ چاپ]</b></p>
+</div>
+</section>
+
+<!-- ═══ ۱۲ · نمونه‌کار ═══ -->
+<section class="sec sec-surface" id="portfolio">
+<div class="wrap">
+<div class="sec-head">
+<span class="eyebrow">نمونه‌کار پروژه‌ای، نه عکس تنهای یک بنر</span>
+<h2>نمونه‌کارها</h2>
+<p class="lede">قرار است هر نمونه، طراحی و چاپ و نصب را در یک قاب نشان دهد. تا رسیدن عکس واقعی کارگاه و پروژه‌ها، این جاها خالی می‌مانند و با تصویر ساختگی پر نمی‌شوند.</p>
+</div>
+<div class="shots">
+<figure class="shot">
+<div class="ph" data-shot="PRT-01">
+<b>عکس واقعی: کارگاه چاپ یووی تهران</b>
+<span>نمای باز از دستگاه در حال کار، با پارچهٔ در حال خروج. برای اثبات مالکیت دستگاه، نه عکس آرشیوی.</span>
+<code>نسبت ۱۶:۱۰ · افقی</code>
+<span>متن جایگزین پیشنهادی: «دستگاه چاپ تکستایل یووی در کارگاه تهران چتر قرمز»</span>
+</div>
+<figcaption>سند ۰۰ این عکس را «بحرانی» علامت زده است.</figcaption>
+</figure>
+<figure class="shot">
+<div class="ph" data-shot="PRT-02">
+<b>عکس واقعی: چاپخانهٔ زرین‌شهر</b>
+<span>سالن چاپ اقلام کاغذی، ترجیحاً هنگام کار روی یک سفارش واقعی کاتالوگ.</span>
+<code>نسبت ۱۶:۱۰ · افقی</code>
+<span>متن جایگزین پیشنهادی: «سالن چاپخانهٔ چتر قرمز در زرین‌شهر هنگام چاپ کاتالوگ»</span>
+</div>
+<figcaption>سند ۰۰ این عکس را «بحرانی» علامت زده است.</figcaption>
+</figure>
+<figure class="shot">
+<div class="ph" data-shot="PRT-03">
+<b>نمونه‌کار: لایت‌باکس مطب یا داروخانه</b>
+<span>عکس نصب‌شده و روشن، در محل واقعی. با اجازهٔ کتبی صاحب مکان.</span>
+<code>نسبت ۱۶:۱۰ · افقی</code>
+<span>متن جایگزین پیشنهادی: «لایت‌باکس پارچه‌ای نصب‌شده در ورودی داروخانه، نور روشن»</span>
+</div>
+<figcaption>عمود پزشکی؛ بی‌رقیب‌ترین زمین این صفحه.</figcaption>
+</figure>
+<figure class="shot">
+<div class="ph" data-shot="PRT-04">
+<b>نمونه‌کار: بنر نصب‌شده روی سازهٔ شهری</b>
+<span>عکس از فاصلهٔ واقعی عابر، نه عکس نزدیک. تا خوانایی از فاصله دیده شود.</span>
+<code>نسبت ۱۶:۱۰ · افقی</code>
+<span>متن جایگزین پیشنهادی: «بنر چاپ‌شده روی استرابورد شهری، از فاصلهٔ دید عابر پیاده»</span>
+</div>
+<figcaption>پیوند مستقیم با سازه‌هایی که در همین مجموعه ساخته می‌شوند.</figcaption>
+</figure>
+</div>
+<p class="fine" style="margin-top:var(--s5)">نمونه‌کارهای منتشرشده در <a href="/portfolio/" style="color:var(--accent);font-weight:800;text-decoration:underline;text-underline-offset:3px">صفحهٔ نمونه‌کارها</a> جمع می‌شوند.</p>
+</div>
+</section>
+
+<!-- ═══ ۱۳ · شهرها ═══ -->
+<section class="sec sec-sunken" id="where">
+<div class="wrap">
+<div class="sec-head">
+<span class="eyebrow">نزدیکی، یعنی کار زودتر می‌رسد</span>
+<h2>کجا تحویل می‌دهیم</h2>
+<p class="lede">فهرست زیر فقط شهرهایی است که در آن‌ها دفتر، کارگاه، چاپخانه یا پروژهٔ واقعی هست. هر شهری که نقش ثبت‌شده نداشته باشد، اینجا نوشته نشده.</p>
+</div>
+<ul class="cities">
+<li><b>اصفهان</b><i>دفتر</i><span>دفتر مرکزی، خیابان شیخ صدوق جنوبی، کوچهٔ ۳۲</span></li>
+<li><b>زرین‌شهر</b><i>چاپخانه</i><span>محل چاپ اقلام کاغذی و اداری</span></li>
+<li><b>تهران</b><i>کارگاه تولید</i><span>کارگاه چاپ و یووی</span></li>
+<li><b>فولادشهر</b><i>دفتر</i><span>دفتر و بازار فعال</span></li>
+<li><b>مبارکه</b><i>پروژهٔ فعال</i><span>پروژهٔ در حال بهره‌برداری</span></li>
+<li><b>چمگردان</b><i>پروژهٔ در جریان</i><span>پروژهٔ در دست اجرا</span></li>
+</ul>
+<p class="fine" style="margin-top:var(--s5)">برای دیگر شهرهای استان، زمان و روش ارسال هنگام تأیید سفارش گفته می‌شود. <b>[نیازمند تأیید: فهرست رسمی شهرهای تحت پوشش ارسال]</b></p>
+</div>
+</section>
+
+<!-- ═══ ۱۴ · مسیر کار ═══ -->
+<section class="sec sec-paper" id="process">
+<div class="wrap">
+<div class="sec-head">
+<span class="eyebrow">چهار قدم، بدون مرحلهٔ اضافه</span>
+<h2>مسیر کار، از فایل تا نصب</h2>
+</div>
+<ol class="steps">
+<li><h3>می‌گویید کار برای چیست</h3><p>نه اینکه چند متر. اول معلوم می‌شود کجا نصب می‌شود و مخاطبش کیست، چون همین دو تا جنس متریال و اندازهٔ متن را تعیین می‌کنند.</p></li>
+<li><h3>فایل خوانده می‌شود</h3><p>ابعاد، رزولوشن، فضای رنگ، حاشیه و خوانایی از فاصلهٔ نصب. گزارشش رایگان به شما داده می‌شود، حتی اگر سفارش ندهید.</p></li>
+<li><h3>برآورد تفکیک‌شده می‌گیرید</h3><p>متریال، چاپ و اجرا جدا نوشته می‌شوند تا بدانید پول کجا می‌رود و کجا می‌شود صرفه‌جویی کرد.</p></li>
+<li><h3>چاپ، تکمیل و نصب</h3><p>پس از تأیید شما کار وارد تولید می‌شود؛ لیفه و پانچ و دوردوزی انجام می‌شود و در صورت نیاز، نصب هم با همین مجموعه است.</p></li>
+</ol>
+</div>
+</section>
+
+<!-- ═══ ۱۵ · پرسش‌ها — ۱۲ پرسش، از رفتار واقعی جست‌وجو ═══ -->
+<section class="sec sec-surface faq" id="faq">
+<div class="wrap">
+<div class="sec-head">
+<span class="eyebrow">همان چیزهایی که پای تلفن پرسیده می‌شود</span>
+<h2>پرسش‌های پرتکرار سفارش چاپ</h2>
+</div>
+<details><summary>طرح آماده دارم، فقط چاپ و نصب می‌خواهم. انجام می‌دهید؟</summary><p>بله. این یکی از دو مسیر عادی سفارش است و هیچ فرقی در اولویت کار ندارد. فایل را می‌فرستید، پیش از چاپ بررسی می‌شود، و اگر مشکلی در رزولوشن، حاشیه یا فضای رنگ داشت پیش از تولید به شما گفته می‌شود. سازمان‌ها و شرکت‌هایی که طراح داخلی دارند معمولاً از همین مسیر می‌آیند.</p></details>
+<details><summary>طرح ندارم. طراحی هم انجام می‌دهید؟</summary><p>بله. طراحی <a href="/services/brand-collateral-design/catalog-design/">کاتالوگ</a>، بنر، ست اداری و <a href="/services/environmental-exhibition-design/">استند نمایشگاهی</a> در همین مجموعه انجام می‌شود و بعد به همان کارگاه چاپ می‌رود. مزیت عملی‌اش این است که طراح از اول می‌داند فایل روی چه متریالی و در چه ابعادی چاپ می‌شود.</p></details>
+<details><summary>قیمت چاپ به چه چیزهایی بستگی دارد؟</summary><p>به متراژ کار، جنس و ضخامت متریال، مقدار سفارش، کارهای تکمیلی مانند لیفه و پانچ و دوردوزی، و محل تحویل. قیمت ثابت متری برای همهٔ کارها واقعی نیست؛ به همین دلیل عدد پس از دیدن فایل و ابعاد اعلام می‌شود.</p></details>
+<details><summary>رزولوشن فایل بنر چقدر باشد؟</summary><p>معیار درست، رزولوشن در ابعاد واقعی کار است نه عدد تنها. برای بنرهای معمولی شهری حدود ۱۰۰ تا ۱۲۰ نقطه بر اینچ در ابعاد نهایی کافی است، و برای کارهای بسیار بزرگ که از فاصلهٔ دور دیده می‌شوند عدد کمتر هم جواب می‌دهد. برای اقلام کاغذی که از فاصلهٔ نزدیک خوانده می‌شوند ۳۰۰ نقطه بر اینچ معیار است.</p></details>
+<details><summary>فایل را CMYK بدهم یا RGB؟</summary><p>CMYK. فضای رنگ چاپ CMYK است و اگر فایل RGB باشد، هنگام تبدیل بعضی رنگ‌ها جابه‌جا می‌شوند؛ بیشترین تفاوت در آبی‌های اشباع و سبزهای روشن دیده می‌شود. بهتر است از همان ابتدای طراحی حالت رنگ روی CMYK باشد.</p></details>
+<details><summary>بنر ایرانی بهتر است یا خارجی؟ انس یعنی چه؟</summary><p>انس واحد وزن و ضخامت بنر است و در بازار ۸، ۱۰ و ۱۳ رایج است. هرچه عدد بالاتر باشد بنر ضخیم‌تر و مقاوم‌تر است. بنر ایرانی از نظر قیمت به‌صرفه‌تر است و برای کار کوتاه‌مدت پاسخ می‌دهد؛ بنرهای وارداتی معمولاً سطح یکنواخت‌تر و ثبات رنگ بهتری دارند. انتخاب به مدت ماندگاری کار و شرایط نصب بستگی دارد.</p></details>
+<details><summary>لیفه و پانچ چیست و کِی لازم است؟</summary><p>لیفه یعنی برگرداندن و دوختن لبهٔ بنر تا میله یا چوب از داخلش رد شود و لبه در برابر کشش پاره نشود. پانچ یعنی نصب حلقهٔ فلزی روی لبه برای بستن با طناب یا بست. برای نصب روی داربست و سازه، هر دو معمولاً لازم می‌شوند و بهتر است هنگام سفارش تعیین شوند.</p></details>
+<details><summary>پارچهٔ لایت‌باکس، تکستایل و پارچهٔ یووی فرقی دارند؟</summary><p>این سه نام در بازار به یک متریال گفته می‌شود. بک‌لایت هم چتر بزرگ‌تری است که هم نوع طلقی و هم نوع پارچه‌ای را شامل می‌شود. پس اگر جایی «چاپ پارچهٔ لایت‌باکس» دیدید و جای دیگر «چاپ تکستایل یووی»، لازم نیست دنبال دو چیز متفاوت بگردید.</p></details>
+<details><summary>چاپ فوری چقدر طول می‌کشد؟</summary><p>زمان واقعی به سه چیز بستگی دارد: سالم بودن فایل، موجود بودن متریال در همان ابعاد، و کارهای تکمیلی مانند دوردوزی و نصب. بیشترین تأخیرهایی که دیده می‌شود از رفت‌وبرگشت فایل می‌آید نه از خود دستگاه؛ به همین دلیل بررسی فایل پیش از چاپ انجام می‌شود.</p></details>
+<details><summary>نصب هم انجام می‌دهید یا فقط چاپ؟</summary><p>نصب هم انجام می‌شود. برای بنر روی سازه و داربست، لایت‌باکس داخل مجتمع و مطب، و استند نمایشگاهی، اجرا و نصب بخشی از همان سفارش است. برای نصب در فضای شهری، مجوز نصب با کارفرما یا شهرداری است.</p></details>
+<details><summary>به شهرستان‌های اصفهان ارسال دارید؟</summary><p>بله. دفتر اصفهان و دفتر فولادشهر و چاپخانهٔ زرین‌شهر، تحویل در استان را کوتاه می‌کنند و پروژه‌های فعال مبارکه و چمگردان از همین مسیر اجرا شده‌اند. برای شهرهای دیگر استان، زمان و روش ارسال هنگام تأیید سفارش مشخص می‌شود.</p></details>
+<details><summary>اگر رنگ چاپ با مانیتور فرق کرد، تکلیف چیست؟</summary><p>مانیتور نور می‌تاباند و کاغذ و بنر نور را بازمی‌تابانند، پس یکی‌بودن کامل ممکن نیست. کاری که انجام می‌شود این است که پیش از تولید انبوه، رنگ‌های حساس کار مانند رنگ سازمانی برند به شما گفته می‌شود و در صورت نیاز نمونهٔ چاپی گرفته می‌شود تا تصمیم روی کاغذ گرفته شود، نه روی صفحه.</p></details>
+</div>
+</section>
+
+<!-- ═══ ۱۶ · دعوت پایانی ═══ -->
+<section class="sec sec-dark regmark on-dark" id="contact">
+<div class="wrap grid-2 price-grid">
+<div>
+<span class="eyebrow">قدم بعد</span>
+<h2>فایلتان را بفرستید، بررسی رایگان است</h2>
+<p class="lede">لازم نیست از قبل بدانید چند متر، چه جنسی و چند انس. فایل و ابعاد تقریبی کافی است؛ بقیه‌اش در همان گفت‌وگو روشن می‌شود.</p>
+<a class="channel" href="tel:+983136258310" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.2);color:#fff"><b>تماس تلفنی</b><span style="color:#B3AFBA">۰۳۱-۳۶۲۵۸۳۱۰ · شنبه تا چهارشنبه</span></a>
+<p class="fine">اگر ددلاین دارید، همان اول بگویید تا صادقانه گفته شود می‌رسد یا نمی‌رسد.</p>
+</div>
+<form class="form" action="#" method="post" novalidate>
+<label for="f-name">نام و کسب‌وکار
+<input id="f-name" name="name" autocomplete="organization" required/>
+</label>
+<label for="f-phone">شمارهٔ تماس
+<input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required/>
+</label>
+<label for="f-kind">چه کاری می‌خواهید چاپ شود
+<select id="f-kind" name="kind" required>
+<option value="">انتخاب کنید</option>
+<option>بنر، فلکس، مش یا استیکر</option>
+<option>پارچهٔ لایت‌باکس یا تکستایل</option>
+<option>کاتالوگ، بروشور یا پوستر</option>
+<option>کارت ویزیت و ست اداری</option>
+<option>هنوز مطمئن نیستم</option>
+</select>
+<span class="hint">سه فیلد کافی است. فایل را در همان تماس یا ایمیل می‌فرستید.</span>
+</label>
+<button class="btn btn-primary" type="submit">درخواست بررسی فایل</button>
+</form>
+</div>
+</section>
+
+</main>
+
+<footer>
+<div class="wrap">
+<div class="f-grid">
+<div class="f-id">
+<img alt="لوگوی آژانس تبلیغاتی چتر قرمز" src="/assets/img/logo.png" width="54" height="58"/>
+<div><h3>آژانس تبلیغاتی چتر قرمز</h3><p>طراحی و برندینگ، وب و محتوا، ساخت و چاپ، تبلیغات محیطی و سرمایه‌گذاری؛ با یک مسیر پاسخ‌گو.</p></div>
+</div>
+<nav class="f-col" aria-label="دسترسی سریع"><b>دسترسی سریع</b><a href="/">صفحه نخست</a><a href="/portfolio/">نمونه‌کارها</a><a href="/blog/">مجله</a><a href="/about-us/">درباره ما</a></nav>
+<nav class="f-col" aria-label="چاپ"><b>چاپ</b><a href="/printing/large-format/">بنر و متریال فضای باز</a><a href="/printing/large-format/uv-textile/">پارچهٔ لایت‌باکس</a><a href="/printing/offset/">کارت ویزیت و ست اداری</a><a href="/printing/offset/catalog-printing/">کاتالوگ</a></nav>
+<div class="f-col"><b>ارتباط</b><a href="tel:+983136258310" style="direction:ltr;text-align:start">۰۳۱-۳۶۲۵۸۳۱۰</a><a href="mailto:info@chatreghermez.com" style="direction:ltr;text-align:start">info@chatreghermez.com</a><a href="/contact-us/">نشانی دفاتر و مسیرهای تماس</a></div>
+</div>
+<div class="f-bottom"><span>© ۱۴۰۵ آژانس تبلیغاتی چتر قرمز · به آسمان سلام کن</span>
+<nav aria-label="پیوندهای حقوقی"><a href="/privacy/">حریم خصوصی</a><a href="/terms/">قوانین و مقررات</a><a href="/faq/">پرسش‌های متداول</a></nav></div>
+</div>
+</footer>
+
+<nav class="tabbar" aria-label="ناوبری اصلی موبایل">
+<a href="#what" data-tab><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18M3 12h18M3 19h12"/></svg><span>چاپ‌ها</span></a>
+<a href="#price" data-tab><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span>قیمت</span></a>
+<button data-open-contact type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg><span>بررسی فایل</span></button>
+<button id="tabMenu" type="button" aria-label="باز کردن منو"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg><span>منو</span></button>
+</nav>
+
+<div class="drawer" id="drawer" aria-hidden="true" role="dialog" aria-modal="true" aria-label="منوی سایت">
+<div class="drawer-panel">
+<button class="drawer-close" type="button" aria-label="بستن منو">×</button>
+<a href="/">خانه</a>
+<a href="/services/printing/" aria-current="page">چاپ</a>
+<a href="/printing/large-format/">بنر و متریال فضای باز</a>
+<a href="/printing/large-format/uv-textile/">پارچهٔ لایت‌باکس</a>
+<a href="/printing/offset/">کارت ویزیت و ست اداری</a>
+<a href="/services/outdoor-advertising/">تبلیغات محیطی</a>
+<a href="/products/outdoor-structures/">سازه‌های شهری</a>
+<a href="/services/urban-investment/">سرمایه‌گذاری</a>
+<a href="/portfolio/">نمونه‌کارها</a>
+<a href="/about-us/">درباره ما</a>
+<a href="/contact-us/">تماس</a>
+</div></div>
+
+<div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+<div class="modal-backdrop" data-close-contact></div>
+<div class="modal-panel">
+<button class="modal-close" aria-label="بستن" data-close-contact type="button">×</button>
+<span class="eyebrow">رایگان و بدون تعهد</span>
+<h3 id="modalTitle">فایلتان پیش از چاپ بررسی می‌شود</h3>
+<p class="lede" style="font-size:16px">ابعاد واقعی، رزولوشن، فضای رنگ، حاشیهٔ برش و خوانایی از فاصلهٔ نصب. گزارشش به شما داده می‌شود، حتی اگر سفارش ندهید.</p>
+<a class="channel" href="tel:+983136258310"><b>تماس تلفنی</b><span>۰۳۱-۳۶۲۵۸۳۱۰ · شنبه تا چهارشنبه</span></a>
+<a class="channel" href="mailto:info@chatreghermez.com"><b>فرستادن فایل با ایمیل</b><span>info@chatreghermez.com</span></a>
+<div class="divider"><span>یا شماره‌تان را بگذارید تا تماس بگیریم</span></div>
+<form action="#" method="post" style="display:grid;gap:var(--s4)" novalidate>
+<label style="font-size:14.5px;font-weight:900" for="m-name">نام و کسب‌وکار
+<input id="m-name" autocomplete="organization" name="org" required style="width:100%;font-size:16.5px;padding:12px 16px;margin-top:8px;border:1.5px solid var(--line);border-radius:10px;background:#FBFAF8;min-height:52px"/></label>
+<label style="font-size:14.5px;font-weight:900" for="m-phone">شمارهٔ تماس
+<input id="m-phone" autocomplete="tel" inputmode="tel" name="phone" type="tel" required style="width:100%;font-size:16.5px;padding:12px 16px;margin-top:8px;border:1.5px solid var(--line);border-radius:10px;background:#FBFAF8;min-height:52px"/></label>
+<button class="btn btn-primary" type="submit">درخواست بررسی فایل</button>
+</form>
+</div></div>
+
+<script>
+(function(){
+  'use strict';
+  var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function(id){ return document.getElementById(id) };
+
+  /* ── مگامنو: باز با کلیک و هاور، بسته با Escape و کلیک بیرون ──
+     دکمه واقعی است نه div، پس با Enter و Space هم کار می‌کند. */
+  var groups = [].slice.call(document.querySelectorAll('[data-nav]'));
+  function closeAll(except){
+    groups.forEach(function(g){
+      if(g === except) return;
+      g.classList.remove('is-open');
+      g.querySelector('.nav-btn').setAttribute('aria-expanded','false');
+    });
+  }
+  /* باز و بسته‌شدن فقط با کلیک و صفحه‌کلید، نه با هاور.
+     نسخهٔ اول هاور هم داشت و در آزمون مرورگر معلوم شد که همان هاور،
+     کلیک را خنثی می‌کند: اشاره‌گر پیش از کلیک پنل را باز می‌کرد و
+     بعد کلیک همان را می‌بست، پس منو با کلیک هرگز باز نمی‌ماند.
+     الگوی Disclosure Navigation در راهنمای ARIA هم منوی هاوری را
+     برای همین‌جور مشکل‌ها توصیه نمی‌کند. */
+  groups.forEach(function(g){
+    var btn = g.querySelector('.nav-btn');
+    btn.addEventListener('click', function(){
+      var willOpen = !g.classList.contains('is-open');
+      closeAll(null);
+      if(willOpen){ g.classList.add('is-open'); btn.setAttribute('aria-expanded','true') }
+    });
+    /* فوکوس که از گروه بیرون رفت، پنل بسته می‌شود */
+    g.addEventListener('focusout', function(e){
+      if(!g.contains(e.relatedTarget)){
+        g.classList.remove('is-open'); btn.setAttribute('aria-expanded','false');
+      }
+    });
+  });
+  document.addEventListener('click', function(e){
+    if(!e.target.closest || !e.target.closest('[data-nav]')) closeAll(null);
+  });
+
+  /* ── ماژول فاصلهٔ خواندن ──
+     سه حالت، هر حالت اندازهٔ متن و وضوح را عوض می‌کند. کلید جهت هم
+     کار می‌کند و در RTL جهتش معکوس است. */
+  var stage = $('distStage'), read = $('distRead');
+  var radios = [].slice.call(document.querySelectorAll('.dist-ctl [role="radio"]'));
+  var COPY = {
+    '3':  ['<b>از ۳ متری:</b> همه‌چیز خوانده می‌شود. این همان فاصله‌ای است که پشت مانیتور دارید و به همین دلیل طرح اینجا همیشه خوب به‌نظر می‌رسد.', 30, 15, 11, 'block'],
+    '10': ['<b>از ۱۰ متری:</b> اسم و خط توضیح هنوز خوانده می‌شوند، ولی آدرس و شماره از دست رفت. این فاصلهٔ عابر پیاده و ویترین است.', 26, 13.5, 9, 'block'],
+    '30': ['<b>از ۳۰ متری:</b> فقط اسم می‌ماند. راننده‌ای که با سرعت رد می‌شود، دو تا سه ثانیه فرصت دارد؛ هرچه غیر از اسم روی تابلو باشد، هزینهٔ چاپش داده شده و خوانده نمی‌شود.', 30, 11, 7, 'none']
+  };
+  function setDist(d){
+    var c = COPY[d]; if(!c) return;
+    stage.setAttribute('data-d', d);
+    stage.style.setProperty('--sign-lead', c[1] + 'px');
+    stage.style.setProperty('--sign-sub',  c[2] + 'px');
+    stage.style.setProperty('--sign-fine', c[3] + 'px');
+    stage.style.setProperty('--sign-fine-show', c[4]);
+    read.innerHTML = c[0];
+    radios.forEach(function(r){
+      var on = r.getAttribute('data-d') === d;
+      r.setAttribute('aria-checked', on ? 'true' : 'false');
+      r.tabIndex = on ? 0 : -1;
+    });
+  }
+  radios.forEach(function(r, i){
+    r.addEventListener('click', function(){ setDist(r.getAttribute('data-d')) });
+    r.addEventListener('keydown', function(e){
+      var step = 0;
+      /* در RTL، فلش چپ یعنی «بعدی» */
+      if(e.key === 'ArrowLeft' || e.key === 'ArrowDown') step = 1;
+      else if(e.key === 'ArrowRight' || e.key === 'ArrowUp') step = -1;
+      else return;
+      e.preventDefault();
+      var n = radios[(i + step + radios.length) % radios.length];
+      n.focus(); setDist(n.getAttribute('data-d'));
+    });
+  });
+
+  /* ── مسیر کار: شمارهٔ قدم‌های دیده‌شده روشن می‌ماند ── */
+  var steps = [].slice.call(document.querySelectorAll('.steps li'));
+  if(steps.length && 'IntersectionObserver' in window && !RM){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('seen'); io.unobserve(en.target) } });
+    }, { rootMargin:'0px 0px -22% 0px' });
+    steps.forEach(function(s){ io.observe(s) });
+  } else {
+    steps.forEach(function(s){ s.classList.add('seen') });
+  }
+
+  /* ── تب‌بار: بخش فعال ── */
+  var tabs = [].slice.call(document.querySelectorAll('[data-tab]'));
+  var targets = tabs.map(function(a){ return document.querySelector(a.getAttribute('href')) }).filter(Boolean);
+  if(targets.length && 'IntersectionObserver' in window){
+    var io2 = new IntersectionObserver(function(es){
+      es.forEach(function(en){
+        var t = tabs.filter(function(a){ return a.getAttribute('href') === '#' + en.target.id })[0];
+        if(t) t.setAttribute('aria-current', en.isIntersecting ? 'true' : 'false');
+      });
+    }, { rootMargin:'-45% 0px -45% 0px' });
+    targets.forEach(function(t){ io2.observe(t) });
+  }
+
+  /* ── لایه‌های شناور: کشو و پاپ‌آپ، با تلهٔ فوکوس و بازگشت فوکوس ── */
+  var lastFocus = null;
+  /* فیلتر offsetParent اینجا به‌کار نمی‌رود: در همان لحظه‌ای که لایه باز
+     می‌شود هنوز visibility:hidden است، پس همهٔ عناصر «نامرئی» شمرده
+     می‌شدند و فهرست خالی برمی‌گشت. نتیجه‌اش در آزمون مرورگر این بود که
+     پاپ‌آپ باز می‌شد ولی فوکوس داخلش نمی‌رفت و Tab از دیالوگ بیرون
+     می‌زد. حالا فقط عناصر غیرفعال و پنهان‌شدهٔ صریح کنار گذاشته می‌شوند
+     و فوکوس در فریم بعد داده می‌شود، وقتی لایه واقعاً دیدنی است. */
+  function focusables(root){
+    return [].slice.call(root.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])'))
+      .filter(function(el){ return getComputedStyle(el).display !== 'none' && !el.hasAttribute('hidden') });
+  }
+  function openLayer(el){
+    lastFocus = document.activeElement;
+    el.setAttribute('aria-hidden','false');
+    document.body.classList.add('is-locked');
+    requestAnimationFrame(function(){
+      var f = focusables(el); if(f.length) f[0].focus();
+    });
+  }
+  function closeLayer(el){
+    el.setAttribute('aria-hidden','true');
+    document.body.classList.remove('is-locked');
+    if(lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  function trap(el, e){
+    if(e.key !== 'Tab') return;
+    var f = focusables(el); if(!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus() }
+    else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus() }
+  }
+  var drawer = $('drawer'), modal = $('modal');
+  function openDrawer(){ openLayer(drawer); $('menuBtn').setAttribute('aria-expanded','true') }
+  function closeDrawer(){ closeLayer(drawer); $('menuBtn').setAttribute('aria-expanded','false') }
+  $('menuBtn').addEventListener('click', openDrawer);
+  $('tabMenu').addEventListener('click', openDrawer);
+  drawer.querySelector('.drawer-close').addEventListener('click', closeDrawer);
+  drawer.addEventListener('click', function(e){ if(e.target === drawer) closeDrawer() });
+  drawer.addEventListener('keydown', function(e){ trap(drawer, e) });
+  [].slice.call(drawer.querySelectorAll('a')).forEach(function(a){
+    a.addEventListener('click', function(){ closeDrawer() });
+  });
+  [].slice.call(document.querySelectorAll('[data-open-contact]')).forEach(function(b){
+    b.addEventListener('click', function(){ openLayer(modal) });
+  });
+  [].slice.call(document.querySelectorAll('[data-close-contact]')).forEach(function(b){
+    b.addEventListener('click', function(){ closeLayer(modal) });
+  });
+  modal.addEventListener('keydown', function(e){ trap(modal, e) });
+  document.addEventListener('keydown', function(e){
+    if(e.key !== 'Escape') return;
+    if(modal.getAttribute('aria-hidden') === 'false') closeLayer(modal);
+    else if(drawer.getAttribute('aria-hidden') === 'false') closeDrawer();
+    else closeAll(null);
+  });
+})();
+</script>
+</body>
+</html>
