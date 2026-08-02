@@ -571,7 +571,12 @@ footer{background:#100F14;color:#A9A4B0;padding:var(--s8) 0 var(--s5)}
   line-height:1;border:0;background:var(--paper-2);border-radius:var(--r-sm);font-size:22px;
   cursor:pointer;color:var(--muted)}
 .channel{display:block;border:1.5px solid var(--line);border-radius:var(--r-md);
-  padding:var(--s4) var(--s5);transition:.18s;min-height:60px;margin-bottom:var(--s4)}
+  /* صریح، نه all: شکل کوتاه visibility را هم ترنزیشن می‌دهد و چون این
+     پیوند داخل پاپ‌آپ است، در لحظهٔ باز شدن hidden می‌ماند و focus
+     رویش بی‌اثر می‌شود. اینجا فوکوس روی دکمهٔ بستن می‌نشیند و مشکل
+     بروز نکرده بود، ولی وابستگی پنهانش حذف شد. */
+  padding:var(--s4) var(--s5);transition:border-color .18s,transform .18s;
+  min-height:60px;margin-bottom:var(--s4)}
 .channel:hover{border-color:var(--accent);transform:translateY(-1px)}
 .channel b{display:block;font-size:16.5px}
 .channel span{display:block;font-size:15px;color:var(--muted);margin-top:2px;direction:ltr;text-align:start}
