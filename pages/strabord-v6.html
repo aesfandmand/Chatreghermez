@@ -5,7 +5,7 @@
   نسخه: v6 | تاریخ: ۱۱ مرداد ۱۴۰۵
   پایه: strabord-v5.html — محتوا، قفل‌ها و ساختار دست‌نخورده.
 
-  === تغییر v6: سه مورد خواسته‌شده، به‌علاوهٔ دو مورد که بازآزمایی گرفت ===
+  === تغییر v6: سه مورد خواسته‌شده، دو مورد که بازآزمایی گرفت، و پیشوندها ===
   هیچ متن، بخش، عدد قفل یا ماژولی تغییر نکرد. فقط لایه‌های زیر:
 
   ۱) قرمز سطح به قرمز شِل کانونیکال برگشت.
@@ -73,11 +73,14 @@
 
   هیچ سنجه‌ای پایین نیامد.
 
-  === باقی‌مانده و آگاهانه دست‌نخورده ===
-  سه پیشوند وبکیت (backdrop-filter روی هدر و تب‌بار، mask-image روی
-  زمینهٔ نقشه) در این فایل هنوز نیستند. سافاری بدون آن‌ها ماسک را
-  نادیده می‌گیرد و شبکهٔ کاغذ شطرنجی به‌جای محو شدن تمام سطح تیره را
-  می‌پوشاند. خارج از دامنهٔ این نسخه ثبت شد تا با تأیید اضافه شود.
+  ۶) پیشوندهای وبکیت اضافه شدند.
+     در شمارش اولیه سه مورد گفته بودم؛ در عمل چهار تا بود:
+     backdrop-filter روی هدر، روی نوار چسبان و روی تب‌بار، به‌علاوهٔ
+     mask-image روی زمینهٔ کاغذ شطرنجی. نوار چسبان از قلم افتاده بود.
+     بدون پیشوند، سافاری ماسک را نادیده می‌گیرد و شبکه به‌جای محو شدن
+     تمام سطح تیره را می‌پوشاند؛ و بلور پس‌زمینهٔ هدر و دو نوار شناور
+     هم اعمال نمی‌شود. هیچ‌کدام روی کرومیوم اثر بصری ندارند، چون آنجا
+     شکل بی‌پیشوند از قبل کار می‌کرد.
 
   === تغییر v5: رفع فونت شکسته ===
   v2 تا v4 به PeydaWebVF.woff2 و DanaVF.woff2 اشاره می‌کردند — دو فونت
@@ -268,7 +271,7 @@ p{margin:0 0 var(--s4);max-width:64ch}
    ۴ · هدر
    ══════════════════════════════════════════════════════ */
 .header{position:sticky;top:0;z-index:700;height:var(--header-h);
-  background:rgba(245,243,239,.92);backdrop-filter:blur(16px);
+  background:rgba(245,243,239,.92);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
   border-bottom:1px solid var(--line)}
 .header-in{height:100%;display:flex;align-items:center;gap:var(--s4)}
 .brand{display:flex;align-items:center;gap:var(--s3);flex:0 0 auto;min-height:44px;padding:var(--s1) 0}
@@ -299,6 +302,10 @@ p{margin:0 0 var(--s4);max-width:64ch}
   background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),
                    linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);
   background-size:32px 32px;
+  /* پیشوند وبکیت لازم است: سافاری mask-image بدون پیشوند را نادیده
+     می‌گیرد و آن‌وقت شبکهٔ کاغذ شطرنجی به‌جای محو شدن، تمام سطح تیره
+     را می‌پوشاند. */
+  -webkit-mask-image:radial-gradient(ellipse 90% 70% at 70% 30%,#000 30%,transparent 78%);
   mask-image:radial-gradient(ellipse 90% 70% at 70% 30%,#000 30%,transparent 78%)}
 .sec>.wrap{position:relative;z-index:1}
 
@@ -435,7 +442,7 @@ p{margin:0 0 var(--s4);max-width:64ch}
 
 /* نوار چسبان — پیکربندی فعلی همراه کاربر می‌ماند */
 .stickybar{position:fixed;inset-inline:0;bottom:0;z-index:650;
-  background:rgba(21,20,26,.96);backdrop-filter:blur(14px);color:#fff;
+  background:rgba(21,20,26,.96);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:#fff;
   border-top:1px solid rgba(255,255,255,.12);
   padding:var(--s3) 0 calc(var(--s3) + env(safe-area-inset-bottom,0px));
   transform:translateY(110%);transition:transform .32s var(--ease);visibility:hidden}
@@ -557,7 +564,7 @@ footer{background:#100F14;color:#A9A4B0;padding:var(--s8) 0 var(--s5)}
    ۱۷ · موبایل: تب‌بار، کشو، پاپ‌آپ
    ══════════════════════════════════════════════════════ */
 .tabbar{position:fixed;inset-inline:0;bottom:0;z-index:700;display:none;
-  grid-template-columns:repeat(4,1fr);background:rgba(255,255,255,.97);backdrop-filter:blur(14px);
+  grid-template-columns:repeat(4,1fr);background:rgba(255,255,255,.97);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
   border-top:1px solid var(--line);padding:var(--s1) var(--s1) calc(var(--s1) + env(safe-area-inset-bottom,0px))}
 .tabbar a,.tabbar button{display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:2px;border:0;background:none;cursor:pointer;color:var(--muted);
