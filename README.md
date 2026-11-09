@@ -99,3 +99,7 @@ QC داخلی ۱۴ از ۱۴ PASS است با حکم `PASS_REPLACE_V4_1`.
 چون اسناد به یکدیگر با همین نام‌ها ارجاع می‌دهند. شمارهٔ سند و شمارهٔ نسخه
 هر دو در نام می‌مانند؛ نسخهٔ جدید فایل جدید می‌سازد و نسخهٔ قبلی حذف نمی‌شود
 (قاعدهٔ عدم پس‌رفت، سند ۰۹ تب ۴).
+
+## افزونهٔ هستهٔ تجارت
+
+کد افزونهٔ `chatreghermez-commerce` در `plugins/chatreghermez-commerce/` است. نقطهٔ شروع: [`plugins/chatreghermez-commerce/START.md`](plugins/chatreghermez-commerce/START.md).
