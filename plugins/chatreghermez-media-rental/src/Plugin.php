@@ -1,0 +1,38 @@
+<?php
+declare(strict_types=1);
+
+namespace Chatreghermez\MediaRental;
+
+use Chatreghermez\MediaRental\Database\Migrator;
+use Chatreghermez\MediaRental\Media\RentalLine;
+use Chatreghermez\MediaRental\Media\SlotService;
+use Chatreghermez\MediaRental\Rest\MediaController;
+
+final class Plugin
+{
+    public static function activate(): void
+    {
+        if (class_exists(\Chatreghermez\Commerce\Plugin::class)) {
+            Migrator::run();
+        }
+    }
+
+    public static function boot(): void
+    {
+        if (!class_exists(\Chatreghermez\Commerce\Plugin::class)) {
+            add_action('admin_notices', static function (): void {
+                echo '<div class="notice notice-error"><p>افزونهٔ اجارهٔ رسانه به «Chatreghermez Commerce» نیاز دارد؛ ابتدا آن را فعال کنید.</p></div>';
+            });
+            return;
+        }
+        Migrator::run();
+        RentalLine::register();
+        add_action('rest_api_init', [MediaController::class, 'register']);
+        add_action('crc_event_payment.confirmed', [SlotService::class, 'onPayment']);
+        add_action('crc_event_reservation.extended', [SlotService::class, 'onExtended']);
+        add_action('crc_media_release_expired', [SlotService::class, 'releaseExpired']);
+        if (!wp_next_scheduled('crc_media_release_expired')) {
+            wp_schedule_event(time() + 60, 'hourly', 'crc_media_release_expired');
+        }
+    }
+}
