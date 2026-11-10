@@ -86,4 +86,16 @@ final class RulesTest extends TestCase
         // Past the hard limit no more extension: null -> the lock lapses.
         $this->assertNull(SlotRules::heartbeatUntil($t0, $until, $t0 + 10801));
     }
+
+    public function testJalaliConversionAndPastMonths(): void
+    {
+        $this->assertSame([1405, 8, 19], FiscalCalendar::gregorianToJalali(2026, 11, 10)); // 19 Aban 1405 (owner's "today")
+        $this->assertSame([1405, 1, 1], FiscalCalendar::gregorianToJalali(2026, 3, 21));   // Nowruz 1405
+        $now = gmmktime(9, 0, 0, 11, 10, 2026);
+        $this->assertSame([1405, 7], FiscalCalendar::current($now));                       // Aban = fiscal month 7
+        $this->assertTrue(FiscalCalendar::isPast(1405, 6, $now));                          // Mehr is past
+        $this->assertFalse(FiscalCalendar::isPast(1405, 7, $now));                         // current month still visible
+        $this->assertFalse(FiscalCalendar::isPast(1405, 12, $now));
+        $this->assertTrue(FiscalCalendar::isPast(1404, 12, $now));
+    }
 }

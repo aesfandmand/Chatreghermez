@@ -32,6 +32,9 @@ final class SlotService
         $rows = (array) $wpdb->get_results($wpdb->prepare('SELECT * FROM ' . self::t() . ' WHERE media_id = %d AND fiscal_year = %d ORDER BY month', $mediaId, $year), ARRAY_A);
         $out = [];
         foreach ($rows as $r) {
+            if (FiscalCalendar::isPast($year, (int) $r['month'], $now)) {
+                continue; // past months are hidden from customers
+            }
             $eff = SlotRules::effectiveState($r, $now);
             $out[] = ['month' => (int) $r['month'], 'name' => FiscalCalendar::monthName((int) $r['month']), 'state' => $eff,
                 'colour' => SlotRules::colour($eff), 'days_left' => $eff === SlotRules::RESERVED ? SlotRules::daysLeft($r, $now) : 0];
@@ -43,6 +46,11 @@ final class SlotService
     public static function lock(int $mediaId, int $year, array $months, int $holder, int $now)
     {
         global $wpdb;
+        foreach ($months as $m) {
+            if (FiscalCalendar::isPast($year, (int) $m, $now)) {
+                return new \WP_Error('crc_month_past', 'ماه گذشته قابل انتخاب نیست.', ['status' => 422, 'month' => $m]);
+            }
+        }
         self::ensure($mediaId, $year);
         $wpdb->query('START TRANSACTION');
         foreach ($months as $m) {
