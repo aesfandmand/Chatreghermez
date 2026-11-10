@@ -5,6 +5,8 @@ namespace Chatreghermez\Commerce;
 
 use Chatreghermez\Commerce\Access\Capabilities;
 use Chatreghermez\Commerce\Access\RoleManager;
+use Chatreghermez\Commerce\Admin\DiscountsPage;
+use Chatreghermez\Commerce\Admin\ProductsPage;
 use Chatreghermez\Commerce\Admin\RolesPage;
 use Chatreghermez\Commerce\Database\Migrator;
 use Chatreghermez\Commerce\Rest\AccountController;
@@ -47,6 +49,8 @@ final class Plugin
         add_action('crc_sms_retry', [SmsService::class, 'deliver']);
         if (is_admin()) {
             RolesPage::register();
+            ProductsPage::register();
+            DiscountsPage::register();
         }
     }
 }
