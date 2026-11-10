@@ -13,14 +13,19 @@ use PHPUnit\Framework\TestCase;
 
 final class BillingTest extends TestCase
 {
-    public function testPrepaymentMultiplesOfFiveHundredThousand(): void
+    public function testPrepaymentRounding(): void
     {
-        $this->assertSame(500000, PrepaymentPolicy::compute(10000000));    // 5% = 500k exactly
-        $this->assertSame(500000, PrepaymentPolicy::compute(3000000));     // below one step -> minimum one step
-        $this->assertSame(500000, PrepaymentPolicy::compute(12000000));    // 600k -> nearest 500k
-        $this->assertSame(1000000, PrepaymentPolicy::compute(12000000, 500, 'up'));
-        $this->assertSame(1000000, PrepaymentPolicy::compute(16000000));   // 800k -> nearest 1,000k
-        $this->assertSame(300000, PrepaymentPolicy::compute(300000));      // never above the invoice
+        $this->assertSame(500000, PrepaymentPolicy::compute(10000000));       // 5% = 500,000
+        $this->assertSame(500000, PrepaymentPolicy::compute(3000000));        // 150,000 -> minimum
+        $this->assertSame(600000, PrepaymentPolicy::compute(12000000));       // 600,000 stays (owner-confirmed)
+        $this->assertSame(800000, PrepaymentPolicy::compute(16000000));
+        $this->assertSame(59000000, PrepaymentPolicy::compute(1177718760));   // 58,885,938 -> 59,000,000 (owner example)
+        $this->assertSame(32500000, PrepaymentPolicy::compute(648370280));    // 32,418,514 -> 32,500,000 (owner example)
+        $this->assertSame(1000000, PrepaymentPolicy::compute(20000000));      // 1,000,000 exactly
+        $this->assertSame(1000000, PrepaymentPolicy::compute(22000000));      // 1,100,000 -> 1,000,000
+        $this->assertSame(1500000, PrepaymentPolicy::compute(30000001));
+        $this->assertSame(32500000, PrepaymentPolicy::compute(648370280, 500, 'up'));
+        $this->assertSame(300000, PrepaymentPolicy::compute(300000));         // never above the invoice
         $this->assertSame(0, PrepaymentPolicy::compute(0));
     }
 
