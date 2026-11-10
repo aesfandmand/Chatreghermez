@@ -8,7 +8,7 @@ namespace Chatreghermez\Commerce\Database;
  */
 final class Migrator
 {
-    public const DB_VERSION = 3;
+    public const DB_VERSION = 4;
     private const OPTION    = 'crc_commerce_db_version';
 
     public static function run(): void
@@ -27,6 +27,9 @@ final class Migrator
         }
         if ($current < 3) {
             self::migration003();
+        }
+        if ($current < 4) {
+            self::migration004();
         }
         update_option(self::OPTION, self::DB_VERSION, false);
     }
@@ -226,6 +229,92 @@ final class Migrator
   created_at datetime NOT NULL,
   PRIMARY KEY  (id),
   KEY code_user (code_id, user_id)
+) {$c};");
+    }
+
+    /** Billing: invoices (immutable amounts), lines, payments, cheques, ledger. */
+    private static function migration004(): void
+    {
+        global $wpdb;
+        $c = $wpdb->get_charset_collate();
+        $p = $wpdb->prefix;
+
+        dbDelta("CREATE TABLE {$p}crc_invoices (
+  id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  invoice_no varchar(32) NOT NULL,
+  order_id bigint(20) unsigned NOT NULL,
+  kind varchar(12) NOT NULL,
+  city varchar(64) NOT NULL DEFAULT '',
+  customer_user_id bigint(20) unsigned NOT NULL,
+  total_rials bigint(20) unsigned NOT NULL,
+  paid_rials bigint(20) unsigned NOT NULL DEFAULT 0,
+  prepayment_rials bigint(20) unsigned NOT NULL DEFAULT 0,
+  status varchar(16) NOT NULL DEFAULT 'issued',
+  reservation_expires_at datetime NULL,
+  extensions_used tinyint(3) unsigned NOT NULL DEFAULT 0,
+  created_at datetime NOT NULL,
+  PRIMARY KEY  (id),
+  UNIQUE KEY invoice_no (invoice_no),
+  KEY order_id (order_id),
+  KEY customer (customer_user_id)
+) {$c};");
+
+        dbDelta("CREATE TABLE {$p}crc_invoice_lines (
+  id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  invoice_id bigint(20) unsigned NOT NULL,
+  order_line_id bigint(20) unsigned NOT NULL,
+  name varchar(200) NOT NULL,
+  quantity int(10) unsigned NOT NULL,
+  unit_rials bigint(20) unsigned NOT NULL,
+  total_rials bigint(20) unsigned NOT NULL,
+  PRIMARY KEY  (id),
+  KEY invoice_id (invoice_id)
+) {$c};");
+
+        dbDelta("CREATE TABLE {$p}crc_payments (
+  id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  invoice_id bigint(20) unsigned NOT NULL,
+  method varchar(16) NOT NULL,
+  amount_rials bigint(20) unsigned NOT NULL,
+  status varchar(12) NOT NULL DEFAULT 'pending',
+  gateway varchar(16) NOT NULL DEFAULT '',
+  gateway_ref varchar(64) NOT NULL DEFAULT '',
+  receipt varchar(64) NOT NULL DEFAULT '',
+  idempotency_key varchar(64) NOT NULL,
+  recorded_by bigint(20) unsigned NOT NULL DEFAULT 0,
+  note text NULL,
+  created_at datetime NOT NULL,
+  confirmed_at datetime NULL,
+  PRIMARY KEY  (id),
+  UNIQUE KEY idempotency_key (idempotency_key),
+  KEY invoice_id (invoice_id),
+  KEY gateway_ref (gateway_ref)
+) {$c};");
+
+        dbDelta("CREATE TABLE {$p}crc_cheques (
+  id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  invoice_id bigint(20) unsigned NOT NULL,
+  payment_id bigint(20) unsigned NOT NULL,
+  sayad_id varchar(16) NOT NULL,
+  payee_national_code varchar(10) NOT NULL,
+  amount_rials bigint(20) unsigned NOT NULL,
+  due_at datetime NOT NULL,
+  status varchar(12) NOT NULL DEFAULT 'pending',
+  approved_by bigint(20) unsigned NOT NULL DEFAULT 0,
+  PRIMARY KEY  (id),
+  UNIQUE KEY sayad_id (sayad_id),
+  KEY invoice_id (invoice_id)
+) {$c};");
+
+        dbDelta("CREATE TABLE {$p}crc_ledger (
+  id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  invoice_id bigint(20) unsigned NOT NULL,
+  payment_id bigint(20) unsigned NOT NULL DEFAULT 0,
+  entry_type varchar(16) NOT NULL,
+  amount_rials bigint(20) NOT NULL,
+  created_at datetime NOT NULL,
+  PRIMARY KEY  (id),
+  KEY invoice_id (invoice_id)
 ) {$c};");
     }
 }
