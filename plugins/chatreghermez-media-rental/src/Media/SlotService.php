@@ -117,6 +117,55 @@ final class SlotService
         }
     }
 
+    /** @return list<array{media_id:int,fiscal_year:int,month:int}> the rental slots an invoice covers */
+    private static function slotsOfInvoice(int $invoiceId): array
+    {
+        global $wpdb;
+        $out = [];
+        $lines = (array) $wpdb->get_results($wpdb->prepare(
+            "SELECT ol.meta_json FROM {$wpdb->prefix}crc_invoice_lines il JOIN {$wpdb->prefix}crc_order_lines ol ON ol.id = il.order_line_id WHERE il.invoice_id = %d",
+            $invoiceId
+        ), ARRAY_A);
+        foreach ($lines as $l) {
+            $meta = json_decode((string) $l['meta_json'], true) ?: [];
+            foreach ((array) ($meta['months'] ?? []) as $m) {
+                $out[] = ['media_id' => (int) ($meta['media_id'] ?? 0), 'fiscal_year' => (int) ($meta['fiscal_year'] ?? 0), 'month' => (int) $m];
+            }
+        }
+        return $out;
+    }
+
+    /** payment.started (online gateway): the 15-minute lock counts from the moment the customer is sent to the bank. */
+    public static function onPaymentStarted(array $payload): void
+    {
+        global $wpdb;
+        $inv = $wpdb->get_row($wpdb->prepare("SELECT customer_user_id FROM {$wpdb->prefix}crc_invoices WHERE id = %d AND kind = 'rental'", (int) ($payload['invoice_id'] ?? 0)), ARRAY_A);
+        if (!$inv) {
+            return;
+        }
+        foreach (self::slotsOfInvoice((int) $payload['invoice_id']) as $s) {
+            $wpdb->query($wpdb->prepare('UPDATE ' . self::t() . " SET locked_until = %d WHERE media_id = %d AND fiscal_year = %d AND month = %d AND holder = %d AND state = 'locked'",
+                time() + SlotRules::LOCK_SECONDS, $s['media_id'], $s['fiscal_year'], $s['month'], (int) $inv['customer_user_id']));
+        }
+    }
+
+    /** cheque.registered (by the office): the cheque path has no 15-minute lock; the 5-day hold starts now. */
+    public static function onChequeRegistered(array $payload): void
+    {
+        global $wpdb;
+        $id = (int) ($payload['invoice_id'] ?? 0);
+        $inv = $wpdb->get_row($wpdb->prepare("SELECT customer_user_id FROM {$wpdb->prefix}crc_invoices WHERE id = %d AND kind = 'rental'", $id), ARRAY_A);
+        if (!$inv) {
+            return;
+        }
+        $until = time() + 5 * 86400;
+        $wpdb->update($wpdb->prefix . 'crc_invoices', ['reservation_expires_at' => gmdate('Y-m-d H:i:s', $until)], ['id' => $id]);
+        foreach (self::slotsOfInvoice($id) as $s) {
+            $wpdb->query($wpdb->prepare('UPDATE ' . self::t() . " SET state = 'reserved', invoice_id = %d, reserved_until = %d, locked_until = 0 WHERE media_id = %d AND fiscal_year = %d AND month = %d AND holder = %d AND state IN ('locked','reserved')",
+                $id, $until, $s['media_id'], $s['fiscal_year'], $s['month'], (int) $inv['customer_user_id']));
+        }
+    }
+
     /** reservation.extended: copy the invoice's new expiry onto its reserved slots. */
     public static function onExtended(array $payload): void
     {

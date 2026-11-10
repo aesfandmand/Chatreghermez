@@ -29,6 +29,8 @@ final class Plugin
         RentalLine::register();
         add_action('rest_api_init', [MediaController::class, 'register']);
         add_action('crc_event_payment.confirmed', [SlotService::class, 'onPayment']);
+        add_action('crc_event_payment.started', [SlotService::class, 'onPaymentStarted']);
+        add_action('crc_event_cheque.registered', [SlotService::class, 'onChequeRegistered']);
         add_action('crc_event_reservation.extended', [SlotService::class, 'onExtended']);
         add_action('crc_media_release_expired', [SlotService::class, 'releaseExpired']);
         if (!wp_next_scheduled('crc_media_release_expired')) {

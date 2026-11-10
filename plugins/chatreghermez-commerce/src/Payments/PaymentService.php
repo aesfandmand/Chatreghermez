@@ -36,7 +36,9 @@ final class PaymentService
             'gateway' => $gw->id(), 'gateway_ref' => $init['ref'], 'idempotency_key' => 'gw-' . $gw->id() . '-' . $init['ref'],
             'created_at' => gmdate('Y-m-d H:i:s'),
         ]);
-        return ['payment_id' => (int) $wpdb->insert_id, 'redirect_url' => $init['redirect_url']];
+        $paymentId = (int) $wpdb->insert_id;
+        Events::dispatch('payment.started', ['invoice_id' => $invoiceId, 'payment_id' => $paymentId, 'customer_id' => (int) $inv['customer_user_id']]);
+        return ['payment_id' => $paymentId, 'redirect_url' => $init['redirect_url']];
     }
 
     /** Called from the browser callback; trusts only the gateway's own verify. Safe to call repeatedly. @return array<string,mixed>|\WP_Error */
@@ -118,8 +120,10 @@ final class PaymentService
             'payee_national_code' => $c['payee_national_code'], 'amount_rials' => (int) $c['amount_rials'],
             'due_at' => gmdate('Y-m-d H:i:s', (int) $c['due_at']),
         ]);
+        $chequeId = (int) $wpdb->insert_id;
         AuditLog::record($actorId, 'cheques.registered', 'invoice', (string) $invoiceId, null, ['sayad_id' => $c['sayad_id']]);
-        return (int) $wpdb->insert_id;
+        Events::dispatch('cheque.registered', ['invoice_id' => $invoiceId, 'cheque_id' => $chequeId, 'customer_id' => (int) $inv['customer_user_id']]);
+        return $chequeId;
     }
 
     /** @return true|\WP_Error */

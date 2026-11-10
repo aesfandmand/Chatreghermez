@@ -15,7 +15,7 @@ use Chatreghermez\Commerce\Support\RateLimiter;
  *   GET  /payments/callback?trackId=    gateway return; verified server-side, then redirects to the account page
  *   POST /invoices/{id}/payments        accountant: manual cash/card {method, amount_rials, idempotency_key, note}
  *   POST /invoices/{id}/cheques         accountant: register cheque; POST /cheques/{id}/approve  (crc_cheques_approve)
- *   POST /invoices/{id}/extend          owner or staff: extend rental hold (max 2 × 5 days)
+ *   POST /invoices/{id}/extend          OFFICE ONLY (crc_orders_edit): extend rental hold (max 2 × 5 days)
  */
 final class BillingController
 {
@@ -29,7 +29,7 @@ final class BillingController
         register_rest_route($ns, '/invoices/(?P<id>\d+)/payments', [['methods' => 'POST', 'callback' => [self::class, 'manual'], 'permission_callback' => static fn (): bool => current_user_can(Capabilities::PAYMENTS_RECORD)]]);
         register_rest_route($ns, '/invoices/(?P<id>\d+)/cheques', [['methods' => 'POST', 'callback' => [self::class, 'cheque'], 'permission_callback' => static fn (): bool => current_user_can(Capabilities::PAYMENTS_RECORD)]]);
         register_rest_route($ns, '/cheques/(?P<id>\d+)/approve', [['methods' => 'POST', 'callback' => [self::class, 'approveCheque'], 'permission_callback' => static fn (): bool => current_user_can(Capabilities::CHEQUES_APPROVE)]]);
-        register_rest_route($ns, '/invoices/(?P<id>\d+)/extend', [['methods' => 'POST', 'callback' => [self::class, 'extend'], 'permission_callback' => $in]]);
+        register_rest_route($ns, '/invoices/(?P<id>\d+)/extend', [['methods' => 'POST', 'callback' => [self::class, 'extend'], 'permission_callback' => static fn (): bool => current_user_can(Capabilities::ORDERS_EDIT)]]); // office only
     }
 
     /** Auto-issue invoices when an order is created (listener on the domain event, runs after commit). */
@@ -120,10 +120,6 @@ final class BillingController
     /** @return \WP_REST_Response|\WP_Error */
     public static function extend(\WP_REST_Request $r)
     {
-        $inv = InvoiceService::find((int) $r['id']);
-        if (!self::mayAccess($inv) && !current_user_can(Capabilities::ORDERS_EDIT)) {
-            return new \WP_Error('crc_not_found', 'پیدا نشد.', ['status' => 404]);
-        }
         $res = InvoiceService::extendReservation((int) $r['id'], get_current_user_id());
         return $res instanceof \WP_Error ? $res : new \WP_REST_Response(InvoiceService::find((int) $r['id']));
     }
