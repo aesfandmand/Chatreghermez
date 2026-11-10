@@ -7,10 +7,12 @@ use Chatreghermez\Commerce\Access\Capabilities;
 use Chatreghermez\Commerce\Access\RoleManager;
 use Chatreghermez\Commerce\Admin\RolesPage;
 use Chatreghermez\Commerce\Database\Migrator;
+use Chatreghermez\Commerce\Rest\AccountController;
 use Chatreghermez\Commerce\Rest\BillingController;
 use Chatreghermez\Commerce\Rest\CatalogController;
 use Chatreghermez\Commerce\Rest\OrdersController;
 use Chatreghermez\Commerce\Rest\RolesController;
+use Chatreghermez\Commerce\Sms\SmsService;
 
 final class Plugin
 {
@@ -39,7 +41,10 @@ final class Plugin
         add_action('rest_api_init', [CatalogController::class, 'register']);
         add_action('rest_api_init', [OrdersController::class, 'register']);
         add_action('rest_api_init', [BillingController::class, 'register']);
+        add_action('rest_api_init', [AccountController::class, 'register']);
         add_action('crc_event_order.created', [BillingController::class, 'onOrderCreated']);
+        add_action('crc_event', [SmsService::class, 'onEvent'], 10, 2);
+        add_action('crc_sms_retry', [SmsService::class, 'deliver']);
         if (is_admin()) {
             RolesPage::register();
         }

@@ -8,7 +8,7 @@ namespace Chatreghermez\Commerce\Database;
  */
 final class Migrator
 {
-    public const DB_VERSION = 4;
+    public const DB_VERSION = 5;
     private const OPTION    = 'crc_commerce_db_version';
 
     public static function run(): void
@@ -30,6 +30,9 @@ final class Migrator
         }
         if ($current < 4) {
             self::migration004();
+        }
+        if ($current < 5) {
+            self::migration005();
         }
         update_option(self::OPTION, self::DB_VERSION, false);
     }
@@ -315,6 +318,36 @@ final class Migrator
   created_at datetime NOT NULL,
   PRIMARY KEY  (id),
   KEY invoice_id (invoice_id)
+) {$c};");
+    }
+
+    /** OTP codes (hashed) and the SMS outbox. */
+    private static function migration005(): void
+    {
+        global $wpdb;
+        $c = $wpdb->get_charset_collate();
+        $p = $wpdb->prefix;
+
+        dbDelta("CREATE TABLE {$p}crc_otp (
+  mobile varchar(11) NOT NULL,
+  code_hash char(64) NOT NULL,
+  created_at int(10) unsigned NOT NULL,
+  attempts tinyint(3) unsigned NOT NULL DEFAULT 0,
+  PRIMARY KEY  (mobile)
+) {$c};");
+
+        dbDelta("CREATE TABLE {$p}crc_sms_outbox (
+  id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  mobile varchar(11) NOT NULL,
+  template varchar(48) NOT NULL DEFAULT '',
+  body text NOT NULL,
+  status varchar(10) NOT NULL DEFAULT 'queued',
+  attempts tinyint(3) unsigned NOT NULL DEFAULT 0,
+  provider varchar(24) NOT NULL DEFAULT '',
+  created_at datetime NOT NULL,
+  sent_at datetime NULL,
+  PRIMARY KEY  (id),
+  KEY status (status)
 ) {$c};");
     }
 }
