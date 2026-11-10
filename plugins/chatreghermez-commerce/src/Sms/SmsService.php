@@ -34,7 +34,7 @@ final class SmsService
         if (!$transactional && get_option('crc_sms_optout_' . md5($mobile))) {
             return; // marketing messages respect opt-out; transactional ones (OTP, order status) always go
         }
-        $templates = (array) get_option('crc_sms_templates', []) + self::DEFAULT_TEMPLATES;
+        $templates = (array) get_option('crc_sms_templates', []) + (array) apply_filters('crc_sms_default_templates', self::DEFAULT_TEMPLATES);
         $body = TemplateRenderer::render((string) ($templates[$template] ?? ''), $vars);
         if ($body === '') {
             return;

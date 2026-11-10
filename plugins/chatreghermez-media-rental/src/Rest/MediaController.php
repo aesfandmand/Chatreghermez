@@ -14,6 +14,8 @@ use Chatreghermez\MediaRental\Media\SlotService;
  *   GET  /media                      public list, filters: city, street, neighborhood, type, lit, orientation, q
  *   GET  /media/{id}/calendar?year=  12 months with colours / days left
  *   POST /media/{id}/hold            login: lock months and put them in the cart {fiscal_year, months[]}
+ *   POST /media/{id}/heartbeat       login: page ping while selecting/paying {fiscal_year, months[]} -> keeps the lock
+ *   POST /media/{id}/release         login: customer left the pages (sendBeacon) -> frees the lock now
  *   POST /media/{id}/notify          login: join the "tell me when free" queue {fiscal_year, month}
  */
 final class MediaController
@@ -24,6 +26,8 @@ final class MediaController
         register_rest_route($ns, '/media', [['methods' => 'GET', 'callback' => [self::class, 'index'], 'permission_callback' => '__return_true']]);
         register_rest_route($ns, '/media/(?P<id>\d+)/calendar', [['methods' => 'GET', 'callback' => [self::class, 'calendar'], 'permission_callback' => '__return_true']]);
         register_rest_route($ns, '/media/(?P<id>\d+)/hold', [['methods' => 'POST', 'callback' => [self::class, 'hold'], 'permission_callback' => static fn (): bool => is_user_logged_in()]]);
+        register_rest_route($ns, '/media/(?P<id>\d+)/heartbeat', [['methods' => 'POST', 'callback' => [self::class, 'heartbeat'], 'permission_callback' => static fn (): bool => is_user_logged_in()]]);
+        register_rest_route($ns, '/media/(?P<id>\d+)/release', [['methods' => 'POST', 'callback' => [self::class, 'release'], 'permission_callback' => static fn (): bool => is_user_logged_in()]]);
         register_rest_route($ns, '/media/(?P<id>\d+)/notify', [['methods' => 'POST', 'callback' => [self::class, 'notify'], 'permission_callback' => static fn (): bool => is_user_logged_in()]]);
     }
 
@@ -94,5 +98,21 @@ final class MediaController
         $wpdb->query($wpdb->prepare("INSERT IGNORE INTO {$wpdb->prefix}crc_media_waitlist (media_id, fiscal_year, month, user_id, created_at) VALUES (%d, %d, %d, %d, %d)",
             (int) $r['id'], (int) ($b['fiscal_year'] ?? 0), (int) ($b['month'] ?? 0), get_current_user_id(), time()));
         return new \WP_REST_Response(['queued' => true], 201);
+    }
+
+    public static function heartbeat(\WP_REST_Request $r): \WP_REST_Response
+    {
+        $b = (array) $r->get_json_params();
+        $months = array_filter(array_map('intval', (array) ($b['months'] ?? [])), static fn (int $m): bool => $m >= 1 && $m <= 12);
+        $kept = SlotService::heartbeat((int) $r['id'], (int) ($b['fiscal_year'] ?? 0), $months, get_current_user_id(), time());
+        return new \WP_REST_Response(['kept' => $kept, 'ok' => $kept === count($months)]);
+    }
+
+    public static function release(\WP_REST_Request $r): \WP_REST_Response
+    {
+        $b = (array) $r->get_json_params();
+        $months = array_filter(array_map('intval', (array) ($b['months'] ?? [])), static fn (int $m): bool => $m >= 1 && $m <= 12);
+        SlotService::release((int) $r['id'], (int) ($b['fiscal_year'] ?? 0), $months, get_current_user_id());
+        return new \WP_REST_Response(['released' => true]);
     }
 }

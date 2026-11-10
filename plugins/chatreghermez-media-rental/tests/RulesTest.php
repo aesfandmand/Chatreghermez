@@ -67,4 +67,16 @@ final class RulesTest extends TestCase
         $this->assertTrue($loc['confident']);
         $this->assertFalse(MediaSheetRules::parseLocation('میدان امام')['confident']);
     }
+
+    public function testHeartbeatKeepsLockWhileCustomerIsPresent(): void
+    {
+        $t0 = 1000000;
+        $until = $t0 + SlotRules::LOCK_SECONDS;
+        // Still inside the first 15 minutes: the guaranteed window is never shortened.
+        $this->assertSame($until, SlotRules::heartbeatUntil($t0, $until, $t0 + 60));
+        // After 15 minutes a ping keeps the lock alive for the presence window only.
+        $this->assertSame($t0 + 1000 + 180, SlotRules::heartbeatUntil($t0, $until, $t0 + 1000));
+        // Past the hard limit no more extension: null -> the lock lapses.
+        $this->assertNull(SlotRules::heartbeatUntil($t0, $until, $t0 + 10801));
+    }
 }

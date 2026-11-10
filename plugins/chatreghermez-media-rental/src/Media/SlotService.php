@@ -47,12 +47,12 @@ final class SlotService
         $wpdb->query('START TRANSACTION');
         foreach ($months as $m) {
             $ok = $wpdb->query($wpdb->prepare(
-                'UPDATE ' . self::t() . " SET state = 'locked', holder = %d, locked_until = %d
+                'UPDATE ' . self::t() . " SET locked_at = IF(state = 'locked' AND holder = %d, locked_at, %d), state = 'locked', holder = %d, locked_until = %d
                  WHERE media_id = %d AND fiscal_year = %d AND month = %d AND (
                    state = 'free'
                    OR (state = 'locked' AND (holder = %d OR locked_until <= %d))
                    OR (state = 'reserved' AND reserved_until <= %d))",
-                $holder, $now + SlotRules::LOCK_SECONDS, $mediaId, $year, $m, $holder, $now, $now
+                $holder, $now, $holder, $now + SlotRules::LOCK_SECONDS, $mediaId, $year, $m, $holder, $now, $now
             ));
             if (!$ok) {
                 $wpdb->query('ROLLBACK');
@@ -86,7 +86,7 @@ final class SlotService
         }
     }
 
-    /** payment.confirmed: pre-payment reserves for 5 days; full payment makes the months final. */
+    /** payment.confirmed: the paid deposit reserves for 5 days; full settlement (incl. accountant-approved cheques) makes it final. */
     public static function onPayment(array $payload): void
     {
         global $wpdb;
@@ -94,26 +94,31 @@ final class SlotService
         if (!$inv) {
             return;
         }
-        // Slots are linked to the order through the rental line meta; resolve them for this invoice's lines.
-        $lines = (array) $wpdb->get_results($wpdb->prepare(
-            "SELECT ol.meta_json FROM {$wpdb->prefix}crc_invoice_lines il JOIN {$wpdb->prefix}crc_order_lines ol ON ol.id = il.order_line_id WHERE il.invoice_id = %d",
-            (int) $inv['id']
-        ), ARRAY_A);
+        $id = (int) $inv['id'];
+        $slots = self::slotsOfInvoice($id);
         $paid = (int) $inv['paid_rials'];
         $final = $paid >= (int) $inv['total_rials'];
-        $reserved = $paid >= (int) $inv['prepayment_rials'] && (int) $inv['prepayment_rials'] > 0;
-        $until = $inv['reservation_expires_at'] ? (int) strtotime($inv['reservation_expires_at'] . ' UTC') : 0;
-        foreach ($lines as $l) {
-            $meta = json_decode((string) $l['meta_json'], true) ?: [];
-            foreach ((array) ($meta['months'] ?? []) as $m) {
-                if ($final) {
-                    $wpdb->query($wpdb->prepare('UPDATE ' . self::t() . " SET state = 'final', invoice_id = %d, locked_until = 0, reserved_until = 0 WHERE media_id = %d AND fiscal_year = %d AND month = %d AND holder = %d",
-                        (int) $inv['id'], (int) $meta['media_id'], (int) $meta['fiscal_year'], (int) $m, (int) $inv['customer_user_id']));
-                } elseif ($reserved) {
-                    $wpdb->query($wpdb->prepare('UPDATE ' . self::t() . " SET state = 'reserved', invoice_id = %d, reserved_until = %d, locked_until = 0 WHERE media_id = %d AND fiscal_year = %d AND month = %d AND holder = %d AND state <> 'final'",
-                        (int) $inv['id'], $until ?: time() + 5 * 86400, (int) $meta['media_id'], (int) $meta['fiscal_year'], (int) $m, (int) $inv['customer_user_id']));
-                }
+        $deposit = (int) $inv['prepayment_rials'] > 0 && $paid >= (int) $inv['prepayment_rials'];
+        $holder = (int) $inv['customer_user_id'];
+        if ($final) {
+            foreach ($slots as $s) {
+                $wpdb->query($wpdb->prepare('UPDATE ' . self::t() . " SET state = 'final', invoice_id = %d, locked_until = 0, reserved_until = 0 WHERE media_id = %d AND fiscal_year = %d AND month = %d AND holder = %d",
+                    $id, $s['media_id'], $s['fiscal_year'], $s['month'], $holder));
             }
+            return;
+        }
+        if (!$deposit) {
+            return;
+        }
+        // The 5-day clock starts when the deposit is confirmed (once; later partial payments don't restart it).
+        $already = (int) $wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM ' . self::t() . " WHERE invoice_id = %d AND state = 'reserved'", $id));
+        $until = $already > 0 && $inv['reservation_expires_at'] ? (int) strtotime($inv['reservation_expires_at'] . ' UTC') : time() + 5 * 86400;
+        if ($already === 0) {
+            $wpdb->update($wpdb->prefix . 'crc_invoices', ['reservation_expires_at' => gmdate('Y-m-d H:i:s', $until)], ['id' => $id]);
+        }
+        foreach ($slots as $s) {
+            $wpdb->query($wpdb->prepare('UPDATE ' . self::t() . " SET state = 'reserved', invoice_id = %d, reserved_until = %d, locked_until = 0 WHERE media_id = %d AND fiscal_year = %d AND month = %d AND holder = %d AND state IN ('locked','reserved')",
+                $id, $until, $s['media_id'], $s['fiscal_year'], $s['month'], $holder));
         }
     }
 
@@ -149,30 +154,74 @@ final class SlotService
         }
     }
 
-    /** cheque.registered (by the office): the cheque path has no 15-minute lock; the 5-day hold starts now. */
-    public static function onChequeRegistered(array $payload): void
-    {
-        global $wpdb;
-        $id = (int) ($payload['invoice_id'] ?? 0);
-        $inv = $wpdb->get_row($wpdb->prepare("SELECT customer_user_id FROM {$wpdb->prefix}crc_invoices WHERE id = %d AND kind = 'rental'", $id), ARRAY_A);
-        if (!$inv) {
-            return;
-        }
-        $until = time() + 5 * 86400;
-        $wpdb->update($wpdb->prefix . 'crc_invoices', ['reservation_expires_at' => gmdate('Y-m-d H:i:s', $until)], ['id' => $id]);
-        foreach (self::slotsOfInvoice($id) as $s) {
-            $wpdb->query($wpdb->prepare('UPDATE ' . self::t() . " SET state = 'reserved', invoice_id = %d, reserved_until = %d, locked_until = 0 WHERE media_id = %d AND fiscal_year = %d AND month = %d AND holder = %d AND state IN ('locked','reserved')",
-                $id, $until, $s['media_id'], $s['fiscal_year'], $s['month'], (int) $inv['customer_user_id']));
-        }
-    }
-
     /** reservation.extended: copy the invoice's new expiry onto its reserved slots. */
     public static function onExtended(array $payload): void
     {
         global $wpdb;
         $inv = $wpdb->get_row($wpdb->prepare("SELECT reservation_expires_at FROM {$wpdb->prefix}crc_invoices WHERE id = %d", (int) ($payload['invoice_id'] ?? 0)), ARRAY_A);
+        $wpdb->delete($wpdb->prefix . 'crc_media_reminders', ['invoice_id' => (int) ($payload['invoice_id'] ?? 0)]); // remind again before the new end
         if ($inv && $inv['reservation_expires_at']) {
             $wpdb->query($wpdb->prepare('UPDATE ' . self::t() . " SET reserved_until = %d WHERE invoice_id = %d AND state = 'reserved'", (int) strtotime($inv['reservation_expires_at'] . ' UTC'), (int) $payload['invoice_id']));
+        }
+    }
+
+    /** Page ping while the customer is on the selection/payment pages. @return int number of slots kept */
+    public static function heartbeat(int $mediaId, int $year, array $months, int $holder, int $now): int
+    {
+        global $wpdb;
+        $kept = 0;
+        foreach ($months as $m) {
+            $r = $wpdb->get_row($wpdb->prepare('SELECT locked_at, locked_until FROM ' . self::t() . " WHERE media_id = %d AND fiscal_year = %d AND month = %d AND holder = %d AND state = 'locked'", $mediaId, $year, $m, $holder), ARRAY_A);
+            if (!$r) {
+                continue;
+            }
+            $new = SlotRules::heartbeatUntil((int) $r['locked_at'], (int) $r['locked_until'], $now);
+            if ($new !== null) {
+                $wpdb->query($wpdb->prepare('UPDATE ' . self::t() . " SET locked_until = %d WHERE media_id = %d AND fiscal_year = %d AND month = %d AND holder = %d AND state = 'locked'", $new, $mediaId, $year, $m, $holder));
+                $kept++;
+            }
+        }
+        return $kept;
+    }
+
+    /** The customer left the selection/payment pages: free the slots for others right away. */
+    public static function release(int $mediaId, int $year, array $months, int $holder): void
+    {
+        global $wpdb;
+        foreach ($months as $m) {
+            $wpdb->query($wpdb->prepare('UPDATE ' . self::t() . " SET state = 'free', holder = 0, locked_until = 0, locked_at = 0 WHERE media_id = %d AND fiscal_year = %d AND month = %d AND holder = %d AND state = 'locked'", $mediaId, $year, $m, $holder));
+            self::offerToWaiter($mediaId, $year, (int) $m, time());
+        }
+    }
+
+    /** Hourly: reservations ending within 2 days -> reminder SMS to the customer, the media supervisor and the accountant (once per reservation). */
+    public static function sendReminders(): void
+    {
+        global $wpdb;
+        $inv = $wpdb->prefix . 'crc_invoices';
+        $rem = $wpdb->prefix . 'crc_media_reminders';
+        $now = time();
+        $rows = (array) $wpdb->get_results($wpdb->prepare(
+            "SELECT i.id, i.invoice_no, i.customer_user_id, i.reservation_expires_at FROM {$inv} i LEFT JOIN {$rem} r ON r.invoice_id = i.id
+             WHERE i.kind = 'rental' AND i.status <> 'paid' AND i.reservation_expires_at IS NOT NULL AND r.invoice_id IS NULL
+               AND i.reservation_expires_at > %s AND i.reservation_expires_at <= %s
+               AND EXISTS (SELECT 1 FROM " . self::t() . " s WHERE s.invoice_id = i.id AND s.state = 'reserved')",
+            gmdate('Y-m-d H:i:s', $now),
+            gmdate('Y-m-d H:i:s', $now + 2 * 86400)
+        ), ARRAY_A);
+        foreach ($rows as $row) {
+            $days = max(1, (int) ceil(((int) strtotime($row['reservation_expires_at'] . ' UTC') - $now) / 86400));
+            $targets = [(int) $row['customer_user_id']];
+            foreach (get_users(['role__in' => ['crc_media_supervisor', 'crc_accountant'], 'fields' => 'ID']) as $uid) {
+                $targets[] = (int) $uid;
+            }
+            foreach (array_unique($targets) as $uid) {
+                $mobile = (string) get_user_meta($uid, 'crc_mobile', true);
+                if ($mobile !== '') {
+                    \Chatreghermez\Commerce\Sms\SmsService::queue($mobile, 'reservation_reminder', ['invoice_no' => (string) $row['invoice_no'], 'days' => (string) $days]);
+                }
+            }
+            $wpdb->insert($rem, ['invoice_id' => (int) $row['id'], 'sent_at' => $now]);
         }
     }
 
@@ -182,7 +231,7 @@ final class SlotService
         global $wpdb;
         $now = time();
         $freed = (array) $wpdb->get_results($wpdb->prepare('SELECT media_id, fiscal_year, month FROM ' . self::t() . " WHERE (state = 'locked' AND locked_until <= %d) OR (state = 'reserved' AND reserved_until <= %d)", $now, $now), ARRAY_A);
-        $wpdb->query($wpdb->prepare('UPDATE ' . self::t() . " SET state = 'free', holder = 0, locked_until = 0, reserved_until = 0, order_id = 0, invoice_id = 0 WHERE (state = 'locked' AND locked_until <= %d) OR (state = 'reserved' AND reserved_until <= %d)", $now, $now));
+        $wpdb->query($wpdb->prepare('UPDATE ' . self::t() . " SET state = 'free', holder = 0, locked_until = 0, locked_at = 0, reserved_until = 0, order_id = 0, invoice_id = 0 WHERE (state = 'locked' AND locked_until <= %d) OR (state = 'reserved' AND reserved_until <= %d)", $now, $now));
         foreach ($freed as $s) {
             self::offerToWaiter((int) $s['media_id'], (int) $s['fiscal_year'], (int) $s['month'], $now);
         }

@@ -5,7 +5,7 @@ namespace Chatreghermez\MediaRental\Database;
 
 final class Migrator
 {
-    public const DB_VERSION = 1;
+    public const DB_VERSION = 2;
     private const OPTION = 'crc_media_db_version';
 
     public static function run(): void
@@ -48,6 +48,7 @@ final class Migrator
   month tinyint(3) unsigned NOT NULL,
   state varchar(10) NOT NULL DEFAULT 'free',
   holder bigint(20) unsigned NOT NULL DEFAULT 0,
+  locked_at int(10) unsigned NOT NULL DEFAULT 0,
   locked_until int(10) unsigned NOT NULL DEFAULT 0,
   reserved_until int(10) unsigned NOT NULL DEFAULT 0,
   order_id bigint(20) unsigned NOT NULL DEFAULT 0,
@@ -69,6 +70,12 @@ final class Migrator
   notified_at int(10) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY  (id),
   UNIQUE KEY entry (media_id, fiscal_year, month, user_id)
+) {$c};");
+
+        dbDelta("CREATE TABLE {$p}crc_media_reminders (
+  invoice_id bigint(20) unsigned NOT NULL,
+  sent_at int(10) unsigned NOT NULL,
+  PRIMARY KEY  (invoice_id)
 ) {$c};");
 
         update_option(self::OPTION, self::DB_VERSION, false);

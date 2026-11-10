@@ -17,7 +17,9 @@ final class SlotRules
     public const FINAL = 'final';
     public const BLOCKED = 'blocked';
 
-    public const LOCK_SECONDS = 900; // 15 minutes while selecting/paying online
+    public const LOCK_SECONDS = 900;      // initial guaranteed lock: 15 minutes
+    public const PRESENCE_SECONDS = 180;  // after that the lock lives only while the customer's page keeps pinging
+    public const MAX_HOLD_SECONDS = 10800; // hard stop: 3 hours from the first lock, so an open tab can't block a board forever
 
     /** The state a customer would see "now" (expired locks/reservations are free). */
     public static function effectiveState(array $slot, int $now): string
@@ -64,5 +66,17 @@ final class SlotRules
     {
         $until = (int) ($slot['reserved_until'] ?? 0);
         return $until > $now ? (int) ceil(($until - $now) / 86400) : 0;
+    }
+
+    /**
+     * Heartbeat from the selection/payment pages. Returns the new locked_until, or null when the customer has held the slot
+     * past the hard limit (the lock then lapses normally and others can take it).
+     */
+    public static function heartbeatUntil(int $lockedAt, int $lockedUntil, int $now): ?int
+    {
+        if ($lockedAt > 0 && $now - $lockedAt > self::MAX_HOLD_SECONDS) {
+            return null;
+        }
+        return max($lockedUntil, $now + self::PRESENCE_SECONDS);
     }
 }
