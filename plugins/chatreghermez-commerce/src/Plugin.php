@@ -7,6 +7,7 @@ use Chatreghermez\Commerce\Access\Capabilities;
 use Chatreghermez\Commerce\Access\RoleManager;
 use Chatreghermez\Commerce\Admin\RolesPage;
 use Chatreghermez\Commerce\Database\Migrator;
+use Chatreghermez\Commerce\Rest\CatalogController;
 use Chatreghermez\Commerce\Rest\RolesController;
 
 final class Plugin
@@ -33,6 +34,7 @@ final class Plugin
         }, 10, 4);
 
         add_action('rest_api_init', [RolesController::class, 'register']);
+        add_action('rest_api_init', [CatalogController::class, 'register']);
         if (is_admin()) {
             RolesPage::register();
         }

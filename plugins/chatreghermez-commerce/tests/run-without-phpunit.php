@@ -16,6 +16,12 @@ namespace PHPUnit\Framework {
             protected function fail(string $m): never { throw new AssertionFailed($m); }
             public function assertSame($e, $a, string $m = ''): void { if ($e !== $a) $this->fail($m ?: 'expected ' . var_export($e, true) . ' got ' . var_export($a, true)); }
             public function assertTrue($a, string $m = ''): void { if ($a !== true) $this->fail($m ?: 'expected true'); }
+            public function assertFalse($a, string $m = ''): void { if ($a !== false) $this->fail($m ?: 'expected false'); }
+            public function assertNull($a, string $m = ''): void { if ($a !== null) $this->fail($m ?: 'expected null'); }
+            public function assertCount(int $n, $c, string $m = ''): void { if (count($c) !== $n) $this->fail($m ?: "expected count $n got " . count($c)); }
+            public function assertEmpty($a, string $m = ''): void { if (!empty($a)) $this->fail($m ?: 'expected empty'); }
+            public function assertArrayHasKey($k, array $a, string $m = ''): void { if (!array_key_exists($k, $a)) $this->fail($m ?: "missing key $k"); }
+            public function assertArrayNotHasKey($k, array $a, string $m = ''): void { if (array_key_exists($k, $a)) $this->fail($m ?: "unexpected key $k"); }
             public function assertContains($n, array $h, string $m = ''): void { if (!in_array($n, $h, true)) $this->fail($m ?: "missing {$n}"); }
             public function assertNotContains($n, array $h, string $m = ''): void { if (in_array($n, $h, true)) $this->fail($m ?: "unexpected {$n}"); }
         }
