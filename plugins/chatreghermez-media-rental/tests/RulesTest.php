@@ -66,6 +66,13 @@ final class RulesTest extends TestCase
         $this->assertSame(6.0, $loc['width_m']);
         $this->assertTrue($loc['confident']);
         $this->assertFalse(MediaSheetRules::parseLocation('میدان امام')['confident']);
+        $lb = MediaSheetRules::parseLocation('لایت باکس افقی 3*2 جنب بانک');
+        $this->assertSame('لایت باکس', $lb['type']);
+        $this->assertTrue($lb['lit']);
+        $this->assertSame('landscape', $lb['orientation']);
+        $cm = MediaSheetRules::parseLocation('لایت 180*120 بلوار');
+        $this->assertSame(1.8, $cm['width_m']);
+        $this->assertSame(1.2, $cm['height_m']);
     }
 
     public function testHeartbeatKeepsLockWhileCustomerIsPresent(): void

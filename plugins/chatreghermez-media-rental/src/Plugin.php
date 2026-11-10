@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Chatreghermez\MediaRental;
 
+use Chatreghermez\MediaRental\Admin\ImportPage;
 use Chatreghermez\MediaRental\Database\Migrator;
 use Chatreghermez\MediaRental\Media\RentalLine;
 use Chatreghermez\MediaRental\Media\SlotService;
@@ -27,6 +28,9 @@ final class Plugin
         }
         Migrator::run();
         RentalLine::register();
+        if (is_admin()) {
+            ImportPage::register();
+        }
         add_action('rest_api_init', [MediaController::class, 'register']);
         add_action('crc_event_payment.confirmed', [SlotService::class, 'onPayment']);
         add_action('crc_event_payment.started', [SlotService::class, 'onPaymentStarted']);

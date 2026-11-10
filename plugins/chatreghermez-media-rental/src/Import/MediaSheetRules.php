@@ -50,7 +50,7 @@ final class MediaSheetRules
 
     /**
      * Location text carries the media type and size, e.g. "بیلبورد 6×3 ..." / "تابلو 3*2". Returns best guess for the preview.
-     * @return array{type:string,width_m:?float,height_m:?float,confident:bool}
+     * @return array{type:string,width_m:?float,height_m:?float,orientation:string,lit:bool,confident:bool}
      */
     public static function parseLocation(string $text): array
     {
@@ -60,13 +60,19 @@ final class MediaSheetRules
             $w = (float) $m[1];
             $h = (float) $m[2];
         }
+        if ($w !== null && $h !== null && $w > 30 && $h > 30) { // written in centimetres (e.g. 180*120)
+            $w /= 100;
+            $h /= 100;
+        }
         $type = '';
-        foreach (['بیلبورد', 'پل عابر', 'پل', 'استند', 'المان', 'تابلو', 'بنر', 'دیجیتال', 'ال ای دی'] as $kw) {
+        foreach (['لایت باکس', 'لایت', 'بیلبورد', 'استرابورد', 'پرتابل', 'پل عابر', 'پل', 'استند', 'المان', 'تابلو', 'بنر', 'دیجیتال', 'ال ای دی'] as $kw) {
             if (mb_strpos($t, $kw) !== false) {
                 $type = $kw;
                 break;
             }
         }
-        return ['type' => $type, 'width_m' => $w, 'height_m' => $h, 'confident' => $type !== '' && $w !== null];
+        $orientation = mb_strpos($t, 'افقی') !== false ? 'landscape' : (mb_strpos($t, 'عمودی') !== false ? 'portrait' : '');
+        return ['type' => $type, 'width_m' => $w, 'height_m' => $h, 'orientation' => $orientation,
+            'lit' => mb_strpos($type, 'لایت') !== false, 'confident' => $type !== '' && $w !== null];
     }
 }
