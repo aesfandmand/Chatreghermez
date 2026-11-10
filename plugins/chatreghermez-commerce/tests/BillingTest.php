@@ -15,17 +15,17 @@ final class BillingTest extends TestCase
 {
     public function testPrepaymentRounding(): void
     {
-        $this->assertSame(500000, PrepaymentPolicy::compute(10000000));       // 5% = 500,000
-        $this->assertSame(500000, PrepaymentPolicy::compute(3000000));        // 150,000 -> minimum
-        $this->assertSame(600000, PrepaymentPolicy::compute(12000000));       // 600,000 stays (owner-confirmed)
-        $this->assertSame(800000, PrepaymentPolicy::compute(16000000));
-        $this->assertSame(59000000, PrepaymentPolicy::compute(1177718760));   // 58,885,938 -> 59,000,000 (owner example)
-        $this->assertSame(32500000, PrepaymentPolicy::compute(648370280));    // 32,418,514 -> 32,500,000 (owner example)
-        $this->assertSame(1000000, PrepaymentPolicy::compute(20000000));      // 1,000,000 exactly
-        $this->assertSame(1000000, PrepaymentPolicy::compute(22000000));      // 1,100,000 -> 1,000,000
-        $this->assertSame(1500000, PrepaymentPolicy::compute(30000001));
-        $this->assertSame(32500000, PrepaymentPolicy::compute(648370280, 500, 'up'));
-        $this->assertSame(300000, PrepaymentPolicy::compute(300000));         // never above the invoice
+        // Owner examples: "5% result" values, expressed through the invoice totals that produce them (total = raw * 20).
+        $this->assertSame(600000, PrepaymentPolicy::compute(12000000));        // 600,000 stays
+        $this->assertSame(12000000, PrepaymentPolicy::compute(240000000));     // 12,000,000 stays
+        $this->assertSame(1100000, PrepaymentPolicy::compute(22000000));       // 1,100,000 stays
+        $this->assertSame(1150000, PrepaymentPolicy::compute(22400000));       // 1,120,000 -> 1,150,000
+        $this->assertSame(850000, PrepaymentPolicy::compute(17000000));        // 850,000 stays
+        $this->assertSame(900000, PrepaymentPolicy::compute(17160000));        // 858,000 -> 900,000
+        $this->assertSame(59000000, PrepaymentPolicy::compute(1177718760));    // 58,885,938 -> 59,000,000
+        $this->assertSame(32500000, PrepaymentPolicy::compute(648370280));     // 32,418,514 -> 32,500,000
+        $this->assertSame(500000, PrepaymentPolicy::compute(3000000));         // 150,000 -> minimum
+        $this->assertSame(300000, PrepaymentPolicy::compute(300000));          // never above the invoice
         $this->assertSame(0, PrepaymentPolicy::compute(0));
     }
 
